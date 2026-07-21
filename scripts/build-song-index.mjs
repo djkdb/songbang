@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 /**
- * 자동완성용 노래 DB(data/songs.json)를 TJ미디어에서 모아 누적한다.
+ * 자동완성용 노래 DB(data/songs.json)를 TJ미디어에서 대량 수집·누적한다. (경쟁 앱의 "전곡 내장"에 근접)
  *
- * TOP100 + HOT100(신곡·인기) × 가요·팝·J-POP = 최대 600곡/실행.
- * 매월 실행하며 기존 data/songs.json 에 **누적**한다(차트에서 내려간 곡도 유지) →
- * 시간이 지날수록 TJ 곡번호가 달린 자동완성 DB가 커진다.
+ * 수집원 (모두 JSON — HTML 스크래핑보다 견고):
+ *   1) legacy/api/newSongOfMonth?searchYm=YYYYMM  … 월별 신곡 (과거 N개월 백필)
+ *   2) legacy/api/topAndHot100 (TOP·HOT × 가요·팝·J-POP) … 인기·역주행 보강
+ * 매 실행마다 기존 data/songs.json 에 **누적**한다(차트/신곡에서 내려간 곡도 유지).
  *
- * ⚠️ 공식 오픈 API가 아니라 TJ 웹사이트 내부 엔드포인트를 사용한다. 사이트 개편 시
- *    ENDPOINT·필드 매핑(indexTitle/indexSong/pro)을 손봐야 한다.
+ * ⚠️ 공식 오픈 API가 아니라 TJ 웹사이트 내부 엔드포인트. 개편 시 ENDPOINT·필드 매핑을 손봐야 함.
  *
+ * 옵션(환경변수): TJ_MONTHS_BACK=백필할 개월 수(기본 60). 최초 대량 백필 땐 크게(예: 120).
  * 실행:  node scripts/build-song-index.mjs
  */
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
@@ -16,49 +17,64 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const ENDPOINT = "https://www.tjmedia.com/legacy/api/topAndHot100";
-const SOURCE_URL = "https://www.tjmedia.com/chart/top100";
+const BASE = "https://www.tjmedia.com";
 const OUT = join(ROOT, "data/songs.json");
-const MAX_SONGS = 5000; // 안전 상한
+const MONTHS_BACK = Math.max(1, Math.min(240, parseInt(process.env.TJ_MONTHS_BACK || "60", 10) || 60));
+const MAX_SONGS = 60000;
 
-// TOP/HOT × 카테고리(1=가요, 2=팝, 3=J-POP)
-const SETS = [];
-for (const chartType of ["TOP", "HOT"]) {
-  for (const strType of ["1", "2", "3"]) SETS.push({ chartType, strType });
-}
-
+const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
 const norm = (s) => String(s ?? "").replace(/\s+/g, "").toLowerCase();
 const keyOf = (t, a) => norm(t) + "|" + norm(a);
 const clean = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function fetchSet(chartType, strType) {
-  const body = new URLSearchParams({ chartType, strType, searchStartDate: "", searchEndDate: "" });
-  const res = await fetch(ENDPOINT, {
-    method: "POST",
+// TJ Song 객체에서 제목/가수/번호를 방어적으로 뽑기 (필드명이 버전마다 다를 수 있어 폴백)
+function pickSong(it) {
+  const title = clean(it.indexTitle ?? it.title ?? it.songName ?? it.SONG_NAME);
+  const artist = clean(it.indexSong ?? it.singer ?? it.singerName ?? it.SINGER);
+  const tj = clean(it.pro ?? it.no ?? it.songNo ?? it.SONG_NO ?? it.songNumber);
+  return { title, artist, tj };
+}
+
+async function getJson(url, opts = {}) {
+  const res = await fetch(url, {
+    method: opts.method || "GET",
     headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+      "User-Agent": UA,
       Accept: "application/json, text/javascript, */*; q=0.01",
       "Accept-Language": "ko-KR,ko;q=0.9,en-US;q=0.8",
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       "X-Requested-With": "XMLHttpRequest",
-      Origin: "https://www.tjmedia.com",
-      Referer: SOURCE_URL,
+      Referer: BASE + "/",
+      ...(opts.body ? { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", Origin: BASE } : {}),
     },
-    body,
+    body: opts.body,
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const json = await res.json();
   const items = json?.resultData?.items;
   if (!Array.isArray(items)) throw new Error(`resultCode=${json?.resultCode}`);
-  return items.map((it) => ({
-    title: clean(it.indexTitle),
-    artist: clean(it.indexSong),
-    tj: clean(it.pro),
-  })).filter((s) => s.title && s.artist);
+  return items;
 }
 
-// 내장 큐레이션에서 장르·연도 룩업
+function recentYms(n) {
+  const out = [];
+  const d = new Date();
+  let y = d.getFullYear(), m = d.getMonth() + 1; // 1~12
+  for (let i = 0; i < n; i++) {
+    out.push(`${y}${String(m).padStart(2, "0")}`);
+    m--; if (m === 0) { m = 12; y--; }
+  }
+  return out;
+}
+
+function loadExisting() {
+  try {
+    const data = JSON.parse(readFileSync(OUT, "utf8"));
+    if (Array.isArray(data.songs)) return data.songs;
+  } catch { /* 없음 */ }
+  return [];
+}
+
 function loadGenreMap() {
   try {
     const src = readFileSync(join(ROOT, "js/chart-data.js"), "utf8");
@@ -71,72 +87,81 @@ function loadGenreMap() {
   } catch { return new Map(); }
 }
 
-function loadExisting() {
-  try {
-    const data = JSON.parse(readFileSync(OUT, "utf8"));
-    if (Array.isArray(data.songs)) return data.songs;
-  } catch { /* 없으면 빈 상태 */ }
-  return [];
-}
-
 async function main() {
   const genreMap = loadGenreMap();
-
-  // 누적 기반: 기존 목록을 map 으로
   const map = new Map();
   for (const s of loadExisting()) {
     if (!s || !s.title || !s.artist) continue;
     map.set(keyOf(s.title, s.artist), {
       title: s.title, artist: s.artist,
-      tj: s.tj ? String(s.tj) : "",
+      tj: s.tj ? String(s.tj) : "", ky: s.ky ? String(s.ky) : "",
       genre: s.genre || "", year: s.year || null,
     });
   }
   const before = map.size;
 
+  const upsert = (title, artist, tj) => {
+    if (!title || !artist) return;
+    const k = keyOf(title, artist);
+    const ex = genreMap.get(k) || {};
+    const cur = map.get(k);
+    if (!cur) {
+      map.set(k, { title, artist, tj: tj || "", ky: "", genre: ex.genre || "", year: ex.year || null });
+    } else if (tj && !cur.tj) cur.tj = tj;
+  };
+
   let fetched = 0;
-  for (const set of SETS) {
+
+  // 1) 월별 신곡 백필
+  for (const ym of recentYms(MONTHS_BACK)) {
     try {
-      const songs = await fetchSet(set.chartType, set.strType);
-      fetched += songs.length;
-      for (const s of songs) {
-        const k = keyOf(s.title, s.artist);
-        const ex = genreMap.get(k) || {};
-        const cur = map.get(k);
-        if (!cur) {
-          map.set(k, { title: s.title, artist: s.artist, tj: s.tj || "", genre: ex.genre || "", year: ex.year || null });
-        } else {
-          if (!cur.tj && s.tj) cur.tj = s.tj; // TJ 번호 보강
-          if (!cur.genre && ex.genre) cur.genre = ex.genre;
-          if (!cur.year && ex.year) cur.year = ex.year;
-        }
-      }
-      console.log(`  · ${set.chartType}/${set.strType}: ${songs.length}곡`);
+      const items = await getJson(`${BASE}/legacy/api/newSongOfMonth?searchYm=${ym}`);
+      items.forEach((it) => { const s = pickSong(it); upsert(s.title, s.artist, s.tj); });
+      fetched += items.length;
+      if (items.length) console.log(`  · 신곡 ${ym}: ${items.length}곡`);
     } catch (e) {
-      console.warn(`  · ${set.chartType}/${set.strType}: 실패(${e.message})`);
+      console.warn(`  · 신곡 ${ym}: 실패(${e.message})`);
+    }
+    await sleep(250); // 예의상 간격
+  }
+
+  // 2) TOP·HOT × 카테고리 보강
+  for (const chartType of ["TOP", "HOT"]) {
+    for (const strType of ["1", "2", "3"]) {
+      try {
+        const body = new URLSearchParams({ chartType, strType, searchStartDate: "", searchEndDate: "" }).toString();
+        const items = await getJson(`${BASE}/legacy/api/topAndHot100`, { method: "POST", body });
+        items.forEach((it) => { const s = pickSong(it); upsert(s.title, s.artist, s.tj); });
+        fetched += items.length;
+      } catch (e) {
+        console.warn(`  · ${chartType}/${strType}: 실패(${e.message})`);
+      }
+      await sleep(250);
     }
   }
 
   if (fetched < 50 && before === 0) {
-    throw new Error(`수집 실패 (fetched=${fetched}) — 응답 형식 확인 필요`);
+    throw new Error(`수집 실패 (fetched=${fetched}) — 엔드포인트/형식 확인 필요`);
   }
 
   let songs = [...map.values()];
   if (songs.length > MAX_SONGS) songs = songs.slice(0, MAX_SONGS);
+  const withTj = songs.filter((s) => s.tj).length;
 
   const out = {
-    source: "TJ미디어 TOP·HOT100 (가요·팝·J-POP) 누적",
-    sourceUrl: SOURCE_URL,
+    source: "TJ미디어 신곡·차트 누적",
+    sourceUrl: BASE + "/song/recent_song",
     updatedAt: new Date().toISOString(),
     count: songs.length,
+    withTj,
     songs,
   };
   mkdirSync(join(ROOT, "data"), { recursive: true });
-  writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
-  console.log(`✅ 자동완성 DB ${before} → ${songs.length}곡 (신규 ${songs.length - before}) · ${out.updatedAt}`);
+  writeFileSync(OUT, JSON.stringify(out) + "\n");
+  console.log(`✅ 자동완성 DB ${before} → ${songs.length}곡 (TJ번호 ${withTj}) · ${out.updatedAt}`);
 }
 
 main().catch((e) => {
-  console.error("❌ 자동완성 DB 빌드 실패:", e.message);
+  console.error("❌ TJ 수집 실패:", e.message);
   process.exit(1);
 });

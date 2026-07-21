@@ -462,12 +462,14 @@
             title: String(s.title),
             artist: String(s.artist),
             tj: s.tj ? String(s.tj) : "",
+            ky: s.ky ? String(s.ky) : "",
             genre: s.genre || "",
             year: s.year || null,
           });
         } else {
-          // 중복 곡은 정보를 합침 (특히 TJ 번호)
+          // 중복 곡은 정보를 합침 (특히 TJ·금영 번호)
           if (!cur.tj && s.tj) cur.tj = String(s.tj);
+          if (!cur.ky && s.ky) cur.ky = String(s.ky);
           if (!cur.genre && s.genre) cur.genre = s.genre;
           if (!cur.year && s.year) cur.year = s.year;
         }
@@ -527,7 +529,8 @@
     if (acItems.length === 0) return closeAc();
     acActive = -1;
     acEl.innerHTML = acItems.map((s, i) => {
-      const sub = [esc(s.artist), s.genre && esc(s.genre), s.year && s.year, s.tj && "TJ " + esc(s.tj)]
+      const sub = [esc(s.artist), s.genre && esc(s.genre), s.year && s.year,
+        s.tj && "TJ " + esc(s.tj), s.ky && "금영 " + esc(s.ky)]
         .filter(Boolean).join(" · ");
       return `<li class="ac-item" role="option" data-i="${i}" id="ac-opt-${i}">
         <div class="ac-title">${acHighlight(s.title, raw)}</div>
@@ -544,6 +547,7 @@
     titleEl.value = s.title;
     $("#input-artist").value = s.artist;
     if (s.tj) $("#input-tj").value = s.tj;
+    if (s.ky) $("#input-ky").value = s.ky;
     haptic(8);
     closeAc();
     // 이미 담긴 곡이면 바로 알려주기

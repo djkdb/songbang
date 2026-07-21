@@ -30,8 +30,14 @@ jobs:
       - name: TJ 인기차트 가져오기
         run: node scripts/update-chart.mjs
 
-      - name: 자동완성 DB 누적 갱신
+      - name: 자동완성 DB 누적 갱신 (TJ)
         run: node scripts/build-song-index.mjs
+
+      - name: 자동완성 DB 금영 번호 누적 (옵트인)
+        continue-on-error: true
+        env:
+          CRAWL_KY: ${{ vars.CRAWL_KY }} # 저장소 Variables 에 CRAWL_KY=1 설정 시 활성화
+        run: node scripts/build-ky-index.mjs
 
       - name: 변경분 커밋 & 푸시
         run: |
