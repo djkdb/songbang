@@ -68,9 +68,9 @@
   }
 
   // ---------- 탭 ----------
-  document.querySelectorAll(".nav-btn").forEach((btn) => {
+  document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      document.querySelectorAll(".nav-btn").forEach((b) => b.classList.toggle("active", b === btn));
+      document.querySelectorAll(".tab-btn").forEach((b) => b.classList.toggle("active", b === btn));
       document.querySelectorAll(".tab-panel").forEach((p) =>
         p.classList.toggle("active", p.id === btn.dataset.tab));
       window.scrollTo({ top: 0 });
@@ -84,16 +84,16 @@
     const wrap = $("#genre-pills");
     allGenres.forEach((g) => {
       const b = document.createElement("button");
-      b.className = "pill small";
+      b.className = "chip";
       b.dataset.genre = g;
       b.textContent = g;
       wrap.appendChild(b);
     });
     wrap.addEventListener("click", (e) => {
-      const b = e.target.closest(".pill");
+      const b = e.target.closest(".chip");
       if (!b) return;
       pickerGenre = b.dataset.genre;
-      wrap.querySelectorAll(".pill").forEach((p) => p.classList.toggle("active", p === b));
+      wrap.querySelectorAll(".chip").forEach((p) => p.classList.toggle("active", p === b));
       updatePoolInfo();
     });
 
@@ -101,25 +101,25 @@
     const cwrap = $("#chart-genre-pills");
     allGenres.forEach((g) => {
       const b = document.createElement("button");
-      b.className = "pill small";
+      b.className = "chip";
       b.dataset.genre = g;
       b.textContent = g;
       cwrap.appendChild(b);
     });
     cwrap.addEventListener("click", (e) => {
-      const b = e.target.closest(".pill");
+      const b = e.target.closest(".chip");
       if (!b) return;
       chartGenreFilter = b.dataset.genre;
-      cwrap.querySelectorAll(".pill").forEach((p) => p.classList.toggle("active", p === b));
+      cwrap.querySelectorAll(".chip").forEach((p) => p.classList.toggle("active", p === b));
       renderChart();
     });
   }
 
   $("#source-pills").addEventListener("click", (e) => {
-    const b = e.target.closest(".pill");
+    const b = e.target.closest(".seg-btn");
     if (!b) return;
     pickerSource = b.dataset.source;
-    $("#source-pills").querySelectorAll(".pill").forEach((p) => p.classList.toggle("active", p === b));
+    $("#source-pills").querySelectorAll(".seg-btn").forEach((p) => p.classList.toggle("active", p === b));
     updatePoolInfo();
   });
 

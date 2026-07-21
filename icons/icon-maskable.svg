@@ -1,37 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#2a1548"/>
-      <stop offset="100%" stop-color="#12081f"/>
-    </linearGradient>
-    <linearGradient id="mic" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ff4d9d"/>
-      <stop offset="100%" stop-color="#a55eff"/>
-    </linearGradient>
-  </defs>
-  <rect width="512" height="512" fill="url(#bg)"/>
-  <!-- 마스커블: 중앙 80% 안전영역에 축소 배치 -->
+  <rect width="512" height="512" fill="#f3ead6"/>
+  <!-- 마스커블: 중앙 80% 안전영역 -->
   <g transform="translate(51.2 51.2) scale(0.8)">
-    <circle cx="256" cy="216" r="118" fill="#ff4d9d" opacity="0.18"/>
-    <circle cx="256" cy="200" r="86" fill="url(#mic)"/>
-    <g stroke="#12081f" stroke-width="10" opacity="0.35">
-      <line x1="190" y1="170" x2="322" y2="170"/>
-      <line x1="180" y1="200" x2="332" y2="200"/>
-      <line x1="190" y1="230" x2="322" y2="230"/>
+    <g transform="translate(256 150) rotate(-5)">
+      <rect x="-108" y="-34" width="216" height="68" rx="14" fill="#1c1a17"/>
+      <text x="0" y="16" text-anchor="middle" font-family="'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="46" font-weight="900" fill="#f3ead6">노래책</text>
     </g>
-    <path d="M232 282 L280 282 L306 400 Q308 424 256 424 Q204 424 206 400 Z" fill="url(#mic)"/>
-    <g transform="translate(322 300) rotate(14)">
-      <rect width="112" height="112" rx="24" fill="#38e5ff"/>
-      <circle cx="32" cy="32" r="11" fill="#12081f"/>
-      <circle cx="80" cy="32" r="11" fill="#12081f"/>
-      <circle cx="56" cy="56" r="11" fill="#12081f"/>
-      <circle cx="32" cy="80" r="11" fill="#12081f"/>
-      <circle cx="80" cy="80" r="11" fill="#12081f"/>
+    <g transform="translate(190 250)">
+      <rect x="-34" y="0" width="68" height="112" rx="34" fill="#e2412b" stroke="#1c1a17" stroke-width="12"/>
+      <rect x="-10" y="112" width="20" height="46" fill="#1c1a17"/>
+      <rect x="-46" y="158" width="92" height="20" rx="10" fill="#1c1a17"/>
+      <line x1="-24" y1="34" x2="24" y2="34" stroke="#1c1a17" stroke-width="8"/>
+      <line x1="-24" y1="58" x2="24" y2="58" stroke="#1c1a17" stroke-width="8"/>
     </g>
-    <g fill="#ffd84d">
-      <circle cx="120" cy="330" r="16"/>
-      <rect x="130" y="258" width="10" height="72" rx="4"/>
-      <path d="M130 258 q34 6 44 28 q-4 -34 -34 -40 z"/>
+    <g transform="translate(276 300) rotate(10)">
+      <rect width="118" height="118" rx="26" fill="#f4b23e" stroke="#1c1a17" stroke-width="12"/>
+      <circle cx="34" cy="34" r="12" fill="#1c1a17"/>
+      <circle cx="84" cy="34" r="12" fill="#1c1a17"/>
+      <circle cx="59" cy="59" r="12" fill="#1c1a17"/>
+      <circle cx="34" cy="84" r="12" fill="#1c1a17"/>
+      <circle cx="84" cy="84" r="12" fill="#1c1a17"/>
     </g>
   </g>
 </svg>
