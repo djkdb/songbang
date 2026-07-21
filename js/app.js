@@ -36,7 +36,11 @@
   }
 
   function saveState() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      // localStorage 사용 불가(사생활 보호 모드·용량 초과·샌드박스 등)에도 앱은 계속 동작
+    }
   }
 
   // ---------- 유틸 ----------
