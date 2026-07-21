@@ -63,6 +63,19 @@
            d.getDate() === now.getDate();
   }
 
+  // 모션 최소화 설정 여부 (멀미·전정계 이슈 사용자 배려)
+  function prefersReducedMotion() {
+    return window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  // 햅틱(짧은 진동) — 지원 기기에서만, 사용자 제스처 안에서 호출
+  function haptic(pattern) {
+    if (navigator.vibrate) {
+      try { navigator.vibrate(pattern); } catch (e) { /* 무시 */ }
+    }
+  }
+
   let toastTimer = null;
   function toast(msg) {
     const el = $("#toast");
@@ -171,6 +184,14 @@
       n > 0 ? `${srcName}에서 ${n}곡 중 하나를 뽑아요` : `뽑을 수 있는 곡이 없어요`;
   }
 
+  // 소스를 코드에서 바꿀 때(첫 실행/빠른담기 등) 세그먼트 UI도 함께 갱신
+  function setSource(src) {
+    pickerSource = src;
+    $("#source-pills").querySelectorAll(".seg-btn").forEach((p) =>
+      p.classList.toggle("active", p.dataset.source === src));
+    updatePoolInfo();
+  }
+
   // ---------- 슬롯머신 뽑기 ----------
   $("#btn-pick").addEventListener("click", doPick);
   $("#btn-repick").addEventListener("click", doPick);
@@ -193,6 +214,14 @@
     spinning = true;
     $("#btn-pick").disabled = true;
     $("#result-card").classList.add("hidden");
+    slotText.classList.remove("reveal"); // 다음 공개 때 페이드가 다시 재생되도록
+
+    // 모션 최소화 설정이면 스핀 연출을 건너뛰고 결과만 부드럽게 공개
+    if (prefersReducedMotion()) {
+      setTimeout(() => finishPick(winner), 140);
+      return;
+    }
+
     slotText.classList.add("spinning");
 
     // 점점 느려지는 슬롯 연출
@@ -219,8 +248,10 @@
     $("#btn-pick").disabled = false;
     const slotText = $("#slot-text");
     slotText.classList.remove("spinning");
+    slotText.classList.add("reveal");
     slotText.innerHTML =
       `✨ ${esc(song.title)} ✨<br><span class="slot-artist">${esc(song.artist)}</span>`;
+    haptic([18, 40, 60]); // 두구두구 끝! 짧은 진동
 
     lastResult = song;
     showResult(song);
@@ -328,6 +359,7 @@
         return;
       }
       state.mySongs.unshift({ id: uid(), title, artist, tj, ky, tags, addedAt: Date.now() });
+      haptic(12);
       toast(`'${title}' 추가! 🎤`);
     }
     saveState();
@@ -369,9 +401,14 @@
 
     const ul = $("#my-song-list");
     if (songs.length === 0) {
-      ul.innerHTML = `<li class="empty-msg">${
-        q ? "검색 결과가 없어요" : "아직 저장한 노래가 없어요.<br>인기차트에서 ♥를 눌러 담아보세요!"
-      }</li>`;
+      ul.innerHTML = q
+        ? `<li class="empty-msg">검색 결과가 없어요</li>`
+        : `<li class="empty-msg">아직 담은 노래가 없어요.<br>부를 노래를 채워야 뽑기가 돌아가요!
+             <div class="empty-cta">
+               <button type="button" class="key key-fill" data-act="quick10">⚡ 인기 10곡 바로 담기</button>
+               <button type="button" class="key key-line" data-act="go-chart">🔥 인기차트에서 고르기</button>
+             </div>
+           </li>`;
       return;
     }
     ul.innerHTML = songs.map((s) => {
@@ -384,14 +421,46 @@
           ${tags ? `<div class="song-tags">${tags}</div>` : ""}
         </div>
         <div class="song-actions">
-          <button class="icon-btn" data-act="edit" title="수정">✏️</button>
-          <button class="icon-btn" data-act="del" title="삭제">🗑️</button>
+          <button class="icon-btn" data-act="edit" title="수정" aria-label="${esc(s.title)} 수정">✏️</button>
+          <button class="icon-btn" data-act="del" title="삭제" aria-label="${esc(s.title)} 삭제">🗑️</button>
         </div>
       </li>`;
     }).join("");
   }
 
+  // 빈 상태 CTA: 첫 실행 마찰 제거 (뽑기가 바로 되도록)
+  function quickAddTop(n) {
+    let added = 0;
+    chart.slice(0, n).forEach((s) => {
+      const key = songKey(s.title, s.artist);
+      if (state.mySongs.some((x) => songKey(x.title, x.artist) === key)) return;
+      state.mySongs.push({
+        id: uid(),
+        title: s.title,
+        artist: s.artist,
+        tj: s.tj ? String(s.tj) : "",
+        ky: "",
+        tags: s.genre ? [s.genre] : [],
+        addedAt: Date.now(),
+      });
+      added++;
+    });
+    saveState();
+    setSource("my"); // 이제 내 노래가 있으니 기본 소스를 내 노래로
+    renderMySongs();
+    renderChart();
+    haptic(12);
+    toast(added > 0 ? `인기 ${added}곡 담았어요! 이제 뽑아보세요 🎲` : "이미 다 담겨 있어요");
+  }
+
   $("#my-song-list").addEventListener("click", (e) => {
+    const cta = e.target.closest("[data-act='quick10'], [data-act='go-chart']");
+    if (cta) {
+      if (cta.dataset.act === "quick10") quickAddTop(10);
+      else document.querySelector('.tab-btn[data-tab="tab-chart"]').click();
+      return;
+    }
+
     const btn = e.target.closest(".icon-btn");
     if (!btn) return;
     const id = btn.closest(".song-item").dataset.id;
@@ -431,6 +500,7 @@
     renderMySongs();
     renderChart();
     updatePoolInfo();
+    haptic(12);
     toast(`'${chartSong.title}' 내 노래에 추가! ❤️`);
   }
 
@@ -462,7 +532,7 @@
           <div class="song-sub">${sub.join(" · ")}</div>
         </div>
         <div class="song-actions">
-          <button class="icon-btn heart-btn${hearted ? " hearted" : ""}" data-act="heart" title="내 노래에 담기">❤️</button>
+          <button class="icon-btn heart-btn${hearted ? " hearted" : ""}" data-act="heart" title="내 노래에 담기" aria-label="${esc(s.title)} ${hearted ? "이미 담김" : "내 노래에 담기"}" aria-pressed="${hearted}">❤️</button>
         </div>
       </li>`;
     }).join("");
@@ -595,6 +665,8 @@
   renderMySongs();
   renderChart();
   renderHistory();
-  updatePoolInfo();
+  // 첫 실행(내 노래 비어있음)이면 기본 소스를 인기차트로 → 바로 뽑기가 된다
+  if (state.mySongs.length === 0) setSource("chart");
+  else updatePoolInfo();
   loadLiveChart(); // 라이브 차트 있으면 비동기로 교체
 })();

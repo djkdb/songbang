@@ -202,6 +202,8 @@ main { max-width: 540px; margin: 0 auto; padding: 14px 14px 0; }
 }
 .slot-text.spinning { animation: flick 0.09s steps(1) infinite; }
 @keyframes flick { 50% { opacity: 0.55; } }
+.slot-text.reveal { animation: fadeIn 0.28s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .slot-text .slot-artist { display: block; font-size: 0.82rem; color: #46b477; margin-top: 3px; font-weight: 700; }
 
 /* ---------- 키(버튼) ---------- */
@@ -271,7 +273,7 @@ main { max-width: 540px; margin: 0 auto; padding: 14px 14px 0; }
   border: var(--bd) solid var(--ink); border-radius: 10px;
   padding: 11px 13px; outline: none;
 }
-.text-in::placeholder { color: #a49b82; font-weight: 600; }
+.text-in::placeholder { color: #8a7f64; font-weight: 600; }
 .text-in:focus { box-shadow: var(--shadow-sm); }
 .search { margin-bottom: 14px; }
 .add-form { display: flex; flex-direction: column; gap: 9px; }
@@ -306,7 +308,10 @@ main { max-width: 540px; margin: 0 auto; padding: 14px 14px 0; }
 .song-actions { display: flex; gap: 2px; flex-shrink: 0; }
 .icon-btn {
   background: none; border: none; cursor: pointer;
-  font-size: 1.15rem; line-height: 1; padding: 6px; border-radius: 8px;
+  font-size: 1.15rem; line-height: 1; border-radius: 10px;
+  /* 접근성: 아이콘은 작아도 탭 영역은 최소 44×44 (WCAG 2.5.5 / iOS HIG) */
+  min-width: 44px; min-height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
   transition: transform 0.1s;
 }
 .icon-btn:active { transform: scale(1.2); }
@@ -314,6 +319,8 @@ main { max-width: 540px; margin: 0 auto; padding: 14px 14px 0; }
 .heart-btn.hearted { filter: none; }
 
 .empty-msg { text-align: center; font-size: 0.87rem; font-weight: 600; color: var(--ink-2); padding: 24px 8px; line-height: 1.6; }
+.empty-cta { display: flex; flex-direction: column; gap: 9px; max-width: 280px; margin: 18px auto 4px; }
+.empty-cta .key { width: 100%; padding: 13px; font-size: 0.95rem; }
 
 /* ---------- 히스토리 ---------- */
 .history-item {
@@ -363,3 +370,25 @@ main { max-width: 540px; margin: 0 auto; padding: 14px 14px 0; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 .hidden { display: none !important; }
+
+/* ---------- 접근성: 키보드 포커스 링 ---------- */
+:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+/* LCD 디스플레이 위/어두운 배경 요소는 밝은 링으로 */
+.key-go:focus-visible, .key-fill:focus-visible, .seg-btn.active:focus-visible {
+  outline-color: var(--amber);
+}
+
+/* ---------- 접근성: 모션 최소화 설정 존중 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .slot-text.spinning { animation: none !important; }
+}
