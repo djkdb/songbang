@@ -133,11 +133,13 @@ main { max-width: 540px; margin: 0 auto; padding: 8px 16px 0; }
   background: var(--bg-3); position: relative; transition: all 0.15s;
 }
 .check input:checked + .check-box { background: var(--accent); border-color: var(--accent); }
-.check input:checked + .check-box::after {
+.check input:checked + .check-box::after,
+.check-box.on::after {
   content: ""; position: absolute; left: 6px; top: 2.5px;
   width: 5px; height: 10px; border: solid #fff; border-width: 0 2px 2px 0;
   transform: rotate(43deg);
 }
+.check-box.on { background: var(--accent); border-color: var(--accent); }
 
 /* ---------- 디스플레이 ---------- */
 .display {
@@ -294,6 +296,43 @@ main { max-width: 540px; margin: 0 auto; padding: 8px 16px 0; }
 .empty-msg { text-align: center; font-size: 0.88rem; color: var(--dim); padding: 26px 8px; line-height: 1.6; }
 .empty-cta { display: flex; flex-direction: column; gap: 9px; max-width: 300px; margin: 18px auto 4px; }
 .empty-cta .key { width: 100%; padding: 13px; font-size: 0.94rem; }
+
+/* 키·최고음 등 곡 부가정보 칩 */
+.spec-chip {
+  border: 1px solid var(--accent-line); color: var(--accent);
+  font-size: 0.68rem; font-weight: 700; padding: 1px 8px; border-radius: 999px;
+}
+
+/* ---------- 셋리스트 ---------- */
+.setlist-list { list-style: none; }
+.setlist-item { border-bottom: 1px solid var(--line); }
+.setlist-item:last-child { border-bottom: none; }
+.setlist-row { display: flex; align-items: center; gap: 10px; padding: 14px 0; }
+.setlist-info { flex: 1; min-width: 0; cursor: pointer; }
+.setlist-name { font-weight: 650; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.setlist-meta { font-size: 0.78rem; color: var(--dim); margin-top: 2px; }
+.setlist-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.mini-btn {
+  border: 1px solid var(--accent-line); background: var(--accent-soft); color: var(--accent);
+  font-family: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer;
+  padding: 8px 14px; border-radius: 10px; transition: transform 0.1s;
+}
+.mini-btn:active { transform: scale(0.96); }
+
+.setlist-editor { padding: 4px 0 16px; }
+.setlist-editor .text-in { margin-bottom: 10px; }
+.sl-hint { font-size: 0.78rem; color: var(--dim); margin-bottom: 8px; }
+.sl-songs { list-style: none; max-height: 320px; overflow-y: auto; overscroll-behavior: contain; }
+.sl-song {
+  display: flex; align-items: center; gap: 11px; padding: 9px 2px;
+  border-bottom: 1px solid var(--line); cursor: pointer;
+}
+.sl-song:last-child { border-bottom: none; }
+.sl-song .check-box { width: 20px; height: 20px; }
+.sl-song-info { flex: 1; min-width: 0; }
+.sl-song-title { font-size: 0.9rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sl-song-sub { font-size: 0.74rem; color: var(--dim); }
+.sl-empty { font-size: 0.84rem; color: var(--dim); padding: 14px 2px; }
 
 /* ---------- 히스토리 ---------- */
 .history-item {

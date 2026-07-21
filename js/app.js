@@ -11,8 +11,10 @@
   let state = loadState();
   let pickerSource = "my"; // 'my' | 'chart' | 'both'
   let pickerGenre = "";
+  let pickerSetlistId = null; // 특정 셋리스트로 좁혀 뽑기 (null=전체)
   let chartGenreFilter = "";
   let editingId = null;
+  let openSetlistId = null; // 편집 중인 셋리스트
   let lastResult = null; // 마지막 뽑기 결과
   let spinning = false;
 
@@ -37,10 +39,11 @@
         return {
           mySongs: Array.isArray(parsed.mySongs) ? parsed.mySongs : [],
           history: Array.isArray(parsed.history) ? parsed.history : [],
+          setlists: Array.isArray(parsed.setlists) ? parsed.setlists : [],
         };
       }
     } catch (e) { /* 손상된 데이터는 초기화 */ }
-    return { mySongs: [], history: [] };
+    return { mySongs: [], history: [], setlists: [] };
   }
 
   function saveState() {
@@ -113,6 +116,7 @@
       document.querySelectorAll(".tab-panel").forEach((p) =>
         p.classList.toggle("active", p.id === btn.dataset.tab));
       window.scrollTo({ top: 0 });
+      if (btn.dataset.tab === "tab-setlist") renderSetlists();
     });
   });
 
@@ -175,7 +179,13 @@
   function buildPool() {
     let pool = [];
     if (pickerSource === "my" || pickerSource === "both") {
-      pool = pool.concat(state.mySongs.map((s) => ({ ...s, source: "my" })));
+      let mine = state.mySongs;
+      if (pickerSetlistId) {
+        const sl = state.setlists.find((x) => x.id === pickerSetlistId);
+        const ids = new Set(sl ? sl.songIds : []);
+        mine = mine.filter((s) => ids.has(s.id));
+      }
+      pool = pool.concat(mine.map((s) => ({ ...s, source: "my" })));
     }
     if (pickerSource === "chart" || pickerSource === "both") {
       const myKeys = new Set(state.mySongs.map((s) => songKey(s.title, s.artist)));
@@ -200,7 +210,11 @@
 
   function updatePoolInfo() {
     const n = buildPool().length;
-    const srcName = { my: "내 노래", chart: "인기차트", both: "내 노래 + 인기차트" }[pickerSource];
+    let srcName = { my: "내 노래", chart: "인기차트", both: "내 노래 + 인기차트" }[pickerSource];
+    if (pickerSetlistId && (pickerSource === "my" || pickerSource === "both")) {
+      const sl = state.setlists.find((x) => x.id === pickerSetlistId);
+      if (sl) srcName = pickerSource === "both" ? `'${sl.name}' + 인기차트` : `'${sl.name}' 셋리스트`;
+    }
     $("#pool-info").textContent =
       n > 0 ? `${srcName}에서 ${n}곡 중 하나를 뽑아요` : `뽑을 수 있는 곡이 없어요`;
   }
@@ -290,6 +304,8 @@
     if (song.year) chips.push(String(song.year));
     if (song.tj) chips.push(`TJ ${song.tj}`);
     if (song.ky) chips.push(`금영 ${song.ky}`);
+    if (song.keyAdj) chips.push(`키 ${song.keyAdj}`);
+    if (song.hi) chips.push(`최고음 ${song.hi}`);
     (song.tags || []).forEach((t) => chips.push(`#${t}`));
     $("#result-meta").innerHTML =
       chips.map((c) => `<span class="meta-chip">${esc(c)}</span>`).join("");
@@ -365,11 +381,13 @@
 
     const tj = $("#input-tj").value.trim();
     const ky = $("#input-ky").value.trim();
+    const keyAdj = normKeyAdj($("#input-keyadj").value);
+    const hi = $("#input-hinote").value.trim();
     const tags = parseTags($("#input-tags").value);
 
     if (editingId) {
       const song = state.mySongs.find((s) => s.id === editingId);
-      if (song) Object.assign(song, { title, artist, tj, ky, tags });
+      if (song) Object.assign(song, { title, artist, tj, ky, keyAdj, hi, tags });
       toast("수정했어요");
       stopEditing();
     } else {
@@ -378,7 +396,7 @@
         toast("이미 저장된 노래예요!");
         return;
       }
-      state.mySongs.unshift({ id: uid(), title, artist, tj, ky, tags, addedAt: Date.now() });
+      state.mySongs.unshift({ id: uid(), title, artist, tj, ky, keyAdj, hi, tags, addedAt: Date.now() });
       haptic(12);
       toast(`'${title}' 담았어요`);
     }
@@ -390,12 +408,23 @@
     updatePoolInfo();
   });
 
+  // 키 값 정규화: "2" → "+2", "-1"·"+2"·"" 유지
+  function normKeyAdj(raw) {
+    let v = String(raw || "").trim().replace(/\s+/g, "");
+    if (!v) return "";
+    if (/^\d+$/.test(v)) v = "+" + v;              // 부호 없는 양수 → +
+    if (v === "+0" || v === "-0" || v === "0") return "";
+    return v.slice(0, 6);
+  }
+
   function startEditing(song) {
     editingId = song.id;
     $("#input-title").value = song.title;
     $("#input-artist").value = song.artist;
     $("#input-tj").value = song.tj || "";
     $("#input-ky").value = song.ky || "";
+    $("#input-keyadj").value = song.keyAdj || "";
+    $("#input-hinote").value = song.hi || "";
     $("#input-tags").value = (song.tags || []).join(", ");
     $("#btn-add").textContent = "수정 저장";
     $("#btn-cancel-edit").classList.remove("hidden");
@@ -554,12 +583,17 @@
     }
     ul.innerHTML = songs.map((s) => {
       const nums = [s.tj && `TJ ${esc(s.tj)}`, s.ky && `금영 ${esc(s.ky)}`].filter(Boolean).join(" · ");
+      const specs = [
+        s.keyAdj && `<span class="spec-chip">키 ${esc(s.keyAdj)}</span>`,
+        s.hi && `<span class="spec-chip">최고음 ${esc(s.hi)}</span>`,
+      ].filter(Boolean).join("");
       const tags = (s.tags || []).map((t) => `<span class="tag-chip">#${esc(t)}</span>`).join("");
+      const chips = specs + tags;
       return `<li class="song-item" data-id="${s.id}">
         <div class="song-info">
           <div class="song-title">${esc(s.title)}</div>
           <div class="song-sub">${esc(s.artist)}${nums ? " · " + nums : ""}</div>
-          ${tags ? `<div class="song-tags">${tags}</div>` : ""}
+          ${chips ? `<div class="song-tags">${chips}</div>` : ""}
         </div>
         <div class="song-actions">
           <button class="icon-btn" data-act="edit" title="수정" aria-label="${esc(s.title)} 수정">${ICON.edit}</button>
@@ -611,10 +645,12 @@
     if (btn.dataset.act === "del") {
       if (!confirm(`'${song.title}'을(를) 삭제할까요?`)) return;
       state.mySongs = state.mySongs.filter((s) => s.id !== id);
+      state.setlists.forEach((sl) => { sl.songIds = sl.songIds.filter((x) => x !== id); });
       if (editingId === id) stopEditing();
       saveState();
       renderMySongs();
       renderChart();
+      renderSetlists();
       updatePoolInfo();
       toast("삭제했어요");
     } else if (btn.dataset.act === "edit") {
@@ -714,6 +750,169 @@
     addChartSongToMy(song);
   });
 
+  // ---------- 셋리스트 ----------
+  function setlistSongs(sl) {
+    const byId = new Map(state.mySongs.map((s) => [s.id, s]));
+    return (sl.songIds || []).map((id) => byId.get(id)).filter(Boolean);
+  }
+
+  $("#setlist-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = $("#setlist-name").value.trim();
+    if (!name) return;
+    state.setlists.unshift({ id: uid(), name: name.slice(0, 30), songIds: [] });
+    saveState();
+    $("#setlist-form").reset();
+    haptic(10);
+    renderSetlists();
+    renderSetlistPills();
+    updatePoolInfo();
+    toast(`'${name}' 셋리스트를 만들었어요`);
+  });
+
+  function renderSetlists() {
+    $("#setlist-count").textContent = state.setlists.length;
+    const ul = $("#setlist-list");
+    if (state.setlists.length === 0) {
+      ul.innerHTML = `<li class="empty-msg">아직 셋리스트가 없어요.<br>위에서 하나 만들어보세요.</li>`;
+      return;
+    }
+    ul.innerHTML = state.setlists.map((sl) => {
+      const n = setlistSongs(sl).length;
+      const open = sl.id === openSetlistId;
+      return `<li class="setlist-item" data-id="${sl.id}">
+        <div class="setlist-row">
+          <div class="setlist-info" data-act="toggle">
+            <div class="setlist-name">${esc(sl.name) || "(이름 없음)"}</div>
+            <div class="setlist-meta">${n}곡${open ? " · 편집 중" : ""}</div>
+          </div>
+          <div class="setlist-actions">
+            <button class="mini-btn" data-act="pick"${n === 0 ? " disabled" : ""}>뽑기</button>
+            <button class="icon-btn" data-act="toggle" title="편집" aria-label="${esc(sl.name)} 편집">${ICON.edit}</button>
+            <button class="icon-btn" data-act="del" title="삭제" aria-label="${esc(sl.name)} 삭제">${ICON.trash}</button>
+          </div>
+        </div>
+        ${open ? renderSetlistEditor(sl) : ""}
+      </li>`;
+    }).join("");
+  }
+
+  function renderSetlistEditor(sl) {
+    const ids = new Set(sl.songIds || []);
+    const listHtml = state.mySongs.length === 0
+      ? `<li class="sl-empty">내 노래가 없어요. 먼저 노래를 담아주세요.</li>`
+      : state.mySongs.map((s) => {
+          const on = ids.has(s.id);
+          return `<li class="sl-song" data-song="${s.id}">
+            <span class="check-box${on ? " on" : ""}" aria-hidden="true"></span>
+            <div class="sl-song-info">
+              <div class="sl-song-title">${esc(s.title)}</div>
+              <div class="sl-song-sub">${esc(s.artist)}</div>
+            </div>
+          </li>`;
+        }).join("");
+    return `<div class="setlist-editor">
+      <input type="text" class="text-in sl-rename" value="${esc(sl.name)}" maxlength="30" aria-label="셋리스트 이름">
+      <div class="sl-hint">담을 곡을 눌러 선택하세요.</div>
+      <ul class="sl-songs">${listHtml}</ul>
+    </div>`;
+  }
+
+  function pickFromSetlist(id) {
+    const sl = state.setlists.find((x) => x.id === id);
+    if (!sl || setlistSongs(sl).length === 0) { toast("셋리스트가 비어있어요"); return; }
+    pickerSetlistId = id;
+    setSource("my");
+    renderSetlistPills();
+    document.querySelector('.tab-btn[data-tab="tab-pick"]').click();
+    setTimeout(() => doPick(), 60);
+  }
+
+  $("#setlist-list").addEventListener("click", (e) => {
+    // 에디터 안 곡 토글
+    const songRow = e.target.closest(".sl-song");
+    if (songRow) {
+      const sl = state.setlists.find((x) => x.id === openSetlistId);
+      if (!sl) return;
+      const sid = songRow.dataset.song;
+      const i = sl.songIds.indexOf(sid);
+      if (i >= 0) sl.songIds.splice(i, 1); else sl.songIds.push(sid);
+      saveState();
+      songRow.querySelector(".check-box").classList.toggle("on");
+      const item = songRow.closest(".setlist-item");
+      const n = setlistSongs(sl).length;
+      const meta = item.querySelector(".setlist-meta");
+      if (meta) meta.textContent = `${n}곡 · 편집 중`;
+      const pickBtn = item.querySelector('.mini-btn[data-act="pick"]');
+      if (pickBtn) pickBtn.disabled = n === 0;
+      renderSetlistPills();
+      updatePoolInfo();
+      return;
+    }
+    const item = e.target.closest(".setlist-item");
+    if (!item) return;
+    const id = item.dataset.id;
+    const sl = state.setlists.find((x) => x.id === id);
+    if (!sl) return;
+    const actEl = e.target.closest("[data-act]");
+    const act = actEl ? actEl.dataset.act : null;
+    if (act === "del") {
+      if (!confirm(`'${sl.name}' 셋리스트를 삭제할까요? (담긴 노래는 내 노래에 그대로 남아요)`)) return;
+      state.setlists = state.setlists.filter((x) => x.id !== id);
+      if (openSetlistId === id) openSetlistId = null;
+      if (pickerSetlistId === id) pickerSetlistId = null;
+      saveState();
+      renderSetlists();
+      renderSetlistPills();
+      updatePoolInfo();
+      toast("삭제했어요");
+    } else if (act === "pick") {
+      pickFromSetlist(id);
+    } else if (act === "toggle") {
+      openSetlistId = (openSetlistId === id) ? null : id;
+      renderSetlists();
+    }
+  });
+
+  // 셋리스트 이름 인라인 수정
+  $("#setlist-list").addEventListener("input", (e) => {
+    const rn = e.target.closest(".sl-rename");
+    if (!rn) return;
+    const sl = state.setlists.find((x) => x.id === openSetlistId);
+    if (!sl) return;
+    sl.name = rn.value.slice(0, 30);
+    saveState();
+    const nameEl = rn.closest(".setlist-item")?.querySelector(".setlist-name");
+    if (nameEl) nameEl.textContent = sl.name || "(이름 없음)";
+    renderSetlistPills();
+  });
+
+  // 뽑기 탭 셋리스트 필터 칩
+  function renderSetlistPills() {
+    const field = $("#setlist-field");
+    const wrap = $("#setlist-pills");
+    if (state.setlists.length === 0) {
+      field.classList.add("hidden");
+      pickerSetlistId = null;
+      return;
+    }
+    field.classList.remove("hidden");
+    if (pickerSetlistId && !state.setlists.some((s) => s.id === pickerSetlistId)) pickerSetlistId = null;
+    const pills = [`<button class="chip${pickerSetlistId ? "" : " active"}" data-setlist="">전체</button>`]
+      .concat(state.setlists.map((sl) =>
+        `<button class="chip${pickerSetlistId === sl.id ? " active" : ""}" data-setlist="${sl.id}">${esc(sl.name)}</button>`));
+    wrap.innerHTML = pills.join("");
+  }
+
+  $("#setlist-pills").addEventListener("click", (e) => {
+    const b = e.target.closest(".chip");
+    if (!b) return;
+    pickerSetlistId = b.dataset.setlist || null;
+    if (pickerSetlistId && pickerSource === "chart") setSource("my");
+    $("#setlist-pills").querySelectorAll(".chip").forEach((p) => p.classList.toggle("active", p === b));
+    updatePoolInfo();
+  });
+
   // ---------- 내보내기 / 가져오기 ----------
   $("#btn-export").addEventListener("click", () => {
     if (state.mySongs.length === 0) {
@@ -721,12 +920,12 @@
       return;
     }
     const blob = new Blob(
-      [JSON.stringify({ app: "songbang", version: 1, mySongs: state.mySongs }, null, 2)],
+      [JSON.stringify({ app: "songbang", version: 2, mySongs: state.mySongs, setlists: state.setlists }, null, 2)],
       { type: "application/json" }
     );
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "songbang-my-songs.json";
+    a.download = "setli-my-songs.json";
     a.click();
     URL.revokeObjectURL(a.href);
     toast("내 노래 목록을 저장했어요");
@@ -756,16 +955,43 @@
             artist: String(s.artist).slice(0, 60),
             tj: String(s.tj || "").slice(0, 8),
             ky: String(s.ky || "").slice(0, 8),
+            keyAdj: normKeyAdj(s.keyAdj),
+            hi: String(s.hi || "").slice(0, 20),
             tags: parseTags(Array.isArray(s.tags) ? s.tags.join(",") : s.tags),
             addedAt: s.addedAt || Date.now(),
           });
           added++;
         });
+
+        // 셋리스트 가져오기 (곡 id를 제목·가수 기준으로 다시 연결)
+        let slAdded = 0;
+        if (Array.isArray(data.setlists) && data.setlists.length) {
+          const oldIdToKey = {};
+          songs.forEach((s) => { if (s && s.id && s.title && s.artist) oldIdToKey[s.id] = songKey(s.title, s.artist); });
+          const keyToId = {};
+          state.mySongs.forEach((s) => { keyToId[songKey(s.title, s.artist)] = s.id; });
+          const names = new Set(state.setlists.map((x) => x.name));
+          data.setlists.forEach((sl) => {
+            if (!sl || !sl.name) return;
+            const newIds = [...new Set((sl.songIds || []).map((oid) => keyToId[oldIdToKey[oid]]).filter(Boolean))];
+            let name = String(sl.name).slice(0, 30);
+            if (names.has(name)) name = (name + " (가져옴)").slice(0, 30);
+            names.add(name);
+            state.setlists.push({ id: uid(), name, songIds: newIds });
+            slAdded++;
+          });
+        }
+
         saveState();
         renderMySongs();
         renderChart();
+        renderSetlists();
+        renderSetlistPills();
         updatePoolInfo();
-        toast(added > 0 ? `${added}곡을 가져왔어요` : "새로 가져올 노래가 없어요");
+        const parts = [];
+        if (added > 0) parts.push(`${added}곡`);
+        if (slAdded > 0) parts.push(`셋리스트 ${slAdded}개`);
+        toast(parts.length ? parts.join(" · ") + " 가져왔어요" : "새로 가져올 항목이 없어요");
       } catch (err) {
         toast("파일을 읽을 수 없어요");
       }
@@ -847,6 +1073,8 @@
   renderMySongs();
   renderChart();
   renderHistory();
+  renderSetlists();
+  renderSetlistPills();
   // 첫 실행(내 노래 비어있음)이면 기본 소스를 인기차트로 → 바로 뽑기가 된다
   if (state.mySongs.length === 0) setSource("chart");
   else updatePoolInfo();

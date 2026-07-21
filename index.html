@@ -37,6 +37,13 @@
           </div>
         </div>
 
+        <div class="field hidden" id="setlist-field">
+          <span class="field-label">셋리스트</span>
+          <div class="chip-row" id="setlist-pills">
+            <button class="chip active" data-setlist="">전체</button>
+          </div>
+        </div>
+
         <label class="check">
           <input type="checkbox" id="exclude-today" checked>
           <span class="check-box" aria-hidden="true"></span>
@@ -100,6 +107,10 @@
             <input type="text" id="input-tj" class="text-in" placeholder="TJ 번호 (선택)" inputmode="numeric" maxlength="8">
             <input type="text" id="input-ky" class="text-in" placeholder="금영 번호 (선택)" inputmode="numeric" maxlength="8">
           </div>
+          <div class="form-row">
+            <input type="text" id="input-keyadj" class="text-in" placeholder="키 (선택 · 예 +2, -1)" maxlength="6">
+            <input type="text" id="input-hinote" class="text-in" placeholder="최고음 (선택 · 예 2옥라#)" maxlength="20">
+          </div>
           <input type="text" id="input-tags" class="text-in" placeholder="태그 (선택) · 예: 발라드, 고음" maxlength="100">
           <div class="form-row">
             <button type="submit" class="key key-fill" id="btn-add">추가하기</button>
@@ -135,6 +146,28 @@
         <ul class="song-list chart-list" id="chart-list"></ul>
       </div>
     </section>
+
+    <!-- ============ 셋리스트 ============ -->
+    <section id="tab-setlist" class="tab-panel">
+      <div class="panel">
+        <div class="panel-head">
+          <h2 class="panel-title">셋리스트 <span class="count" id="setlist-count">0</span></h2>
+        </div>
+        <p class="note">부를 상황별로 곡을 묶어두고, 그 셋리스트에서 바로 뽑아요. (예: 회식용, 감성 발라드, 1차·2차)</p>
+        <form id="setlist-form" class="add-form">
+          <div class="form-row">
+            <input type="text" id="setlist-name" class="text-in" placeholder="새 셋리스트 이름" maxlength="30" required>
+            <button type="submit" class="key key-fill" id="btn-add-setlist">만들기</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <ul class="setlist-list" id="setlist-list">
+          <li class="empty-msg">아직 셋리스트가 없어요.<br>위에서 하나 만들어보세요.</li>
+        </ul>
+      </div>
+    </section>
   </main>
 
   <nav class="tabbar">
@@ -149,6 +182,10 @@
     <button class="tab-btn" data-tab="tab-chart" aria-label="인기차트">
       <span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20v-5"/><path d="M12 20V5"/><path d="M18 20v-9"/></svg></span>
       <span class="tab-txt">인기차트</span>
+    </button>
+    <button class="tab-btn" data-tab="tab-setlist" aria-label="셋리스트">
+      <span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11M4 12h11M4 17h7"/><path d="M18 15l2 2 3-3.5"/></svg></span>
+      <span class="tab-txt">셋리</span>
     </button>
   </nav>
 
