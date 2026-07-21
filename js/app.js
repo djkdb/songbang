@@ -30,6 +30,7 @@
   let chart = chartCategories[currentCategory]; // 현재 카테고리의 곡 목록
   let chartMeta = null; // { source, updatedAt }
   let songIndex = []; // 제목 자동완성용 통합 인덱스 (init에서 채움)
+  let extraIndex = []; // data/songs.json (배포 시 TJ 누적 DB)에서 로드
 
   function loadState() {
     try {
@@ -445,28 +446,47 @@
   // 앱이 가진 노래 데이터(가요·팝·J-POP·스테디셀러)를 하나의 검색 인덱스로 합친다.
   // 배포 시 라이브 차트가 로드되면 인덱스도 자동으로 넓어지고 TJ 번호까지 포함된다.
   function buildSongIndex() {
-    const seen = new Set();
-    const list = [];
+    const map = new Map();
     const pools = [
       ...Object.values(chartCategories),
       (typeof CHART_EXTRA !== "undefined" ? CHART_EXTRA : []),
+      extraIndex, // 배포 시 TJ 누적 DB
     ];
     for (const pool of pools) {
       for (const s of pool || []) {
         if (!s || !s.title || !s.artist) continue;
         const k = songKey(s.title, s.artist);
-        if (seen.has(k)) continue;
-        seen.add(k);
-        list.push({
-          title: String(s.title),
-          artist: String(s.artist),
-          tj: s.tj ? String(s.tj) : "",
-          genre: s.genre || "",
-          year: s.year || null,
-        });
+        const cur = map.get(k);
+        if (!cur) {
+          map.set(k, {
+            title: String(s.title),
+            artist: String(s.artist),
+            tj: s.tj ? String(s.tj) : "",
+            genre: s.genre || "",
+            year: s.year || null,
+          });
+        } else {
+          // 중복 곡은 정보를 합침 (특히 TJ 번호)
+          if (!cur.tj && s.tj) cur.tj = String(s.tj);
+          if (!cur.genre && s.genre) cur.genre = s.genre;
+          if (!cur.year && s.year) cur.year = s.year;
+        }
       }
     }
-    return list;
+    return [...map.values()];
+  }
+
+  // 배포 시 data/songs.json(TJ 누적 DB)을 불러와 자동완성 인덱스를 넓힌다.
+  function loadSongIndex() {
+    if (location.protocol === "file:") return;
+    fetch("data/songs.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!data || !Array.isArray(data.songs) || data.songs.length === 0) return;
+        extraIndex = data.songs;
+        songIndex = buildSongIndex();
+      })
+      .catch(() => { /* 없으면 내장 인덱스 유지 */ });
   }
 
   const acNorm = (s) => String(s ?? "").toLowerCase().replace(/\s+/g, "");
@@ -1079,4 +1099,5 @@
   if (state.mySongs.length === 0) setSource("chart");
   else updatePoolInfo();
   loadLiveChart(); // 라이브 차트 있으면 비동기로 교체
+  loadSongIndex(); // 자동완성 누적 DB 있으면 인덱스 확장
 })();
