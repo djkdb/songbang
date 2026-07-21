@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#f3ead6"/>
+  <!-- 마스커블: 중앙 80% 안전영역 -->
+  <g transform="translate(51.2 51.2) scale(0.8)">
+    <g transform="translate(256 150) rotate(-5)">
+      <rect x="-108" y="-34" width="216" height="68" rx="14" fill="#1c1a17"/>
+      <text x="0" y="16" text-anchor="middle" font-family="'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="46" font-weight="900" fill="#f3ead6">노래책</text>
+    </g>
+    <g transform="translate(190 250)">
+      <rect x="-34" y="0" width="68" height="112" rx="34" fill="#e2412b" stroke="#1c1a17" stroke-width="12"/>
+      <rect x="-10" y="112" width="20" height="46" fill="#1c1a17"/>
+      <rect x="-46" y="158" width="92" height="20" rx="10" fill="#1c1a17"/>
+      <line x1="-24" y1="34" x2="24" y2="34" stroke="#1c1a17" stroke-width="8"/>
+      <line x1="-24" y1="58" x2="24" y2="58" stroke="#1c1a17" stroke-width="8"/>
+    </g>
+    <g transform="translate(276 300) rotate(10)">
+      <rect width="118" height="118" rx="26" fill="#f4b23e" stroke="#1c1a17" stroke-width="12"/>
+      <circle cx="34" cy="34" r="12" fill="#1c1a17"/>
+      <circle cx="84" cy="34" r="12" fill="#1c1a17"/>
+      <circle cx="59" cy="59" r="12" fill="#1c1a17"/>
+      <circle cx="34" cy="84" r="12" fill="#1c1a17"/>
+      <circle cx="84" cy="84" r="12" fill="#1c1a17"/>
+    </g>
+  </g>
+</svg>
