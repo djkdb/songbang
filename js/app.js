@@ -80,6 +80,15 @@
     }
   }
 
+  // 라인 아이콘 (currentColor 상속)
+  const svg = (inner) =>
+    `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+  const ICON = {
+    heart: svg('<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 0 0 0-7.8z"/>'),
+    edit: svg('<path d="M17 3a2.83 2.83 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>'),
+    trash: svg('<path d="M3 6h18"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>'),
+  };
+
   let toastTimer = null;
   function toast(msg) {
     const el = $("#toast");
@@ -207,7 +216,7 @@
 
     if (pool.length === 0) {
       if (pickerSource === "my" && state.mySongs.length === 0) {
-        toast("내 노래가 비어있어요! 인기차트에서 담아보세요 🔥");
+        toast("내 노래가 비어있어요. 인기차트에서 담아보세요");
       } else {
         toast("조건에 맞는 곡이 없어요. 필터를 바꿔보세요!");
       }
@@ -254,7 +263,7 @@
     slotText.classList.remove("spinning");
     slotText.classList.add("reveal");
     slotText.innerHTML =
-      `✨ ${esc(song.title)} ✨<br><span class="slot-artist">${esc(song.artist)}</span>`;
+      `${esc(song.title)}<br><span class="slot-artist">${esc(song.artist)}</span>`;
     haptic([18, 40, 60]); // 두구두구 끝! 짧은 진동
 
     lastResult = song;
@@ -267,8 +276,8 @@
     $("#result-artist").textContent = song.artist;
 
     const chips = [];
-    if (song.source === "chart") chips.push(`🔥 인기차트 ${song.rank}위`);
-    if (song.source === "my") chips.push("🎤 내 노래");
+    if (song.source === "chart") chips.push(`인기차트 ${song.rank}위`);
+    if (song.source === "my") chips.push("내 노래");
     if (song.genre) chips.push(song.genre);
     if (song.year) chips.push(String(song.year));
     if (song.tj) chips.push(`TJ ${song.tj}`);
@@ -316,9 +325,8 @@
       const timeStr = isToday(h.pickedAt)
         ? `오늘 ${String(t.getHours()).padStart(2, "0")}:${String(t.getMinutes()).padStart(2, "0")}`
         : `${t.getMonth() + 1}/${t.getDate()}`;
-      const icon = h.source === "chart" ? "🔥" : "🎤";
       return `<li class="history-item">
-        <span class="history-song">${icon} ${esc(h.title)} <span class="h-artist">— ${esc(h.artist)}</span></span>
+        <span class="history-song">${esc(h.title)} <span class="h-artist">— ${esc(h.artist)}</span></span>
         <span class="history-time">${timeStr}</span>
       </li>`;
     }).join("");
@@ -354,7 +362,7 @@
     if (editingId) {
       const song = state.mySongs.find((s) => s.id === editingId);
       if (song) Object.assign(song, { title, artist, tj, ky, tags });
-      toast("수정했어요 ✏️");
+      toast("수정했어요");
       stopEditing();
     } else {
       const key = songKey(title, artist);
@@ -364,7 +372,7 @@
       }
       state.mySongs.unshift({ id: uid(), title, artist, tj, ky, tags, addedAt: Date.now() });
       haptic(12);
-      toast(`'${title}' 추가! 🎤`);
+      toast(`'${title}' 담았어요`);
     }
     saveState();
     $("#add-form").reset();
@@ -380,7 +388,7 @@
     $("#input-tj").value = song.tj || "";
     $("#input-ky").value = song.ky || "";
     $("#input-tags").value = (song.tags || []).join(", ");
-    $("#btn-add").textContent = "💾 수정 저장";
+    $("#btn-add").textContent = "수정 저장";
     $("#btn-cancel-edit").classList.remove("hidden");
     $("#input-title").focus();
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -389,7 +397,7 @@
   function stopEditing() {
     editingId = null;
     $("#add-form").reset();
-    $("#btn-add").textContent = "➕ 추가하기";
+    $("#btn-add").textContent = "추가하기";
     $("#btn-cancel-edit").classList.add("hidden");
   }
 
@@ -407,10 +415,10 @@
     if (songs.length === 0) {
       ul.innerHTML = q
         ? `<li class="empty-msg">검색 결과가 없어요</li>`
-        : `<li class="empty-msg">아직 담은 노래가 없어요.<br>부를 노래를 채워야 뽑기가 돌아가요!
+        : `<li class="empty-msg">아직 담은 노래가 없어요.<br>부를 노래를 채워야 뽑기가 돌아가요.
              <div class="empty-cta">
-               <button type="button" class="key key-fill" data-act="quick10">⚡ 인기 10곡 바로 담기</button>
-               <button type="button" class="key key-line" data-act="go-chart">🔥 인기차트에서 고르기</button>
+               <button type="button" class="key key-fill" data-act="quick10">인기 10곡 바로 담기</button>
+               <button type="button" class="key key-line" data-act="go-chart">인기차트에서 고르기</button>
              </div>
            </li>`;
       return;
@@ -425,8 +433,8 @@
           ${tags ? `<div class="song-tags">${tags}</div>` : ""}
         </div>
         <div class="song-actions">
-          <button class="icon-btn" data-act="edit" title="수정" aria-label="${esc(s.title)} 수정">✏️</button>
-          <button class="icon-btn" data-act="del" title="삭제" aria-label="${esc(s.title)} 삭제">🗑️</button>
+          <button class="icon-btn" data-act="edit" title="수정" aria-label="${esc(s.title)} 수정">${ICON.edit}</button>
+          <button class="icon-btn" data-act="del" title="삭제" aria-label="${esc(s.title)} 삭제">${ICON.trash}</button>
         </div>
       </li>`;
     }).join("");
@@ -454,7 +462,7 @@
     renderMySongs();
     renderChart();
     haptic(12);
-    toast(added > 0 ? `인기 ${added}곡 담았어요! 이제 뽑아보세요 🎲` : "이미 다 담겨 있어요");
+    toast(added > 0 ? `인기 ${added}곡 담았어요. 이제 뽑아보세요` : "이미 다 담겨 있어요");
   }
 
   $("#my-song-list").addEventListener("click", (e) => {
@@ -505,7 +513,7 @@
     renderChart();
     updatePoolInfo();
     haptic(12);
-    toast(`'${chartSong.title}' 내 노래에 추가! ❤️`);
+    toast(`'${chartSong.title}' 담았어요`);
   }
 
   function renderChart() {
@@ -536,7 +544,7 @@
           <div class="song-sub">${sub.join(" · ")}</div>
         </div>
         <div class="song-actions">
-          <button class="icon-btn heart-btn${hearted ? " hearted" : ""}" data-act="heart" title="내 노래에 담기" aria-label="${esc(s.title)} ${hearted ? "이미 담김" : "내 노래에 담기"}" aria-pressed="${hearted}">❤️</button>
+          <button class="icon-btn heart-btn${hearted ? " hearted" : ""}" data-act="heart" title="내 노래에 담기" aria-label="${esc(s.title)} ${hearted ? "이미 담김" : "내 노래에 담기"}" aria-pressed="${hearted}">${ICON.heart}</button>
         </div>
       </li>`;
     }).join("");
@@ -570,7 +578,7 @@
     a.download = "songbang-my-songs.json";
     a.click();
     URL.revokeObjectURL(a.href);
-    toast("내 노래 목록을 저장했어요 💾");
+    toast("내 노래 목록을 저장했어요");
   });
 
   $("#btn-import").addEventListener("click", () => $("#import-file").click());
@@ -606,9 +614,9 @@
         renderMySongs();
         renderChart();
         updatePoolInfo();
-        toast(added > 0 ? `${added}곡을 가져왔어요 📥` : "새로 가져올 노래가 없어요");
+        toast(added > 0 ? `${added}곡을 가져왔어요` : "새로 가져올 노래가 없어요");
       } catch (err) {
-        toast("파일을 읽을 수 없어요 😢");
+        toast("파일을 읽을 수 없어요");
       }
       e.target.value = "";
     };

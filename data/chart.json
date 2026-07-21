@@ -7,11 +7,11 @@
   "songs": [
     {
       "rank": 1,
-      "title": "APT.",
-      "artist": "로제(ROSÉ) & Bruno Mars",
+      "title": "Drowning",
+      "artist": "우즈(WOODZ)",
       "tj": "",
-      "genre": "댄스",
-      "year": 2024
+      "genre": "발라드",
+      "year": 2023
     },
     {
       "rank": 2,
@@ -23,6 +23,94 @@
     },
     {
       "rank": 3,
+      "title": "모르시나요",
+      "artist": "조째즈",
+      "tj": "",
+      "genre": "발라드",
+      "year": 2024
+    },
+    {
+      "rank": 4,
+      "title": "천상연",
+      "artist": "이창섭",
+      "tj": "",
+      "genre": "발라드",
+      "year": 2024
+    },
+    {
+      "rank": 5,
+      "title": "오늘만 I LOVE YOU",
+      "artist": "보이넥스트도어",
+      "tj": "",
+      "genre": "댄스",
+      "year": 2024
+    },
+    {
+      "rank": 6,
+      "title": "REBEL HEART",
+      "artist": "아이브(IVE)",
+      "tj": "",
+      "genre": "댄스",
+      "year": 2025
+    },
+    {
+      "rank": 7,
+      "title": "Golden",
+      "artist": "헌트릭스(HUNTR/X)",
+      "tj": "",
+      "genre": "OST",
+      "year": 2025
+    },
+    {
+      "rank": 8,
+      "title": "like JENNIE",
+      "artist": "제니(JENNIE)",
+      "tj": "",
+      "genre": "댄스",
+      "year": 2025
+    },
+    {
+      "rank": 9,
+      "title": "Soda Pop",
+      "artist": "사자보이즈(Saja Boys)",
+      "tj": "",
+      "genre": "OST",
+      "year": 2025
+    },
+    {
+      "rank": 10,
+      "title": "만찬가",
+      "artist": "tuki.(츠키)",
+      "tj": "",
+      "genre": "발라드",
+      "year": 2024
+    },
+    {
+      "rank": 11,
+      "title": "How It's Done",
+      "artist": "헌트릭스(HUNTR/X)",
+      "tj": "",
+      "genre": "OST",
+      "year": 2025
+    },
+    {
+      "rank": 12,
+      "title": "Whiplash",
+      "artist": "aespa",
+      "tj": "",
+      "genre": "댄스",
+      "year": 2024
+    },
+    {
+      "rank": 13,
+      "title": "APT.",
+      "artist": "로제(ROSÉ) & Bruno Mars",
+      "tj": "",
+      "genre": "댄스",
+      "year": 2024
+    },
+    {
+      "rank": 14,
       "title": "비의 랩소디",
       "artist": "임재현",
       "tj": "",
@@ -30,7 +118,7 @@
       "year": 2023
     },
     {
-      "rank": 4,
+      "rank": 15,
       "title": "헤어지자 말해요",
       "artist": "박재정",
       "tj": "",
@@ -38,7 +126,7 @@
       "year": 2023
     },
     {
-      "rank": 5,
+      "rank": 16,
       "title": "고민중독",
       "artist": "QWER",
       "tj": "",
@@ -46,7 +134,7 @@
       "year": 2024
     },
     {
-      "rank": 6,
+      "rank": 17,
       "title": "밤양갱",
       "artist": "비비(BIBI)",
       "tj": "",
@@ -54,7 +142,7 @@
       "year": 2024
     },
     {
-      "rank": 7,
+      "rank": 18,
       "title": "소나기",
       "artist": "이클립스(ECLIPSE)",
       "tj": "",
@@ -62,7 +150,7 @@
       "year": 2024
     },
     {
-      "rank": 8,
+      "rank": 19,
       "title": "첫 만남은 계획대로 되지 않아",
       "artist": "TWS(투어스)",
       "tj": "",
@@ -70,7 +158,7 @@
       "year": 2024
     },
     {
-      "rank": 9,
+      "rank": 20,
       "title": "Magnetic",
       "artist": "아일릿(ILLIT)",
       "tj": "",
@@ -78,7 +166,7 @@
       "year": 2024
     },
     {
-      "rank": 10,
+      "rank": 21,
       "title": "Supernova",
       "artist": "aespa",
       "tj": "",
@@ -86,7 +174,7 @@
       "year": 2024
     },
     {
-      "rank": 11,
+      "rank": 22,
       "title": "테스형!",
       "artist": "나훈아",
       "tj": "",
@@ -94,7 +182,7 @@
       "year": 2020
     },
     {
-      "rank": 12,
+      "rank": 23,
       "title": "해야 (HEYA)",
       "artist": "IVE",
       "tj": "",
@@ -102,7 +190,7 @@
       "year": 2024
     },
     {
-      "rank": 13,
+      "rank": 24,
       "title": "나는 아픈 건 딱 질색이니까",
       "artist": "(여자)아이들",
       "tj": "",
@@ -110,7 +198,7 @@
       "year": 2024
     },
     {
-      "rank": 14,
+      "rank": 25,
       "title": "Love wins all",
       "artist": "아이유",
       "tj": "",
@@ -118,7 +206,7 @@
       "year": 2024
     },
     {
-      "rank": 15,
+      "rank": 26,
       "title": "Seven",
       "artist": "정국 (feat. Latto)",
       "tj": "",
@@ -126,7 +214,7 @@
       "year": 2023
     },
     {
-      "rank": 16,
+      "rank": 27,
       "title": "퀸카 (Queencard)",
       "artist": "(여자)아이들",
       "tj": "",
@@ -134,7 +222,7 @@
       "year": 2023
     },
     {
-      "rank": 17,
+      "rank": 28,
       "title": "I AM",
       "artist": "IVE",
       "tj": "",
@@ -142,7 +230,7 @@
       "year": 2023
     },
     {
-      "rank": 18,
+      "rank": 29,
       "title": "Ditto",
       "artist": "NewJeans",
       "tj": "",
@@ -150,7 +238,7 @@
       "year": 2022
     },
     {
-      "rank": 19,
+      "rank": 30,
       "title": "Hype Boy",
       "artist": "NewJeans",
       "tj": "",
@@ -158,7 +246,7 @@
       "year": 2022
     },
     {
-      "rank": 20,
+      "rank": 31,
       "title": "손오공",
       "artist": "세븐틴",
       "tj": "",
@@ -166,7 +254,7 @@
       "year": 2023
     },
     {
-      "rank": 21,
+      "rank": 32,
       "title": "Love Lee",
       "artist": "AKMU(악뮤)",
       "tj": "",
@@ -174,7 +262,7 @@
       "year": 2023
     },
     {
-      "rank": 22,
+      "rank": 33,
       "title": "어머나",
       "artist": "장윤정",
       "tj": "",
@@ -182,7 +270,7 @@
       "year": 2004
     },
     {
-      "rank": 23,
+      "rank": 34,
       "title": "인사",
       "artist": "범진",
       "tj": "",
@@ -190,7 +278,7 @@
       "year": 2023
     },
     {
-      "rank": 24,
+      "rank": 35,
       "title": "사건의 지평선",
       "artist": "윤하",
       "tj": "",
@@ -198,7 +286,7 @@
       "year": 2022
     },
     {
-      "rank": 25,
+      "rank": 36,
       "title": "Welcome to the Show",
       "artist": "DAY6(데이식스)",
       "tj": "",
@@ -206,7 +294,7 @@
       "year": 2024
     },
     {
-      "rank": 26,
+      "rank": 37,
       "title": "한 페이지가 될 수 있게",
       "artist": "DAY6(데이식스)",
       "tj": "",
@@ -214,7 +302,7 @@
       "year": 2019
     },
     {
-      "rank": 27,
+      "rank": 38,
       "title": "예뻤어",
       "artist": "DAY6(데이식스)",
       "tj": "",
@@ -222,7 +310,7 @@
       "year": 2017
     },
     {
-      "rank": 28,
+      "rank": 39,
       "title": "신호등",
       "artist": "이무진",
       "tj": "",
@@ -230,7 +318,7 @@
       "year": 2021
     },
     {
-      "rank": 29,
+      "rank": 40,
       "title": "사랑인가 봐",
       "artist": "멜로망스",
       "tj": "",
@@ -238,7 +326,7 @@
       "year": 2022
     },
     {
-      "rank": 30,
+      "rank": 41,
       "title": "취중고백",
       "artist": "김민석",
       "tj": "",
@@ -246,7 +334,7 @@
       "year": 2021
     },
     {
-      "rank": 31,
+      "rank": 42,
       "title": "사랑은 늘 도망가",
       "artist": "임영웅",
       "tj": "",
@@ -254,7 +342,7 @@
       "year": 2021
     },
     {
-      "rank": 32,
+      "rank": 43,
       "title": "다시 만날 수 있을까",
       "artist": "임영웅",
       "tj": "",
@@ -262,7 +350,7 @@
       "year": 2022
     },
     {
-      "rank": 33,
+      "rank": 44,
       "title": "취기를 빌려",
       "artist": "산들",
       "tj": "",
@@ -270,7 +358,7 @@
       "year": 2020
     },
     {
-      "rank": 34,
+      "rank": 45,
       "title": "어떻게 지내",
       "artist": "크러쉬(Crush)",
       "tj": "",
@@ -278,7 +366,7 @@
       "year": 2020
     },
     {
-      "rank": 35,
+      "rank": 46,
       "title": "다정히 내 이름을 부르면",
       "artist": "경서예지·전건호",
       "tj": "",
@@ -286,7 +374,7 @@
       "year": 2021
     },
     {
-      "rank": 36,
+      "rank": 47,
       "title": "밤하늘의 별을",
       "artist": "경서",
       "tj": "",
@@ -294,7 +382,7 @@
       "year": 2020
     },
     {
-      "rank": 37,
+      "rank": 48,
       "title": "Celebrity",
       "artist": "아이유",
       "tj": "",
@@ -302,7 +390,7 @@
       "year": 2021
     },
     {
-      "rank": 38,
+      "rank": 49,
       "title": "라일락",
       "artist": "아이유",
       "tj": "",
@@ -310,7 +398,7 @@
       "year": 2021
     },
     {
-      "rank": 39,
+      "rank": 50,
       "title": "아무노래",
       "artist": "지코(ZICO)",
       "tj": "",
@@ -318,7 +406,7 @@
       "year": 2020
     },
     {
-      "rank": 40,
+      "rank": 51,
       "title": "롤린 (Rollin')",
       "artist": "브레이브걸스",
       "tj": "",
@@ -326,7 +414,7 @@
       "year": 2017
     },
     {
-      "rank": 41,
+      "rank": 52,
       "title": "다시 여기 바닷가",
       "artist": "싹쓰리",
       "tj": "",
@@ -334,7 +422,7 @@
       "year": 2020
     },
     {
-      "rank": 42,
+      "rank": 53,
       "title": "Dynamite",
       "artist": "방탄소년단(BTS)",
       "tj": "",
@@ -342,7 +430,7 @@
       "year": 2020
     },
     {
-      "rank": 43,
+      "rank": 54,
       "title": "TOMBOY",
       "artist": "(여자)아이들",
       "tj": "",
@@ -350,7 +438,7 @@
       "year": 2022
     },
     {
-      "rank": 44,
+      "rank": 55,
       "title": "어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
       "artist": "AKMU(악뮤)",
       "tj": "",
@@ -358,7 +446,7 @@
       "year": 2019
     },
     {
-      "rank": 45,
+      "rank": 56,
       "title": "오랜 날 오랜 밤",
       "artist": "AKMU(악뮤)",
       "tj": "",
@@ -366,7 +454,7 @@
       "year": 2017
     },
     {
-      "rank": 46,
+      "rank": 57,
       "title": "주저하는 연인들을 위해",
       "artist": "잔나비",
       "tj": "",
@@ -374,7 +462,7 @@
       "year": 2019
     },
     {
-      "rank": 47,
+      "rank": 58,
       "title": "모든 날, 모든 순간",
       "artist": "폴킴",
       "tj": "",
@@ -382,7 +470,7 @@
       "year": 2018
     },
     {
-      "rank": 48,
+      "rank": 59,
       "title": "너를 만나",
       "artist": "폴킴",
       "tj": "",
@@ -390,7 +478,7 @@
       "year": 2017
     },
     {
-      "rank": 49,
+      "rank": 60,
       "title": "그날처럼",
       "artist": "장덕철",
       "tj": "",
@@ -398,7 +486,7 @@
       "year": 2018
     },
     {
-      "rank": 50,
+      "rank": 61,
       "title": "사랑에 연습이 있었다면",
       "artist": "임재현",
       "tj": "",
@@ -406,7 +494,7 @@
       "year": 2019
     },
     {
-      "rank": 51,
+      "rank": 62,
       "title": "좋니",
       "artist": "윤종신",
       "tj": "",
@@ -414,7 +502,7 @@
       "year": 2017
     },
     {
-      "rank": 52,
+      "rank": 63,
       "title": "선물",
       "artist": "멜로망스",
       "tj": "",
@@ -422,7 +510,7 @@
       "year": 2017
     },
     {
-      "rank": 53,
+      "rank": 64,
       "title": "비도 오고 그래서",
       "artist": "헤이즈 (feat. 신용재)",
       "tj": "",
@@ -430,7 +518,7 @@
       "year": 2017
     },
     {
-      "rank": 54,
+      "rank": 65,
       "title": "첫눈처럼 너에게 가겠다",
       "artist": "에일리",
       "tj": "",
@@ -438,7 +526,7 @@
       "year": 2017
     },
     {
-      "rank": 55,
+      "rank": 66,
       "title": "Beautiful",
       "artist": "크러쉬(Crush)",
       "tj": "",
@@ -446,7 +534,7 @@
       "year": 2016
     },
     {
-      "rank": 56,
+      "rank": 67,
       "title": "우주를 줄게",
       "artist": "볼빨간사춘기",
       "tj": "",
@@ -454,7 +542,7 @@
       "year": 2016
     },
     {
-      "rank": 57,
+      "rank": 68,
       "title": "여행",
       "artist": "볼빨간사춘기",
       "tj": "",
@@ -462,7 +550,7 @@
       "year": 2018
     },
     {
-      "rank": 58,
+      "rank": 69,
       "title": "사랑을 했다",
       "artist": "iKON",
       "tj": "",
@@ -470,7 +558,7 @@
       "year": 2018
     },
     {
-      "rank": 59,
+      "rank": 70,
       "title": "봄날",
       "artist": "방탄소년단(BTS)",
       "tj": "",
@@ -478,7 +566,7 @@
       "year": 2017
     },
     {
-      "rank": 60,
+      "rank": 71,
       "title": "METEOR",
       "artist": "창모",
       "tj": "",
@@ -486,7 +574,7 @@
       "year": 2019
     },
     {
-      "rank": 61,
+      "rank": 72,
       "title": "이 노래가 클럽에서 나온다면",
       "artist": "우디(Woody)",
       "tj": "",
@@ -494,7 +582,7 @@
       "year": 2019
     },
     {
-      "rank": 62,
+      "rank": 73,
       "title": "어디에도",
       "artist": "엠씨더맥스",
       "tj": "",
@@ -502,7 +590,7 @@
       "year": 2016
     },
     {
-      "rank": 63,
+      "rank": 74,
       "title": "밤편지",
       "artist": "아이유",
       "tj": "",
@@ -510,7 +598,7 @@
       "year": 2017
     },
     {
-      "rank": 64,
+      "rank": 75,
       "title": "Blueming",
       "artist": "아이유",
       "tj": "",
@@ -518,7 +606,7 @@
       "year": 2019
     },
     {
-      "rank": 65,
+      "rank": 76,
       "title": "마지막처럼",
       "artist": "블랙핑크",
       "tj": "",
@@ -526,7 +614,7 @@
       "year": 2017
     },
     {
-      "rank": 66,
+      "rank": 77,
       "title": "TT",
       "artist": "트와이스",
       "tj": "",
@@ -534,7 +622,7 @@
       "year": 2016
     },
     {
-      "rank": 67,
+      "rank": 78,
       "title": "너의 모든 순간",
       "artist": "성시경",
       "tj": "",
@@ -542,7 +630,7 @@
       "year": 2014
     },
     {
-      "rank": 68,
+      "rank": 79,
       "title": "내가 저지른 사랑",
       "artist": "임창정",
       "tj": "",
@@ -550,7 +638,7 @@
       "year": 2017
     },
     {
-      "rank": 69,
+      "rank": 80,
       "title": "걱정말아요 그대",
       "artist": "이적",
       "tj": "",
@@ -558,7 +646,7 @@
       "year": 2015
     },
     {
-      "rank": 70,
+      "rank": 81,
       "title": "벚꽃 엔딩",
       "artist": "버스커버스커",
       "tj": "",
@@ -566,7 +654,7 @@
       "year": 2012
     },
     {
-      "rank": 71,
+      "rank": 82,
       "title": "여수 밤바다",
       "artist": "버스커버스커",
       "tj": "",
@@ -574,7 +662,7 @@
       "year": 2012
     },
     {
-      "rank": 72,
+      "rank": 83,
       "title": "좋은 날",
       "artist": "아이유",
       "tj": "",
@@ -582,7 +670,7 @@
       "year": 2010
     },
     {
-      "rank": 73,
+      "rank": 84,
       "title": "너랑 나",
       "artist": "아이유",
       "tj": "",
@@ -590,7 +678,7 @@
       "year": 2011
     },
     {
-      "rank": 74,
+      "rank": 85,
       "title": "스물다섯, 스물하나",
       "artist": "자우림",
       "tj": "",
@@ -598,7 +686,7 @@
       "year": 2013
     },
     {
-      "rank": 75,
+      "rank": 86,
       "title": "야생화",
       "artist": "박효신",
       "tj": "",
@@ -606,7 +694,7 @@
       "year": 2014
     },
     {
-      "rank": 76,
+      "rank": 87,
       "title": "바람기억",
       "artist": "나얼",
       "tj": "",
@@ -614,7 +702,7 @@
       "year": 2012
     },
     {
-      "rank": 77,
+      "rank": 88,
       "title": "봄 사랑 벚꽃 말고",
       "artist": "HIGH4·아이유",
       "tj": "",
@@ -622,7 +710,7 @@
       "year": 2014
     },
     {
-      "rank": 78,
+      "rank": 89,
       "title": "이러지마 제발",
       "artist": "케이윌",
       "tj": "",
@@ -630,7 +718,7 @@
       "year": 2012
     },
     {
-      "rank": 79,
+      "rank": 90,
       "title": "안녕이라고 말하지마",
       "artist": "다비치",
       "tj": "",
@@ -638,7 +726,7 @@
       "year": 2011
     },
     {
-      "rank": 80,
+      "rank": 91,
       "title": "고백 (Go Back)",
       "artist": "다이나믹 듀오",
       "tj": "",
@@ -646,7 +734,7 @@
       "year": 2011
     },
     {
-      "rank": 81,
+      "rank": 92,
       "title": "내가 제일 잘 나가",
       "artist": "2NE1",
       "tj": "",
@@ -654,7 +742,7 @@
       "year": 2011
     },
     {
-      "rank": 82,
+      "rank": 93,
       "title": "삐딱하게",
       "artist": "G-DRAGON",
       "tj": "",
@@ -662,7 +750,7 @@
       "year": 2013
     },
     {
-      "rank": 83,
+      "rank": 94,
       "title": "말하는 대로",
       "artist": "처진 달팽이(유재석·이적)",
       "tj": "",
@@ -670,7 +758,7 @@
       "year": 2011
     },
     {
-      "rank": 84,
+      "rank": 95,
       "title": "눈의 꽃",
       "artist": "박효신",
       "tj": "",
@@ -678,7 +766,7 @@
       "year": 2004
     },
     {
-      "rank": 85,
+      "rank": 96,
       "title": "보고 싶다",
       "artist": "김범수",
       "tj": "",
@@ -686,7 +774,7 @@
       "year": 2002
     },
     {
-      "rank": 86,
+      "rank": 97,
       "title": "벌써 일년",
       "artist": "브라운아이즈",
       "tj": "",
@@ -694,7 +782,7 @@
       "year": 2001
     },
     {
-      "rank": 87,
+      "rank": 98,
       "title": "I Believe",
       "artist": "신승훈",
       "tj": "",
@@ -702,7 +790,7 @@
       "year": 2001
     },
     {
-      "rank": 88,
+      "rank": 99,
       "title": "To Heaven",
       "artist": "조성모",
       "tj": "",
@@ -710,100 +798,12 @@
       "year": 1998
     },
     {
-      "rank": 89,
+      "rank": 100,
       "title": "총 맞은 것처럼",
       "artist": "백지영",
       "tj": "",
       "genre": "발라드",
       "year": 2008
-    },
-    {
-      "rank": 90,
-      "title": "거리에서",
-      "artist": "성시경",
-      "tj": "",
-      "genre": "발라드",
-      "year": 2006
-    },
-    {
-      "rank": 91,
-      "title": "소주 한 잔",
-      "artist": "임창정",
-      "tj": "",
-      "genre": "발라드",
-      "year": 2003
-    },
-    {
-      "rank": 92,
-      "title": "겁쟁이",
-      "artist": "버즈",
-      "tj": "",
-      "genre": "락/밴드",
-      "year": 2005
-    },
-    {
-      "rank": 93,
-      "title": "가시",
-      "artist": "버즈",
-      "tj": "",
-      "genre": "락/밴드",
-      "year": 2003
-    },
-    {
-      "rank": 94,
-      "title": "너를 위해",
-      "artist": "임재범",
-      "tj": "",
-      "genre": "발라드",
-      "year": 2000
-    },
-    {
-      "rank": 95,
-      "title": "고해",
-      "artist": "임재범",
-      "tj": "",
-      "genre": "발라드",
-      "year": 1998
-    },
-    {
-      "rank": 96,
-      "title": "응급실",
-      "artist": "izi(이지)",
-      "tj": "",
-      "genre": "락/밴드",
-      "year": 2005
-    },
-    {
-      "rank": 97,
-      "title": "체념",
-      "artist": "빅마마",
-      "tj": "",
-      "genre": "발라드",
-      "year": 2003
-    },
-    {
-      "rank": 98,
-      "title": "Tears",
-      "artist": "소찬휘",
-      "tj": "",
-      "genre": "락/밴드",
-      "year": 2000
-    },
-    {
-      "rank": 99,
-      "title": "하루하루",
-      "artist": "빅뱅",
-      "tj": "",
-      "genre": "댄스",
-      "year": 2008
-    },
-    {
-      "rank": 100,
-      "title": "거짓말",
-      "artist": "빅뱅",
-      "tj": "",
-      "genre": "댄스",
-      "year": 2007
     }
   ]
 }

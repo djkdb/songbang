@@ -1,28 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- 종이 배경 -->
-  <rect width="512" height="512" rx="112" fill="#f3ead6"/>
-  <rect x="18" y="18" width="476" height="476" rx="96" fill="none" stroke="#1c1a17" stroke-width="14"/>
-  <!-- 노래책 라벨 -->
-  <g transform="translate(256 150) rotate(-5)">
-    <rect x="-108" y="-34" width="216" height="68" rx="14" fill="#1c1a17"/>
-    <text x="0" y="16" text-anchor="middle" font-family="'Apple SD Gothic Neo','Noto Sans KR',sans-serif" font-size="46" font-weight="900" fill="#f3ead6">노래책</text>
-  </g>
-  <!-- 큰 송(송방) 이니셜 대신 주사위+마이크 조합 심볼 -->
-  <!-- 마이크 -->
-  <g transform="translate(190 250)">
-    <rect x="-34" y="0" width="68" height="112" rx="34" fill="#e2412b" stroke="#1c1a17" stroke-width="12"/>
-    <rect x="-10" y="112" width="20" height="46" fill="#1c1a17"/>
-    <rect x="-46" y="158" width="92" height="20" rx="10" fill="#1c1a17"/>
-    <line x1="-24" y1="34" x2="24" y2="34" stroke="#1c1a17" stroke-width="8"/>
-    <line x1="-24" y1="58" x2="24" y2="58" stroke="#1c1a17" stroke-width="8"/>
-  </g>
-  <!-- 주사위 -->
-  <g transform="translate(276 300) rotate(10)">
-    <rect width="118" height="118" rx="26" fill="#f4b23e" stroke="#1c1a17" stroke-width="12"/>
-    <circle cx="34" cy="34" r="12" fill="#1c1a17"/>
-    <circle cx="84" cy="34" r="12" fill="#1c1a17"/>
-    <circle cx="59" cy="59" r="12" fill="#1c1a17"/>
-    <circle cx="34" cy="84" r="12" fill="#1c1a17"/>
-    <circle cx="84" cy="84" r="12" fill="#1c1a17"/>
+  <rect width="512" height="512" rx="112" fill="#131217"/>
+  <!-- 주사위 (라인) -->
+  <g transform="translate(256 256)">
+    <rect x="-118" y="-118" width="236" height="236" rx="56" fill="none" stroke="#ff6f5e" stroke-width="18"/>
+    <circle cx="-56" cy="-56" r="20" fill="#ff6f5e"/>
+    <circle cx="56" cy="-56" r="20" fill="#ff6f5e"/>
+    <circle cx="0" cy="0" r="20" fill="#ece9f1"/>
+    <circle cx="-56" cy="56" r="20" fill="#ff6f5e"/>
+    <circle cx="56" cy="56" r="20" fill="#ff6f5e"/>
   </g>
 </svg>
