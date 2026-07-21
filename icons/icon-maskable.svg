@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2a1548"/>
+      <stop offset="100%" stop-color="#12081f"/>
+    </linearGradient>
+    <linearGradient id="mic" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff4d9d"/>
+      <stop offset="100%" stop-color="#a55eff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- 마스커블: 중앙 80% 안전영역에 축소 배치 -->
+  <g transform="translate(51.2 51.2) scale(0.8)">
+    <circle cx="256" cy="216" r="118" fill="#ff4d9d" opacity="0.18"/>
+    <circle cx="256" cy="200" r="86" fill="url(#mic)"/>
+    <g stroke="#12081f" stroke-width="10" opacity="0.35">
+      <line x1="190" y1="170" x2="322" y2="170"/>
+      <line x1="180" y1="200" x2="332" y2="200"/>
+      <line x1="190" y1="230" x2="322" y2="230"/>
+    </g>
+    <path d="M232 282 L280 282 L306 400 Q308 424 256 424 Q204 424 206 400 Z" fill="url(#mic)"/>
+    <g transform="translate(322 300) rotate(14)">
+      <rect width="112" height="112" rx="24" fill="#38e5ff"/>
+      <circle cx="32" cy="32" r="11" fill="#12081f"/>
+      <circle cx="80" cy="32" r="11" fill="#12081f"/>
+      <circle cx="56" cy="56" r="11" fill="#12081f"/>
+      <circle cx="32" cy="80" r="11" fill="#12081f"/>
+      <circle cx="80" cy="80" r="11" fill="#12081f"/>
+    </g>
+    <g fill="#ffd84d">
+      <circle cx="120" cy="330" r="16"/>
+      <rect x="130" y="258" width="10" height="72" rx="4"/>
+      <path d="M130 258 q34 6 44 28 q-4 -34 -34 -40 z"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#12081f">
+  <meta name="description" content="내가 부를 수 있는 노래를 저장하고 랜덤으로 뽑아주는 노래방 도우미">
+  <title>송방 SongBang — 노래방 랜덤 뽑기</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1><span class="logo-mic">🎤</span> 송방 <span class="logo-sub">SongBang</span></h1>
+    <p class="tagline">뭐 부르지? 고민 끝. 랜덤으로 뽑자!</p>
+  </header>
+
+  <main>
+    <!-- ============ 뽑기 탭 ============ -->
+    <section id="tab-pick" class="tab-panel active">
+      <div class="card picker-card">
+        <div class="picker-options">
+          <div class="option-group">
+            <span class="option-label">어디서 뽑을까?</span>
+            <div class="pill-group" id="source-pills">
+              <button class="pill active" data-source="my">🎤 내 노래</button>
+              <button class="pill" data-source="chart">🔥 인기차트</button>
+              <button class="pill" data-source="both">🎲 둘 다</button>
+            </div>
+          </div>
+          <div class="option-group">
+            <span class="option-label">장르</span>
+            <div class="pill-group" id="genre-pills">
+              <button class="pill small active" data-genre="">전체</button>
+              <!-- 장르 필터는 JS에서 채움 -->
+            </div>
+          </div>
+          <label class="toggle-row">
+            <input type="checkbox" id="exclude-today" checked>
+            <span>오늘 이미 뽑은 곡은 제외</span>
+          </label>
+        </div>
+
+        <div class="slot-machine" id="slot-machine">
+          <div class="slot-window">
+            <div class="slot-text" id="slot-text">버튼을 눌러서<br>운명의 노래를 뽑아보세요</div>
+          </div>
+        </div>
+
+        <button class="btn-pick" id="btn-pick">🎰 랜덤 뽑기!</button>
+        <p class="pool-info" id="pool-info"></p>
+      </div>
+
+      <div class="card result-card hidden" id="result-card">
+        <div class="result-label">🎉 오늘의 선곡</div>
+        <div class="result-title" id="result-title"></div>
+        <div class="result-artist" id="result-artist"></div>
+        <div class="result-meta" id="result-meta"></div>
+        <div class="result-actions">
+          <button class="btn-secondary" id="btn-repick">🔄 다시 뽑기</button>
+          <button class="btn-primary hidden" id="btn-save-result">➕ 내 노래에 추가</button>
+        </div>
+      </div>
+
+      <div class="card history-card">
+        <div class="card-header">
+          <h2>🕘 최근 뽑은 노래</h2>
+          <button class="btn-text" id="btn-clear-history">기록 지우기</button>
+        </div>
+        <ul class="history-list" id="history-list">
+          <li class="empty-msg">아직 뽑은 노래가 없어요</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 내 노래 탭 ============ -->
+    <section id="tab-my" class="tab-panel">
+      <div class="card">
+        <div class="card-header">
+          <h2>🎤 내 노래 <span class="count-badge" id="my-count">0</span></h2>
+          <div class="header-actions">
+            <button class="btn-text" id="btn-export">내보내기</button>
+            <button class="btn-text" id="btn-import">가져오기</button>
+            <input type="file" id="import-file" accept=".json,application/json" hidden>
+          </div>
+        </div>
+
+        <form id="add-form" class="add-form">
+          <input type="text" id="input-title" placeholder="노래 제목 *" required maxlength="80">
+          <input type="text" id="input-artist" placeholder="가수 *" required maxlength="60">
+          <div class="form-row">
+            <input type="text" id="input-tj" placeholder="TJ 번호" inputmode="numeric" maxlength="8">
+            <input type="text" id="input-ky" placeholder="금영 번호" inputmode="numeric" maxlength="8">
+          </div>
+          <input type="text" id="input-tags" placeholder="태그 (쉼표로 구분: 발라드, 고음, 분위기)" maxlength="100">
+          <div class="form-row">
+            <button type="submit" class="btn-primary" id="btn-add">➕ 추가하기</button>
+            <button type="button" class="btn-secondary hidden" id="btn-cancel-edit">취소</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <input type="search" id="my-search" class="search-input" placeholder="🔍 내 노래 검색">
+        <ul class="song-list" id="my-song-list">
+          <li class="empty-msg">아직 저장한 노래가 없어요.<br>인기차트에서 ♥를 눌러 담아보세요!</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 인기차트 탭 ============ -->
+    <section id="tab-chart" class="tab-panel">
+      <div class="card">
+        <div class="card-header">
+          <h2>🔥 노래방 인기차트 100</h2>
+        </div>
+        <p class="chart-note">앱에 내장된 애창곡 차트예요. ♥를 누르면 내 노래에 저장돼요.</p>
+        <input type="search" id="chart-search" class="search-input" placeholder="🔍 제목·가수 검색">
+        <div class="pill-group wrap" id="chart-genre-pills">
+          <button class="pill small active" data-genre="">전체</button>
+        </div>
+        <ul class="song-list chart-list" id="chart-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-tab="tab-pick">
+      <span class="nav-icon">🎰</span><span class="nav-text">뽑기</span>
+    </button>
+    <button class="nav-btn" data-tab="tab-my">
+      <span class="nav-icon">🎤</span><span class="nav-text">내 노래</span>
+    </button>
+    <button class="nav-btn" data-tab="tab-chart">
+      <span class="nav-icon">🔥</span><span class="nav-text">인기차트</span>
+    </button>
+  </nav>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/chart-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
