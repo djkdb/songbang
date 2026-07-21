@@ -89,8 +89,12 @@
           </div>
         </div>
 
-        <form id="add-form" class="add-form">
-          <input type="text" id="input-title" class="text-in" placeholder="노래 제목" required maxlength="80">
+        <form id="add-form" class="add-form" autocomplete="off">
+          <div class="autocomplete">
+            <input type="text" id="input-title" class="text-in" placeholder="노래 제목" required maxlength="80"
+                   autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac-list" aria-autocomplete="list">
+            <ul class="ac-list hidden" id="ac-list" role="listbox" aria-label="노래 제목 추천"></ul>
+          </div>
           <input type="text" id="input-artist" class="text-in" placeholder="가수" required maxlength="60">
           <div class="form-row">
             <input type="text" id="input-tj" class="text-in" placeholder="TJ 번호" inputmode="numeric" maxlength="8">

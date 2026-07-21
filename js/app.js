@@ -27,6 +27,7 @@
   let currentCategory = "가요";
   let chart = chartCategories[currentCategory]; // 현재 카테고리의 곡 목록
   let chartMeta = null; // { source, updatedAt }
+  let songIndex = []; // 제목 자동완성용 통합 인덱스 (init에서 채움)
 
   function loadState() {
     try {
@@ -383,6 +384,7 @@
     }
     saveState();
     $("#add-form").reset();
+    closeAc();
     renderMySongs();
     renderChart();
     updatePoolInfo();
@@ -409,6 +411,126 @@
   }
 
   $("#btn-cancel-edit").addEventListener("click", stopEditing);
+
+  // ---------- 제목 자동완성 ----------
+  // 앱이 가진 노래 데이터(가요·팝·J-POP·스테디셀러)를 하나의 검색 인덱스로 합친다.
+  // 배포 시 라이브 차트가 로드되면 인덱스도 자동으로 넓어지고 TJ 번호까지 포함된다.
+  function buildSongIndex() {
+    const seen = new Set();
+    const list = [];
+    const pools = [
+      ...Object.values(chartCategories),
+      (typeof CHART_EXTRA !== "undefined" ? CHART_EXTRA : []),
+    ];
+    for (const pool of pools) {
+      for (const s of pool || []) {
+        if (!s || !s.title || !s.artist) continue;
+        const k = songKey(s.title, s.artist);
+        if (seen.has(k)) continue;
+        seen.add(k);
+        list.push({
+          title: String(s.title),
+          artist: String(s.artist),
+          tj: s.tj ? String(s.tj) : "",
+          genre: s.genre || "",
+          year: s.year || null,
+        });
+      }
+    }
+    return list;
+  }
+
+  const acNorm = (s) => String(s ?? "").toLowerCase().replace(/\s+/g, "");
+  const acEl = $("#ac-list");
+  const titleEl = $("#input-title");
+  let acItems = [];
+  let acActive = -1;
+
+  function acHighlight(text, q) {
+    const t = String(text);
+    if (!q) return esc(t);
+    const i = t.toLowerCase().indexOf(q.toLowerCase());
+    if (i < 0) return esc(t);
+    return esc(t.slice(0, i)) + '<span class="ac-hl">' + esc(t.slice(i, i + q.length)) +
+      "</span>" + esc(t.slice(i + q.length));
+  }
+
+  function closeAc() {
+    acItems = [];
+    acActive = -1;
+    acEl.classList.add("hidden");
+    acEl.innerHTML = "";
+    titleEl.setAttribute("aria-expanded", "false");
+  }
+
+  function renderAc() {
+    const raw = titleEl.value.trim();
+    const q = acNorm(raw);
+    if (!q) return closeAc();
+    acItems = songIndex
+      .filter((s) => acNorm(s.title).includes(q) || acNorm(s.artist).includes(q))
+      .sort((a, b) => {
+        const as = acNorm(a.title).startsWith(q) ? 0 : 1;
+        const bs = acNorm(b.title).startsWith(q) ? 0 : 1;
+        return as - bs;
+      })
+      .slice(0, 8);
+    if (acItems.length === 0) return closeAc();
+    acActive = -1;
+    acEl.innerHTML = acItems.map((s, i) => {
+      const sub = [esc(s.artist), s.genre && esc(s.genre), s.year && s.year, s.tj && "TJ " + esc(s.tj)]
+        .filter(Boolean).join(" · ");
+      return `<li class="ac-item" role="option" data-i="${i}" id="ac-opt-${i}">
+        <div class="ac-title">${acHighlight(s.title, raw)}</div>
+        <div class="ac-sub">${sub}</div>
+      </li>`;
+    }).join("");
+    acEl.classList.remove("hidden");
+    titleEl.setAttribute("aria-expanded", "true");
+  }
+
+  function acChoose(i) {
+    const s = acItems[i];
+    if (!s) return;
+    titleEl.value = s.title;
+    $("#input-artist").value = s.artist;
+    if (s.tj) $("#input-tj").value = s.tj;
+    haptic(8);
+    closeAc();
+    // 이미 담긴 곡이면 바로 알려주기
+    const dup = state.mySongs.some((x) => songKey(x.title, x.artist) === songKey(s.title, s.artist));
+    if (dup) toast("이미 담긴 노래예요");
+    $("#input-tags").focus();
+  }
+
+  function acSetActive(n) {
+    acActive = n;
+    acEl.querySelectorAll(".ac-item").forEach((li, i) =>
+      li.classList.toggle("active", i === acActive));
+    if (acActive >= 0) {
+      titleEl.setAttribute("aria-activedescendant", "ac-opt-" + acActive);
+      acEl.children[acActive]?.scrollIntoView({ block: "nearest" });
+    } else {
+      titleEl.removeAttribute("aria-activedescendant");
+    }
+  }
+
+  titleEl.addEventListener("input", renderAc);
+  titleEl.addEventListener("focus", () => { if (titleEl.value.trim()) renderAc(); });
+  titleEl.addEventListener("blur", () => setTimeout(closeAc, 150));
+  titleEl.addEventListener("keydown", (e) => {
+    if (acEl.classList.contains("hidden") || acItems.length === 0) return;
+    if (e.key === "ArrowDown") { e.preventDefault(); acSetActive((acActive + 1) % acItems.length); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); acSetActive((acActive - 1 + acItems.length) % acItems.length); }
+    else if (e.key === "Enter" && acActive >= 0) { e.preventDefault(); acChoose(acActive); }
+    else if (e.key === "Escape") { closeAc(); }
+  });
+  acEl.addEventListener("mousedown", (e) => {
+    // blur 전에 선택되도록 mousedown 사용
+    const li = e.target.closest(".ac-item");
+    if (li) { e.preventDefault(); acChoose(Number(li.dataset.i)); }
+  });
+
   $("#my-search").addEventListener("input", renderMySongs);
 
   function renderMySongs() {
@@ -704,6 +826,7 @@
         chartCategories = cats;
         chart = chartCategories[currentCategory] || [];
         chartMeta = { source: data.source, updatedAt: data.updatedAt };
+        songIndex = buildSongIndex(); // 라이브 데이터로 자동완성 인덱스 확장
         renderChart();
         updatePoolInfo();
         updateChartNote();
@@ -719,6 +842,7 @@
   }
 
   // ---------- 초기화 ----------
+  songIndex = buildSongIndex();
   buildGenrePills();
   renderMySongs();
   renderChart();

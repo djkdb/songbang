@@ -233,6 +233,24 @@ main { max-width: 540px; margin: 0 auto; padding: 8px 16px 0; }
 .text-in:focus { border-color: var(--accent-line); }
 .search { margin-bottom: 14px; }
 .add-form { display: flex; flex-direction: column; gap: 9px; }
+
+/* 제목 자동완성 */
+.autocomplete { position: relative; }
+.ac-list {
+  list-style: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 30;
+  background: var(--bg-3); border: 1px solid var(--line-2); border-radius: 12px;
+  box-shadow: 0 16px 38px -14px rgba(0, 0, 0, 0.85);
+  max-height: 264px; overflow-y: auto; overscroll-behavior: contain;
+}
+.ac-item {
+  padding: 10px 13px; cursor: pointer;
+  border-bottom: 1px solid var(--line);
+}
+.ac-item:last-child { border-bottom: none; }
+.ac-item.active, .ac-item:hover { background: rgba(255, 255, 255, 0.05); }
+.ac-title { font-size: 0.92rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ac-title .ac-hl { color: var(--accent); }
+.ac-sub { font-size: 0.76rem; color: var(--dim); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .form-row { display: flex; gap: 9px; }
 .form-row .text-in, .form-row .key { flex: 1; min-width: 0; }
 
