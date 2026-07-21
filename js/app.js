@@ -16,9 +16,16 @@
   let lastResult = null; // 마지막 뽑기 결과
   let spinning = false;
 
-  // 활성 인기차트: 기본은 앱 내장 큐레이션(CHART_TOP100),
+  // 인기차트: 카테고리별(가요/팝/J-POP). 기본은 앱 내장 큐레이션,
   // data/chart.json(자동 업데이트본)이 있으면 그걸로 교체한다.
-  let chart = (typeof CHART_TOP100 !== "undefined" ? CHART_TOP100 : []).slice();
+  const CATS = ["가요", "팝", "J-POP"];
+  let chartCategories = {
+    "가요": (typeof CHART_TOP100 !== "undefined" ? CHART_TOP100 : []).slice(),
+    "팝": (typeof CHART_POP !== "undefined" ? CHART_POP : []).slice(),
+    "J-POP": (typeof CHART_JPOP !== "undefined" ? CHART_JPOP : []).slice(),
+  };
+  let currentCategory = "가요";
+  let chart = chartCategories[currentCategory]; // 현재 카테고리의 곡 목록
   let chartMeta = null; // { source, updatedAt }
 
   function loadState() {
@@ -496,6 +503,28 @@
   // ---------- 인기차트 ----------
   $("#chart-search").addEventListener("input", renderChart);
 
+  // 카테고리 전환 (가요 / 팝 / J-POP)
+  function updateCategoryUI() {
+    $("#chart-cat").querySelectorAll(".seg-btn").forEach((b) =>
+      b.classList.toggle("active", b.dataset.cat === currentCategory));
+  }
+  function setCategory(cat) {
+    if (!CATS.includes(cat)) return;
+    currentCategory = cat;
+    chart = chartCategories[cat] || [];
+    // 카테고리를 바꾸면 장르 필터는 전체로 초기화
+    chartGenreFilter = "";
+    $("#chart-genre-pills").querySelectorAll(".chip").forEach((p) =>
+      p.classList.toggle("active", p.dataset.genre === ""));
+    updateCategoryUI();
+    renderChart();
+    updatePoolInfo();
+  }
+  $("#chart-cat").addEventListener("click", (e) => {
+    const b = e.target.closest(".seg-btn");
+    if (b) setCategory(b.dataset.cat);
+  });
+
   function addChartSongToMy(chartSong) {
     const key = songKey(chartSong.title, chartSong.artist);
     if (state.mySongs.some((s) => songKey(s.title, s.artist) === key)) return;
@@ -655,8 +684,25 @@
     fetch("data/chart.json", { cache: "no-cache" })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
-        if (!data || !Array.isArray(data.songs) || data.songs.length < 10) return;
-        chart = normalizeChartSongs(data.songs);
+        if (!data) return;
+        const cats = {};
+        if (data.categories && typeof data.categories === "object") {
+          // 신 스키마: 카테고리별. 비어있는 카테고리는 내장 목록 유지
+          for (const name of CATS) {
+            const live = normalizeChartSongs(data.categories[name] || []);
+            cats[name] = live.length ? live : (chartCategories[name] || []);
+          }
+        } else if (Array.isArray(data.songs) && data.songs.length) {
+          // 구 스키마 호환: songs = 가요
+          cats["가요"] = normalizeChartSongs(data.songs);
+          cats["팝"] = chartCategories["팝"];
+          cats["J-POP"] = chartCategories["J-POP"];
+        } else {
+          return;
+        }
+        if ((cats["가요"] || []).length < 10) return;
+        chartCategories = cats;
+        chart = chartCategories[currentCategory] || [];
         chartMeta = { source: data.source, updatedAt: data.updatedAt };
         renderChart();
         updatePoolInfo();

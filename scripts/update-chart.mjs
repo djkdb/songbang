@@ -1,20 +1,17 @@
 #!/usr/bin/env node
 /**
- * TJ미디어 노래방 TOP100(가요) 인기차트를 받아 data/chart.json 으로 저장한다.
+ * TJ미디어 노래방 TOP100을 카테고리별(가요 / 팝 / J-POP)로 받아 data/chart.json 으로 저장.
  *
  * ⚠️ 공식 오픈 API가 아니라 TJ 웹사이트(https://www.tjmedia.com/chart/top100)가
- *    내부적으로 호출하는 엔드포인트를 사용한다. 사이트가 개편되면 엔드포인트/필드명이
- *    바뀔 수 있으므로 그때는 이 파일의 ENDPOINT·필드 매핑을 손봐야 한다.
+ *    내부적으로 호출하는 엔드포인트를 사용한다. 사이트 개편 시 엔드포인트/필드/카테고리 코드가
+ *    바뀔 수 있으므로 그때는 ENDPOINT·CATEGORIES·필드 매핑을 손봐야 한다.
  *
- * 응답 형태: { resultCode, resultData: { items: [ { rank, pro, indexTitle, indexSong, com, ... } ] } }
- *   - rank        : 순위
- *   - pro         : TJ 곡번호(반주 번호)
- *   - indexTitle  : 곡 제목
- *   - indexSong   : 가수
- *   - com         : 작곡가
+ * 요청: POST /legacy/api/topAndHot100  (chartType=TOP, strType=<카테고리>, 날짜 비움=현재 차트)
+ *   strType 1=가요, 2=팝, 3=J-POP
+ * 응답: { resultCode, resultData: { items: [ { rank, pro, indexTitle, indexSong, com } ] } }
+ *   rank=순위, pro=TJ 곡번호, indexTitle=제목, indexSong=가수
  *
  * 실행:  node scripts/update-chart.mjs
- * 옵션:  TJ_STR_TYPE 환경변수로 카테고리 변경 (1=가요[기본], 2=팝, 3=J-POP)
  */
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -23,17 +20,22 @@ import { dirname, join } from "node:path";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ENDPOINT = "https://www.tjmedia.com/legacy/api/topAndHot100";
 const SOURCE_URL = "https://www.tjmedia.com/chart/top100";
-const STR_TYPE = process.env.TJ_STR_TYPE || "1"; // 1=가요
-const MIN_SONGS = 50; // 이보다 적게 파싱되면 실패로 간주(잘못된 데이터 커밋 방지)
+const MIN_MAIN = 50; // 가요가 이보다 적게 파싱되면 실패로 간주
+
+const CATEGORIES = [
+  { name: "가요", strType: "1" },
+  { name: "팝", strType: "2" },
+  { name: "J-POP", strType: "3" },
+];
 
 const norm = (s) => String(s ?? "").replace(/\s+/g, "").toLowerCase();
 const keyOf = (t, a) => norm(t) + "|" + norm(a);
 const clean = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
 
-async function fetchTopChart() {
+async function fetchCategory(strType) {
   const body = new URLSearchParams({
     chartType: "TOP",
-    strType: STR_TYPE,
+    strType,
     searchStartDate: "",
     searchEndDate: "",
   });
@@ -54,37 +56,35 @@ async function fetchTopChart() {
   if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
   const json = await res.json();
   const items = json?.resultData?.items;
-  if (!Array.isArray(items) || items.length === 0) {
-    throw new Error(`예상치 못한 응답 (resultCode=${json?.resultCode}, items=${items?.length})`);
+  if (!Array.isArray(items)) {
+    throw new Error(`예상치 못한 응답 (resultCode=${json?.resultCode})`);
   }
   return items;
 }
 
-// 내장 큐레이션 차트(js/chart-data.js)에서 장르·연도 룩업표를 만든다.
-// TJ API는 장르/연도를 주지 않으므로, 이미 아는 곡은 장르 필터가 계속 동작하도록 보강.
+// 내장 큐레이션에서 장르·연도 룩업 (TJ API는 장르를 주지 않으므로 아는 곡은 보강)
 function loadGenreMap() {
   try {
     const src = readFileSync(join(ROOT, "js/chart-data.js"), "utf8");
-    const { CHART_TOP100, CHART_EXTRA } = new Function(
-      src + "; return { CHART_TOP100, CHART_EXTRA };"
+    const g = new Function(
+      src + "; return { CHART_TOP100, CHART_EXTRA, CHART_POP, CHART_JPOP };"
     )();
     const map = new Map();
-    for (const s of [...(CHART_TOP100 || []), ...(CHART_EXTRA || [])]) {
-      map.set(keyOf(s.title, s.artist), { genre: s.genre || "", year: s.year || null });
+    for (const list of [g.CHART_TOP100, g.CHART_EXTRA, g.CHART_POP, g.CHART_JPOP]) {
+      for (const s of list || []) {
+        map.set(keyOf(s.title, s.artist), { genre: s.genre || "", year: s.year || null });
+      }
     }
     return map;
   } catch (e) {
-    console.warn("⚠️ 장르 룩업 생성 실패(무시하고 진행):", e.message);
+    console.warn("⚠️ 장르 룩업 생성 실패(무시):", e.message);
     return new Map();
   }
 }
 
-async function main() {
-  const items = await fetchTopChart();
-  const genreMap = loadGenreMap();
+function parseItems(items, genreMap) {
   const seen = new Set();
   const songs = [];
-
   for (const it of items) {
     const title = clean(it.indexTitle);
     const artist = clean(it.indexSong);
@@ -97,25 +97,41 @@ async function main() {
     const extra = genreMap.get(k) || {};
     songs.push({ rank, title, artist, tj, genre: extra.genre || "", year: extra.year || null });
   }
-
   songs.sort((a, b) => a.rank - b.rank);
-  const top = songs.slice(0, 100);
-  if (top.length < MIN_SONGS) {
-    throw new Error(`파싱된 곡이 너무 적음 (${top.length}곡) — 응답 형식 변경 여부 확인 필요`);
+  return songs.slice(0, 100);
+}
+
+async function main() {
+  const genreMap = loadGenreMap();
+  const categories = {};
+
+  for (const cat of CATEGORIES) {
+    try {
+      const items = await fetchCategory(cat.strType);
+      const songs = parseItems(items, genreMap);
+      categories[cat.name] = songs;
+      console.log(`  · ${cat.name}: ${songs.length}곡`);
+    } catch (e) {
+      console.warn(`  · ${cat.name}: 실패(${e.message}) — 건너뜀`);
+      categories[cat.name] = [];
+    }
+  }
+
+  if ((categories["가요"]?.length || 0) < MIN_MAIN) {
+    throw new Error(`가요 차트 파싱 부족 (${categories["가요"]?.length || 0}곡) — 응답 형식 확인 필요`);
   }
 
   const out = {
-    source: "TJ미디어 노래방 TOP100 (가요)",
+    source: "TJ미디어 노래방 TOP100",
     sourceUrl: SOURCE_URL,
-    strType: STR_TYPE,
     updatedAt: new Date().toISOString(),
-    count: top.length,
-    songs: top,
+    categories,
   };
 
   mkdirSync(join(ROOT, "data"), { recursive: true });
   writeFileSync(join(ROOT, "data/chart.json"), JSON.stringify(out, null, 2) + "\n");
-  console.log(`✅ 인기차트 ${top.length}곡 저장 완료 · ${out.updatedAt}`);
+  const total = Object.values(categories).reduce((n, a) => n + a.length, 0);
+  console.log(`✅ 인기차트 저장 완료 · 총 ${total}곡 · ${out.updatedAt}`);
 }
 
 main().catch((e) => {
