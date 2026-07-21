@@ -16,6 +16,11 @@
   let lastResult = null; // 마지막 뽑기 결과
   let spinning = false;
 
+  // 활성 인기차트: 기본은 앱 내장 큐레이션(CHART_TOP100),
+  // data/chart.json(자동 업데이트본)이 있으면 그걸로 교체한다.
+  let chart = (typeof CHART_TOP100 !== "undefined" ? CHART_TOP100 : []).slice();
+  let chartMeta = null; // { source, updatedAt }
+
   function loadState() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -141,7 +146,7 @@
     if (pickerSource === "chart" || pickerSource === "both") {
       const myKeys = new Set(state.mySongs.map((s) => songKey(s.title, s.artist)));
       pool = pool.concat(
-        CHART_TOP100
+        chart
           .filter((s) => pickerSource === "chart" || !myKeys.has(songKey(s.title, s.artist)))
           .map((s) => ({ ...s, source: "chart" }))
       );
@@ -417,7 +422,7 @@
       id: uid(),
       title: chartSong.title,
       artist: chartSong.artist,
-      tj: "",
+      tj: chartSong.tj ? String(chartSong.tj) : "", // TJ 차트면 곡번호가 자동으로 담긴다
       ky: "",
       tags: chartSong.genre ? [chartSong.genre] : [],
       addedAt: Date.now(),
@@ -433,7 +438,7 @@
     const q = $("#chart-search").value.trim().toLowerCase();
     const myKeys = new Set(state.mySongs.map((s) => songKey(s.title, s.artist)));
 
-    const songs = CHART_TOP100.filter((s) => {
+    const songs = chart.filter((s) => {
       const matchQ = !q || s.title.toLowerCase().includes(q) || s.artist.toLowerCase().includes(q);
       const matchG = !chartGenreFilter || s.genre === chartGenreFilter;
       return matchQ && matchG;
@@ -446,11 +451,15 @@
     }
     ul.innerHTML = songs.map((s) => {
       const hearted = myKeys.has(songKey(s.title, s.artist));
+      const sub = [esc(s.artist)];
+      if (s.genre) sub.push(esc(s.genre));
+      if (s.year) sub.push(String(s.year));
+      if (s.tj) sub.push("TJ " + esc(s.tj));
       return `<li class="song-item" data-rank="${s.rank}">
         <span class="song-rank${s.rank <= 3 ? " top3" : ""}">${s.rank}</span>
         <div class="song-info">
           <div class="song-title">${esc(s.title)}</div>
-          <div class="song-sub">${esc(s.artist)} · ${esc(s.genre)} · ${s.year}</div>
+          <div class="song-sub">${sub.join(" · ")}</div>
         </div>
         <div class="song-actions">
           <button class="icon-btn heart-btn${hearted ? " hearted" : ""}" data-act="heart" title="내 노래에 담기">❤️</button>
@@ -463,7 +472,7 @@
     const btn = e.target.closest(".heart-btn");
     if (!btn) return;
     const rank = Number(btn.closest(".song-item").dataset.rank);
-    const song = CHART_TOP100.find((s) => s.rank === rank);
+    const song = chart.find((s) => s.rank === rank);
     if (!song) return;
     if (btn.classList.contains("hearted")) {
       toast("이미 내 노래에 있어요!");
@@ -532,6 +541,48 @@
     reader.readAsText(file);
   });
 
+  // ---------- 라이브 인기차트 (data/chart.json) ----------
+  // GitHub Actions가 매월 TJ미디어 TOP100을 긁어 data/chart.json으로 커밋한다.
+  // 있으면 그걸 쓰고, 없거나(첫 배포 전) 오프라인/로컬파일이면 내장 차트로 폴백.
+  function normalizeChartSongs(songs) {
+    return songs
+      .filter((s) => s && s.title && s.artist)
+      .map((s, i) => ({
+        rank: Number(s.rank) || i + 1,
+        title: String(s.title),
+        artist: String(s.artist),
+        tj: s.tj ? String(s.tj) : "",
+        genre: s.genre || "",
+        year: s.year || null,
+      }))
+      .sort((a, b) => a.rank - b.rank);
+  }
+
+  function updateChartNote() {
+    const note = $("#chart-note");
+    if (!note || !chartMeta || !chartMeta.updatedAt) return;
+    const d = new Date(chartMeta.updatedAt);
+    if (isNaN(d)) return;
+    const ymd = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
+    note.innerHTML =
+      `<b>${esc(chartMeta.source || "TJ미디어")}</b> 기준 · ${ymd} 자동 업데이트. ♥를 누르면 내 노래에 저장돼요.`;
+  }
+
+  function loadLiveChart() {
+    if (location.protocol === "file:") return; // 로컬 파일 열기에선 fetch 불가 → 내장 차트 사용
+    fetch("data/chart.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!data || !Array.isArray(data.songs) || data.songs.length < 10) return;
+        chart = normalizeChartSongs(data.songs);
+        chartMeta = { source: data.source, updatedAt: data.updatedAt };
+        renderChart();
+        updatePoolInfo();
+        updateChartNote();
+      })
+      .catch(() => { /* 실패 시 내장 차트 유지 */ });
+  }
+
   // ---------- 서비스 워커 (오프라인/PWA) ----------
   if ("serviceWorker" in navigator && location.protocol !== "file:") {
     window.addEventListener("load", () => {
@@ -545,4 +596,5 @@
   renderChart();
   renderHistory();
   updatePoolInfo();
+  loadLiveChart(); // 라이브 차트 있으면 비동기로 교체
 })();
