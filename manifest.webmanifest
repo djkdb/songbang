@@ -1,14 +1,14 @@
 {
-  "name": "송방 SongBang — 노래방 랜덤 뽑기",
-  "short_name": "송방",
+  "name": "셋리. — 노래방 랜덤 뽑기",
+  "short_name": "셋리.",
   "description": "내가 부를 수 있는 노래를 저장하고 랜덤으로 뽑아주는 노래방 도우미",
   "lang": "ko",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f3ead6",
-  "theme_color": "#f3ead6",
+  "background_color": "#131217",
+  "theme_color": "#131217",
   "icons": [
     {
       "src": "icons/icon.svg",

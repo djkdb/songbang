@@ -1,4 +1,4 @@
-# 🎤 송방 SongBang — 노래방 랜덤 뽑기
+# 🎤 셋리. — 노래방 랜덤 뽑기
 
 > 노래방에서 "뭐 부르지?" 하며 인기차트를 한참 뒤지는 시간, 이제 끝!
 > 내가 부를 수 있는 노래를 저장해두고, 버튼 한 번으로 랜덤으로 뽑아주는 노래방 도우미 앱입니다.
@@ -54,8 +54,11 @@ songbang/
 ├── js/
 │   ├── app.js                    # 앱 로직 (뽑기, 목록 관리, 저장, 라이브 차트 로드)
 │   └── chart-data.js             # 내장 인기차트 100 (오프라인 폴백 & 장르/연도 룩업)
-├── data/chart.json               # 자동 업데이트되는 인기차트 (Actions가 갱신)
-├── scripts/update-chart.mjs      # TJ미디어 TOP100 스크래퍼 (의존성 없음, Node 20+)
+├── data/chart.json               # 자동 업데이트되는 인기차트 (가요/팝/J-POP)
+├── data/songs.json               # 자동완성 누적 노래 DB (TJ·금영 번호 포함)
+├── scripts/update-chart.mjs      # TJ 인기차트(카테고리별 TOP100) 스크래퍼
+├── scripts/build-song-index.mjs  # 자동완성 DB — TJ 신곡·차트 대량 누적
+├── scripts/build-ky-index.mjs    # 자동완성 DB — 금영(KYSing) 번호 누적 (옵트인)
 ├── .github/workflows/update-chart.yml  # 매월 자동 실행 워크플로우
 ├── icons/                        # 앱 아이콘 (SVG)
 ├── manifest.webmanifest          # PWA 매니페스트
@@ -85,8 +88,26 @@ songbang/
   `scripts/update-chart.mjs`의 `ENDPOINT`·필드 매핑(`indexTitle`/`indexSong`/`pro`)을 손보면 됩니다.
 - 카테고리 변경: `TJ_STR_TYPE` 환경변수 (`1`=가요[기본], `2`=팝, `3`=J-POP)
 
+### 자동완성 노래 DB (`data/songs.json`)
+
+제목 자동완성용 노래 DB를 매월 **누적**해 키웁니다(경쟁 앱의 "전곡 내장"에 근접).
+
+```
+scripts/build-song-index.mjs  → TJ 월별 신곡(newSongOfMonth) 과거 N개월 백필 + TOP·HOT 차트
+scripts/build-ky-index.mjs    → 금영(KYSing) 곡번호 열거 누적 (ky 보강)  ※ 옵트인
+                                     │
+                                     ▼   앱이 fetch → 자동완성 인덱스에 병합
+                          제목 입력 시 후보 + 선택 시 가수·TJ·금영 번호 자동 채움
+```
+
+- **TJ 백필 범위**: `TJ_MONTHS_BACK` 환경변수(기본 60개월). 최초 대량 백필 땐 크게(예: 120) 한 번 실행.
+- **금영 활성화**: 저장소 **Settings → Variables** 에 `CRAWL_KY=1` 추가(옵트인). 매 실행 `KY_BATCH`(기본 1000)개
+  번호씩 열거해 `data/songs.json`에 누적합니다(진행 커서 `kyCursor` 저장). 부담이 커서 기본은 꺼져 있어요.
+- 금영은 HTML 파싱이라 사이트 개편 시 `build-ky-index.mjs`의 셀렉터(`.search_chart_tit .tit`, `.search_chart_sng`)를
+  손봐야 할 수 있습니다.
+
 ## 📝 참고
 
 - TJ 차트는 장르/연도를 제공하지 않아, 내장 차트(`js/chart-data.js`)와 제목·가수가 일치하는
   곡은 장르/연도를 자동 보강합니다. 신곡은 장르가 비어 있을 수 있어요(‘전체’에서는 항상 뽑혀요).
-- TJ 차트에는 곡번호(`pro`)가 있어서, ♥로 담으면 **TJ 노래방 번호가 자동으로 채워집니다.** 금영 번호는 직접 입력해 주세요.
+- ♥로 담거나 제목 자동완성으로 고르면 **TJ(그리고 금영 활성화 시 금영) 노래방 번호가 자동으로 채워집니다.**

@@ -30,14 +30,23 @@ jobs:
       - name: TJ 인기차트 가져오기
         run: node scripts/update-chart.mjs
 
+      - name: 자동완성 DB 누적 갱신 (TJ)
+        run: node scripts/build-song-index.mjs
+
+      - name: 자동완성 DB 금영 번호 누적 (옵트인)
+        continue-on-error: true
+        env:
+          CRAWL_KY: ${{ vars.CRAWL_KY }} # 저장소 Variables 에 CRAWL_KY=1 설정 시 활성화
+        run: node scripts/build-ky-index.mjs
+
       - name: 변경분 커밋 & 푸시
         run: |
-          if git diff --quiet -- data/chart.json; then
-            echo "차트 변경 없음 — 커밋 건너뜀"
+          if git diff --quiet -- data/chart.json data/songs.json; then
+            echo "변경 없음 — 커밋 건너뜀"
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/chart.json
-            git commit -m "chore: 인기차트 자동 업데이트 ($(date -u +%Y-%m-%d))"
+            git add data/chart.json data/songs.json
+            git commit -m "chore: 인기차트·자동완성 DB 자동 업데이트 ($(date -u +%Y-%m-%d))"
             git push
           fi

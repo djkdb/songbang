@@ -3,32 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#f3ead6">
+  <meta name="theme-color" content="#131217">
   <meta name="description" content="내가 부를 수 있는 노래를 저장하고 랜덤으로 뽑아주는 노래방 선곡 도우미">
-  <title>송방 — 노래방 선곡 도우미</title>
+  <title>셋리. — 노래방 선곡 도우미</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icons/icon.svg">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="masthead">
-    <div class="masthead-inner">
-      <div class="brand">
-        <span class="brand-badge">노래책</span>
-        <h1 class="brand-title">송방</h1>
-      </div>
-      <p class="masthead-tag">오늘 뭐 부르지? · 랜덤 선곡 도우미</p>
-    </div>
-    <div class="masthead-rule"></div>
+  <header class="topbar">
+    <div class="wordmark">셋리<span class="dot">.</span></div>
+    <div class="kicker">노래방 선곡 도우미</div>
   </header>
 
   <main>
     <!-- ============ 뽑기 ============ -->
     <section id="tab-pick" class="tab-panel active">
       <div class="panel">
-        <div class="panel-tab">SELECT</div>
-
         <div class="field">
           <span class="field-label">어디서 뽑을까</span>
           <div class="seg" id="source-pills">
@@ -45,33 +37,39 @@
           </div>
         </div>
 
-        <label class="check">
-          <input type="checkbox" id="exclude-today" checked>
-          <span class="check-box" aria-hidden="true"></span>
-          <span>오늘 이미 뽑은 곡은 빼줘</span>
-        </label>
-
-        <div class="display" id="slot-machine">
-          <div class="display-screws"><i></i><i></i><i></i><i></i></div>
-          <div class="display-screen">
-            <div class="slot-text" id="slot-text" role="status" aria-live="polite">아래 버튼을 누르면<br>운명의 한 곡을 골라줄게</div>
+        <div class="field hidden" id="setlist-field">
+          <span class="field-label">셋리스트</span>
+          <div class="chip-row" id="setlist-pills">
+            <button class="chip active" data-setlist="">전체</button>
           </div>
         </div>
 
-        <button class="key key-go" id="btn-pick">🎲 랜덤으로 뽑기</button>
+        <label class="check">
+          <input type="checkbox" id="exclude-today" checked>
+          <span class="check-box" aria-hidden="true"></span>
+          <span>오늘 뽑은 곡은 빼기</span>
+        </label>
+
+        <div class="display" id="slot-machine">
+          <span class="display-label">SONG</span>
+          <div class="slot-text" id="slot-text" role="status" aria-live="polite">버튼을 누르면<br>한 곡을 골라드려요</div>
+        </div>
+
+        <button class="key key-go" id="btn-pick">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="8.5" cy="8.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.15" fill="currentColor" stroke="none"/><circle cx="8.5" cy="15.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.15" fill="currentColor" stroke="none"/></svg>
+          랜덤으로 뽑기
+        </button>
         <p class="pool-info" id="pool-info"></p>
       </div>
 
-      <div class="ticket hidden" id="result-card">
-        <div class="ticket-notch ticket-notch--l"></div>
-        <div class="ticket-notch ticket-notch--r"></div>
-        <div class="ticket-head">TODAY'S PICK · 오늘의 선곡</div>
+      <div class="feature-card hidden" id="result-card">
+        <div class="feature-kicker">오늘의 선곡</div>
         <div class="result-title" id="result-title"></div>
         <div class="result-artist" id="result-artist"></div>
         <div class="result-meta" id="result-meta"></div>
-        <div class="ticket-actions">
+        <div class="feature-actions">
           <button class="key key-line" id="btn-repick">다시 뽑기</button>
-          <button class="key key-fill hidden" id="btn-save-result">＋ 내 노래에 담기</button>
+          <button class="key key-fill hidden" id="btn-save-result">내 노래에 담기</button>
         </div>
       </div>
 
@@ -98,16 +96,24 @@
           </div>
         </div>
 
-        <form id="add-form" class="add-form">
-          <input type="text" id="input-title" class="text-in" placeholder="노래 제목" required maxlength="80">
+        <form id="add-form" class="add-form" autocomplete="off">
+          <div class="autocomplete">
+            <input type="text" id="input-title" class="text-in" placeholder="노래 제목" required maxlength="80"
+                   autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac-list" aria-autocomplete="list">
+            <ul class="ac-list hidden" id="ac-list" role="listbox" aria-label="노래 제목 추천"></ul>
+          </div>
           <input type="text" id="input-artist" class="text-in" placeholder="가수" required maxlength="60">
           <div class="form-row">
-            <input type="text" id="input-tj" class="text-in" placeholder="TJ 번호" inputmode="numeric" maxlength="8">
-            <input type="text" id="input-ky" class="text-in" placeholder="금영 번호" inputmode="numeric" maxlength="8">
+            <input type="text" id="input-tj" class="text-in" placeholder="TJ 번호 (선택)" inputmode="numeric" maxlength="8">
+            <input type="text" id="input-ky" class="text-in" placeholder="금영 번호 (선택)" inputmode="numeric" maxlength="8">
           </div>
-          <input type="text" id="input-tags" class="text-in" placeholder="태그 (예: 발라드, 고음, 분위기)" maxlength="100">
           <div class="form-row">
-            <button type="submit" class="key key-fill" id="btn-add">＋ 추가하기</button>
+            <input type="text" id="input-keyadj" class="text-in" placeholder="키 (선택 · 예 +2, -1)" maxlength="6">
+            <input type="text" id="input-hinote" class="text-in" placeholder="최고음 (선택 · 예 2옥라#)" maxlength="20">
+          </div>
+          <input type="text" id="input-tags" class="text-in" placeholder="태그 (선택) · 예: 발라드, 고음" maxlength="100">
+          <div class="form-row">
+            <button type="submit" class="key key-fill" id="btn-add">추가하기</button>
             <button type="button" class="key key-line hidden" id="btn-cancel-edit">취소</button>
           </div>
         </form>
@@ -116,7 +122,7 @@
       <div class="panel">
         <input type="search" id="my-search" class="text-in search" placeholder="내 노래 검색">
         <ul class="song-list" id="my-song-list">
-          <li class="empty-msg">아직 담은 노래가 없어요.<br>인기차트에서 ♥를 눌러 담아보세요.</li>
+          <li class="empty-msg">아직 담은 노래가 없어요.</li>
         </ul>
       </div>
     </section>
@@ -127,7 +133,12 @@
         <div class="panel-head">
           <h2 class="panel-title">노래방 인기차트 100</h2>
         </div>
-        <p class="note" id="chart-note">앱에 담긴 애창곡 차트예요. ♥를 누르면 내 노래에 저장돼요.</p>
+        <div class="seg seg-cat" id="chart-cat">
+          <button class="seg-btn active" data-cat="가요">가요</button>
+          <button class="seg-btn" data-cat="팝">팝</button>
+          <button class="seg-btn" data-cat="J-POP">J-POP</button>
+        </div>
+        <p class="note" id="chart-note">앱에 담긴 애창곡 차트예요. 하트를 누르면 내 노래에 저장돼요.</p>
         <input type="search" id="chart-search" class="text-in search" placeholder="제목·가수 검색">
         <div class="chip-row wrap" id="chart-genre-pills">
           <button class="chip active" data-genre="">전체</button>
@@ -135,17 +146,46 @@
         <ul class="song-list chart-list" id="chart-list"></ul>
       </div>
     </section>
+
+    <!-- ============ 셋리스트 ============ -->
+    <section id="tab-setlist" class="tab-panel">
+      <div class="panel">
+        <div class="panel-head">
+          <h2 class="panel-title">셋리스트 <span class="count" id="setlist-count">0</span></h2>
+        </div>
+        <p class="note">부를 상황별로 곡을 묶어두고, 그 셋리스트에서 바로 뽑아요. (예: 회식용, 감성 발라드, 1차·2차)</p>
+        <form id="setlist-form" class="add-form">
+          <div class="form-row">
+            <input type="text" id="setlist-name" class="text-in" placeholder="새 셋리스트 이름" maxlength="30" required>
+            <button type="submit" class="key key-fill" id="btn-add-setlist">만들기</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <ul class="setlist-list" id="setlist-list">
+          <li class="empty-msg">아직 셋리스트가 없어요.<br>위에서 하나 만들어보세요.</li>
+        </ul>
+      </div>
+    </section>
   </main>
 
   <nav class="tabbar">
-    <button class="tab-btn active" data-tab="tab-pick">
-      <span class="tab-ico">🎲</span><span class="tab-txt">뽑기</span>
+    <button class="tab-btn active" data-tab="tab-pick" aria-label="뽑기">
+      <span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="8.5" cy="8.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.15" fill="currentColor" stroke="none"/><circle cx="8.5" cy="15.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.15" fill="currentColor" stroke="none"/></svg></span>
+      <span class="tab-txt">뽑기</span>
     </button>
-    <button class="tab-btn" data-tab="tab-my">
-      <span class="tab-ico">🎵</span><span class="tab-txt">내 노래</span>
+    <button class="tab-btn" data-tab="tab-my" aria-label="내 노래">
+      <span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.6"/><circle cx="17.5" cy="16" r="2.6"/></svg></span>
+      <span class="tab-txt">내 노래</span>
     </button>
-    <button class="tab-btn" data-tab="tab-chart">
-      <span class="tab-ico">📖</span><span class="tab-txt">인기차트</span>
+    <button class="tab-btn" data-tab="tab-chart" aria-label="인기차트">
+      <span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20v-5"/><path d="M12 20V5"/><path d="M18 20v-9"/></svg></span>
+      <span class="tab-txt">인기차트</span>
+    </button>
+    <button class="tab-btn" data-tab="tab-setlist" aria-label="셋리스트">
+      <span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11M4 12h11M4 17h7"/><path d="M18 15l2 2 3-3.5"/></svg></span>
+      <span class="tab-txt">셋리</span>
     </button>
   </nav>
 
