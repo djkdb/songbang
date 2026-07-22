@@ -432,14 +432,18 @@
   // 배포 시 라이브 차트가 로드되면 인덱스도 자동으로 넓어지고 TJ 번호까지 포함된다.
   function buildSongIndex() {
     const map = new Map();
+    // 팝/J-POP 카테고리 곡은 해외(cat)로 태그해서 장르 뷰에서 제외되게 한다.
     const pools = [
-      ...Object.values(chartCategories),
-      (typeof CHART_EXTRA !== "undefined" ? CHART_EXTRA : []),
-      extraIndex, // 배포 시 TJ 누적 DB
+      { songs: chartCategories["가요"] || [], cat: "" },
+      { songs: chartCategories["팝"] || [], cat: "팝" },
+      { songs: chartCategories["J-POP"] || [], cat: "J-POP" },
+      { songs: (typeof CHART_EXTRA !== "undefined" ? CHART_EXTRA : []), cat: "" },
+      { songs: extraIndex, cat: "" }, // extraIndex 항목은 자체 cat 보유
     ];
-    for (const pool of pools) {
-      for (const s of pool || []) {
+    for (const { songs, cat: poolCat } of pools) {
+      for (const s of songs || []) {
         if (!s || !s.title || !s.artist) continue;
+        const scat = s.cat || poolCat;
         const k = songKey(s.title, s.artist);
         const cur = map.get(k);
         if (!cur) {
@@ -450,11 +454,13 @@
             ky: s.ky ? String(s.ky) : "",
             genre: s.genre || classifyGenre(s.title, s.artist, ""),
             year: s.year || null,
+            cat: scat || "", // 팝 / J-POP (해외) 표시 — 장르 뷰 제외용
           });
         } else {
-          // 중복 곡은 정보를 합침 (특히 TJ·금영 번호)
+          // 중복 곡은 정보를 합침 (특히 TJ·금영 번호, 해외 태그)
           if (!cur.tj && s.tj) cur.tj = String(s.tj);
           if (!cur.ky && s.ky) cur.ky = String(s.ky);
+          if (!cur.cat && scat) cur.cat = scat;
           if (!cur.genre) cur.genre = s.genre || classifyGenre(s.title, s.artist, "");
           if (!cur.year && s.year) cur.year = s.year;
         }
@@ -703,11 +709,14 @@
     if (genreCharts && Array.isArray(genreCharts[view]) && genreCharts[view].length) {
       return genreCharts[view].map((s, i) => ({ ...s, dRank: i + 1 }));
     }
-    // 폴백: 그 장르의 차트 진입곡(순위순) + 자동완성 DB(16k)의 그 장르 곡(최신순)으로 100곡
-    const inChart = combinedChart().filter((s) => songGenreOf(s) === view);
+    // 폴백: 가요(국내)만. 팝·J-POP은 각자 탭에만 두고 장르 뷰엔 넣지 않는다.
+    const foreign = new Set();
+    for (const c of ["팝", "J-POP"]) for (const s of chartCategories[c] || []) foreign.add(songKey(s.title, s.artist));
+    const isDomestic = (s) => s.cat !== "팝" && s.cat !== "J-POP" && !foreign.has(songKey(s.title, s.artist));
+    const inChart = (chartCategories["가요"] || []).filter((s) => songGenreOf(s) === view);
     const seen = new Set(inChart.map((s) => songKey(s.title, s.artist)));
     const rest = songIndex
-      .filter((s) => songGenreOf(s) === view && !seen.has(songKey(s.title, s.artist)))
+      .filter((s) => songGenreOf(s) === view && isDomestic(s) && !seen.has(songKey(s.title, s.artist)))
       .sort((a, b) => (b.year || 0) - (a.year || 0) || (b.tj ? 1 : 0) - (a.tj ? 1 : 0));
     return inChart.concat(rest).slice(0, 100).map((s, i) => ({ ...s, dRank: i + 1 }));
   }

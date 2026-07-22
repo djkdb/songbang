@@ -1,5 +1,5 @@
 /* 셋리 — 오프라인 캐시 서비스 워커 */
-const CACHE_NAME = "songbang-v14";
+const CACHE_NAME = "songbang-v15";
 const ASSETS = [
   "./",
   "./index.html",
