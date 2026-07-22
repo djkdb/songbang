@@ -87,6 +87,14 @@ function loadGenreMap() {
   } catch { return new Map(); }
 }
 
+function loadClassify() {
+  try {
+    const src = readFileSync(join(ROOT, "js/genre-map.js"), "utf8");
+    return new Function(src + "; return classifyGenre;")();
+  } catch { return (t, a, e) => e || ""; }
+}
+const classify = loadClassify();
+
 async function main() {
   const genreMap = loadGenreMap();
   const map = new Map();
@@ -106,7 +114,7 @@ async function main() {
     const ex = genreMap.get(k) || {};
     const cur = map.get(k);
     if (!cur) {
-      map.set(k, { title, artist, tj: tj || "", ky: "", genre: ex.genre || "", year: ex.year || null });
+      map.set(k, { title, artist, tj: tj || "", ky: "", genre: ex.genre || classify(title, artist, ""), year: ex.year || null });
     } else if (tj && !cur.tj) cur.tj = tj;
   };
 
