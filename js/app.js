@@ -12,7 +12,6 @@
   let pickerSource = "my"; // 'my' | 'chart' | 'both'
   let pickerGenre = "";
   let pickerSetlistId = null; // 특정 셋리스트로 좁혀 뽑기 (null=전체)
-  let chartGenreFilter = "";
   let editingId = null;
   let openSetlistId = null; // 편집 중인 셋리스트
   let lastResult = null; // 마지막 뽑기 결과
@@ -26,8 +25,10 @@
     "팝": (typeof CHART_POP !== "undefined" ? CHART_POP : []).slice(),
     "J-POP": (typeof CHART_JPOP !== "undefined" ? CHART_JPOP : []).slice(),
   };
-  let currentCategory = "가요";
-  let chart = chartCategories[currentCategory]; // 현재 카테고리의 곡 목록
+  // 인기차트 상단 통합 선택: 전체 / 언어카테고리(가요·팝·J-POP) / 장르
+  const CHART_VIEWS = ["전체", "가요", "팝", "J-POP", "발라드", "댄스", "OST", "락/밴드", "트로트", "R&B", "힙합", "포크/인디"];
+  let chartView = "전체";
+  let chart = []; // 현재 선택된 뷰의 곡 목록 (init에서 채움)
   let chartMeta = null; // { source, updatedAt }
   let songIndex = []; // 제목 자동완성용 통합 인덱스 (init에서 채움)
   let extraIndex = []; // data/songs.json (배포 시 TJ 누적 DB)에서 로드
@@ -139,23 +140,6 @@
       pickerGenre = b.dataset.genre;
       wrap.querySelectorAll(".chip").forEach((p) => p.classList.toggle("active", p === b));
       updatePoolInfo();
-    });
-
-    // 차트 탭 장르 필터
-    const cwrap = $("#chart-genre-pills");
-    allGenres.forEach((g) => {
-      const b = document.createElement("button");
-      b.className = "chip";
-      b.dataset.genre = g;
-      b.textContent = g;
-      cwrap.appendChild(b);
-    });
-    cwrap.addEventListener("click", (e) => {
-      const b = e.target.closest(".chip");
-      if (!b) return;
-      chartGenreFilter = b.dataset.genre;
-      cwrap.querySelectorAll(".chip").forEach((p) => p.classList.toggle("active", p === b));
-      renderChart();
     });
   }
 
@@ -685,26 +669,48 @@
   // ---------- 인기차트 ----------
   $("#chart-search").addEventListener("input", renderChart);
 
-  // 카테고리 전환 (가요 / 팝 / J-POP)
-  function updateCategoryUI() {
-    $("#chart-cat").querySelectorAll(".seg-btn").forEach((b) =>
-      b.classList.toggle("active", b.dataset.cat === currentCategory));
+  // 인기차트 상단 통합 선택 (전체 / 가요·팝·J-POP / 장르)
+  function songGenreOf(s) { return s.genre || classifyGenre(s.title, s.artist, ""); }
+
+  function combinedChart() {
+    const seen = new Set();
+    const out = [];
+    for (const cat of CATS) for (const s of chartCategories[cat] || []) {
+      const k = songKey(s.title, s.artist);
+      if (seen.has(k)) continue;
+      seen.add(k);
+      out.push(s);
+    }
+    out.sort((a, b) => (a.rank || 999) - (b.rank || 999));
+    return out;
   }
-  function setCategory(cat) {
-    if (!CATS.includes(cat)) return;
-    currentCategory = cat;
-    chart = chartCategories[cat] || [];
-    // 카테고리를 바꾸면 장르 필터는 전체로 초기화
-    chartGenreFilter = "";
-    $("#chart-genre-pills").querySelectorAll(".chip").forEach((p) =>
-      p.classList.toggle("active", p.dataset.genre === ""));
-    updateCategoryUI();
+
+  function poolForView(view) {
+    if (view === "가요" || view === "팝" || view === "J-POP") {
+      return (chartCategories[view] || []).map((s) => ({ ...s, dRank: s.rank }));
+    }
+    let list = combinedChart();
+    if (view !== "전체") list = list.filter((s) => songGenreOf(s) === view);
+    return list.map((s, i) => ({ ...s, dRank: i + 1 }));
+  }
+
+  function renderChartViews() {
+    $("#chart-views").innerHTML = CHART_VIEWS.map((v) =>
+      `<button class="chip${v === chartView ? " active" : ""}" data-view="${esc(v)}">${esc(v)}</button>`
+    ).join("");
+  }
+
+  function setChartView(view) {
+    if (!CHART_VIEWS.includes(view)) return;
+    chartView = view;
+    chart = poolForView(view);
+    renderChartViews();
     renderChart();
     updatePoolInfo();
   }
-  $("#chart-cat").addEventListener("click", (e) => {
-    const b = e.target.closest(".seg-btn");
-    if (b) setCategory(b.dataset.cat);
+  $("#chart-views").addEventListener("click", (e) => {
+    const b = e.target.closest(".chip");
+    if (b) setChartView(b.dataset.view);
   });
 
   function addChartSongToMy(chartSong) {
@@ -731,25 +737,24 @@
     const q = $("#chart-search").value.trim().toLowerCase();
     const myKeys = new Set(state.mySongs.map((s) => songKey(s.title, s.artist)));
 
-    const songs = chart.filter((s) => {
-      const matchQ = !q || s.title.toLowerCase().includes(q) || s.artist.toLowerCase().includes(q);
-      const matchG = !chartGenreFilter || s.genre === chartGenreFilter;
-      return matchQ && matchG;
-    });
+    const songs = chart.filter((s) =>
+      !q || s.title.toLowerCase().includes(q) || s.artist.toLowerCase().includes(q));
 
     const ul = $("#chart-list");
     if (songs.length === 0) {
-      ul.innerHTML = `<li class="empty-msg">검색 결과가 없어요</li>`;
+      ul.innerHTML = `<li class="empty-msg">${chartView === "전체" || CATS.includes(chartView) ? "검색 결과가 없어요" : `'${esc(chartView)}' 장르 곡이 아직 없어요`}</li>`;
       return;
     }
     ul.innerHTML = songs.map((s) => {
       const hearted = myKeys.has(songKey(s.title, s.artist));
+      const r = s.dRank || s.rank || 0;
+      const g = songGenreOf(s);
       const sub = [esc(s.artist)];
-      if (s.genre) sub.push(esc(s.genre));
+      if (g) sub.push(esc(g));
       if (s.year) sub.push(String(s.year));
       if (s.tj) sub.push("TJ " + esc(s.tj));
-      return `<li class="song-item" data-rank="${s.rank}">
-        <span class="song-rank${s.rank <= 3 ? " top3" : ""}">${s.rank}</span>
+      return `<li class="song-item" data-key="${esc(songKey(s.title, s.artist))}">
+        <span class="song-rank${r && r <= 3 ? " top3" : ""}">${r || ""}</span>
         <div class="song-info">
           <div class="song-title">${esc(s.title)}</div>
           <div class="song-sub">${sub.join(" · ")}</div>
@@ -764,8 +769,8 @@
   $("#chart-list").addEventListener("click", (e) => {
     const btn = e.target.closest(".heart-btn");
     if (!btn) return;
-    const rank = Number(btn.closest(".song-item").dataset.rank);
-    const song = chart.find((s) => s.rank === rank);
+    const key = btn.closest(".song-item").dataset.key;
+    const song = chart.find((s) => songKey(s.title, s.artist) === key);
     if (!song) return;
     if (btn.classList.contains("hearted")) {
       toast("이미 내 노래에 있어요!");
@@ -1074,7 +1079,7 @@
         }
         if ((cats["가요"] || []).length < 10) return;
         chartCategories = cats;
-        chart = chartCategories[currentCategory] || [];
+        chart = poolForView(chartView);
         chartMeta = { source: data.source, updatedAt: data.updatedAt };
         songIndex = buildSongIndex(); // 라이브 데이터로 자동완성 인덱스 확장
         renderChart();
@@ -1094,6 +1099,8 @@
   // ---------- 초기화 ----------
   songIndex = buildSongIndex();
   buildGenrePills();
+  renderChartViews();
+  chart = poolForView(chartView);
   renderMySongs();
   renderChart();
   renderHistory();
