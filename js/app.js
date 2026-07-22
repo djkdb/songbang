@@ -471,6 +471,12 @@
         if (!data || !Array.isArray(data.songs) || data.songs.length === 0) return;
         extraIndex = data.songs;
         songIndex = buildSongIndex();
+        // 장르 뷰가 열려 있으면 넓어진 DB로 다시 채운다
+        if (chartView !== "전체" && !CATS.includes(chartView)) {
+          chart = poolForView(chartView);
+          renderChart();
+          updatePoolInfo();
+        }
       })
       .catch(() => { /* 없으면 내장 인덱스 유지 */ });
   }
@@ -689,9 +695,16 @@
     if (view === "가요" || view === "팝" || view === "J-POP") {
       return (chartCategories[view] || []).map((s) => ({ ...s, dRank: s.rank }));
     }
-    let list = combinedChart();
-    if (view !== "전체") list = list.filter((s) => songGenreOf(s) === view);
-    return list.map((s, i) => ({ ...s, dRank: i + 1 }));
+    if (view === "전체") {
+      return combinedChart().map((s, i) => ({ ...s, dRank: i + 1 }));
+    }
+    // 장르 독립 TOP100: 그 장르의 차트 진입곡(순위순) + 자동완성 DB(16k)의 그 장르 곡(최신순)으로 100곡
+    const inChart = combinedChart().filter((s) => songGenreOf(s) === view);
+    const seen = new Set(inChart.map((s) => songKey(s.title, s.artist)));
+    const rest = songIndex
+      .filter((s) => songGenreOf(s) === view && !seen.has(songKey(s.title, s.artist)))
+      .sort((a, b) => (b.year || 0) - (a.year || 0) || (b.tj ? 1 : 0) - (a.tj ? 1 : 0));
+    return inChart.concat(rest).slice(0, 100).map((s, i) => ({ ...s, dRank: i + 1 }));
   }
 
   function renderChartViews() {
