@@ -32,6 +32,7 @@
   let chartMeta = null; // { source, updatedAt }
   let songIndex = []; // 제목 자동완성용 통합 인덱스 (init에서 채움)
   let extraIndex = []; // data/songs.json (배포 시 TJ 누적 DB)에서 로드
+  let genreCharts = null; // data/genre-charts.json (장르별 인기순 TOP100)에서 로드
 
   function loadState() {
     try {
@@ -698,7 +699,11 @@
     if (view === "전체") {
       return combinedChart().map((s, i) => ({ ...s, dRank: i + 1 }));
     }
-    // 장르 독립 TOP100: 그 장르의 차트 진입곡(순위순) + 자동완성 DB(16k)의 그 장르 곡(최신순)으로 100곡
+    // 장르별 인기순 TOP100 (벅스 장르차트 + TJ번호)이 있으면 그걸 우선 사용
+    if (genreCharts && Array.isArray(genreCharts[view]) && genreCharts[view].length) {
+      return genreCharts[view].map((s, i) => ({ ...s, dRank: i + 1 }));
+    }
+    // 폴백: 그 장르의 차트 진입곡(순위순) + 자동완성 DB(16k)의 그 장르 곡(최신순)으로 100곡
     const inChart = combinedChart().filter((s) => songGenreOf(s) === view);
     const seen = new Set(inChart.map((s) => songKey(s.title, s.artist)));
     const rest = songIndex
@@ -1102,6 +1107,23 @@
       .catch(() => { /* 실패 시 내장 차트 유지 */ });
   }
 
+  // 배포 시 data/genre-charts.json(장르별 인기순 TOP100)을 불러온다.
+  function loadGenreCharts() {
+    if (location.protocol === "file:") return;
+    fetch("data/genre-charts.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!data || !data.genres) return;
+        genreCharts = data.genres;
+        if (chartView !== "전체" && !CATS.includes(chartView)) {
+          chart = poolForView(chartView);
+          renderChart();
+          updatePoolInfo();
+        }
+      })
+      .catch(() => { /* 없으면 자체 로직 폴백 */ });
+  }
+
   // ---------- 서비스 워커 (오프라인/PWA) ----------
   if ("serviceWorker" in navigator && location.protocol !== "file:") {
     window.addEventListener("load", () => {
@@ -1124,4 +1146,5 @@
   else updatePoolInfo();
   loadLiveChart(); // 라이브 차트 있으면 비동기로 교체
   loadSongIndex(); // 자동완성 누적 DB 있으면 인덱스 확장
+  loadGenreCharts(); // 장르별 인기순 TOP100 있으면 로드
 })();

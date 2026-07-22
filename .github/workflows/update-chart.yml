@@ -39,14 +39,18 @@ jobs:
           CRAWL_KY: ${{ vars.CRAWL_KY }} # 저장소 Variables 에 CRAWL_KY=1 설정 시 활성화
         run: node scripts/build-ky-index.mjs
 
+      - name: 장르별 인기순 차트 (벅스 + TJ번호 매칭)
+        continue-on-error: true
+        run: node scripts/build-genre-charts.mjs
+
       - name: 변경분 커밋 & 푸시
         run: |
-          if git diff --quiet -- data/chart.json data/songs.json; then
+          if git diff --quiet -- data/chart.json data/songs.json data/genre-charts.json; then
             echo "변경 없음 — 커밋 건너뜀"
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/chart.json data/songs.json
-            git commit -m "chore: 인기차트·자동완성 DB 자동 업데이트 ($(date -u +%Y-%m-%d))"
+            git add data/chart.json data/songs.json data/genre-charts.json
+            git commit -m "chore: 인기차트·자동완성·장르차트 자동 업데이트 ($(date -u +%Y-%m-%d))"
             git push
           fi
