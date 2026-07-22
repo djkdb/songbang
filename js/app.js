@@ -705,20 +705,32 @@
     if (view === "전체") {
       return combinedChart().map((s, i) => ({ ...s, dRank: i + 1 }));
     }
-    // 장르별 인기순 TOP100 (벅스 장르차트 + TJ번호)이 있으면 그걸 우선 사용
-    if (genreCharts && Array.isArray(genreCharts[view]) && genreCharts[view].length) {
-      return genreCharts[view].map((s, i) => ({ ...s, dRank: i + 1 }));
-    }
-    // 폴백: 가요(국내)만. 팝·J-POP은 각자 탭에만 두고 장르 뷰엔 넣지 않는다.
+    // 장르 뷰는 국내(가요)만. 팝·J-POP·일본곡은 각자 탭에만.
     const foreign = new Set();
     for (const c of ["팝", "J-POP"]) for (const s of chartCategories[c] || []) foreign.add(songKey(s.title, s.artist));
-    const isDomestic = (s) => s.cat !== "팝" && s.cat !== "J-POP" && !foreign.has(songKey(s.title, s.artist));
-    const inChart = (chartCategories["가요"] || []).filter((s) => songGenreOf(s) === view);
+    const domestic = (s) => !isForeignSong(s, foreign);
+
+    // 장르별 인기순 TOP100 (벅스 장르차트 + TJ번호)이 있으면 그걸 우선 사용
+    if (genreCharts && Array.isArray(genreCharts[view]) && genreCharts[view].length) {
+      return genreCharts[view].filter(domestic).map((s, i) => ({ ...s, dRank: i + 1 }));
+    }
+    // 폴백: 그 장르의 차트 진입곡(순위순) + 자동완성 DB(16k)의 그 장르 곡(최신순)으로 100곡
+    const inChart = (chartCategories["가요"] || []).filter((s) => songGenreOf(s) === view && domestic(s));
     const seen = new Set(inChart.map((s) => songKey(s.title, s.artist)));
     const rest = songIndex
-      .filter((s) => songGenreOf(s) === view && isDomestic(s) && !seen.has(songKey(s.title, s.artist)))
+      .filter((s) => songGenreOf(s) === view && domestic(s) && !seen.has(songKey(s.title, s.artist)))
       .sort((a, b) => (b.year || 0) - (a.year || 0) || (b.tj ? 1 : 0) - (a.tj ? 1 : 0));
     return inChart.concat(rest).slice(0, 100).map((s, i) => ({ ...s, dRank: i + 1 }));
+  }
+
+  // 일본곡/해외곡 판별 (장르 뷰 제외용). 가나·한자 포함이면 일본/중화권으로 간주.
+  function isForeignSong(s, foreignKeys) {
+    if (s.cat === "팝" || s.cat === "J-POP") return true;
+    if (foreignKeys && foreignKeys.has(songKey(s.title, s.artist))) return true;
+    const t = String(s.title || "") + String(s.artist || "");
+    if (/[぀-ヿｦ-ﾟ]/.test(t)) return true; // 히라가나·가타카나 → 일본곡
+    if (/[㐀-鿿]/.test(t)) return true;              // 한자 포함(한글 병기 무관) → 일본/중화권
+    return false;
   }
 
   function renderChartViews() {
