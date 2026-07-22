@@ -100,22 +100,30 @@ async function main() {
   const map = new Map();
   for (const s of loadExisting()) {
     if (!s || !s.title || !s.artist) continue;
-    map.set(keyOf(s.title, s.artist), {
+    const o = {
       title: s.title, artist: s.artist,
       tj: s.tj ? String(s.tj) : "", ky: s.ky ? String(s.ky) : "",
       genre: s.genre || "", year: s.year || null,
-    });
+    };
+    if (s.cat) o.cat = s.cat; // 팝 / J-POP (국내가 아니면 표시)
+    map.set(keyOf(s.title, s.artist), o);
   }
   const before = map.size;
 
-  const upsert = (title, artist, tj) => {
+  // cat: 팝 / J-POP 이면 해외로 표시(장르 뷰에서 제외됨). 국내(가요)·미상은 표시 안 함.
+  const upsert = (title, artist, tj, cat) => {
     if (!title || !artist) return;
     const k = keyOf(title, artist);
     const ex = genreMap.get(k) || {};
     const cur = map.get(k);
     if (!cur) {
-      map.set(k, { title, artist, tj: tj || "", ky: "", genre: ex.genre || classify(title, artist, ""), year: ex.year || null });
-    } else if (tj && !cur.tj) cur.tj = tj;
+      const o = { title, artist, tj: tj || "", ky: "", genre: ex.genre || classify(title, artist, ""), year: ex.year || null };
+      if (cat) o.cat = cat;
+      map.set(k, o);
+    } else {
+      if (tj && !cur.tj) cur.tj = tj;
+      if (cat && !cur.cat) cur.cat = cat;
+    }
   };
 
   let fetched = 0;
@@ -133,13 +141,14 @@ async function main() {
     await sleep(250); // 예의상 간격
   }
 
-  // 2) TOP·HOT × 카테고리 보강
+  // 2) TOP·HOT × 카테고리 보강 (strType 2=팝, 3=J-POP 은 해외로 태그)
+  const CAT_OF = { "1": null, "2": "팝", "3": "J-POP" };
   for (const chartType of ["TOP", "HOT"]) {
     for (const strType of ["1", "2", "3"]) {
       try {
         const body = new URLSearchParams({ chartType, strType, searchStartDate: "", searchEndDate: "" }).toString();
         const items = await getJson(`${BASE}/legacy/api/topAndHot100`, { method: "POST", body });
-        items.forEach((it) => { const s = pickSong(it); upsert(s.title, s.artist, s.tj); });
+        items.forEach((it) => { const s = pickSong(it); upsert(s.title, s.artist, s.tj, CAT_OF[strType]); });
         fetched += items.length;
       } catch (e) {
         console.warn(`  · ${chartType}/${strType}: 실패(${e.message})`);
