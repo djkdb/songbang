@@ -702,14 +702,14 @@
     if (view === "가요" || view === "팝" || view === "J-POP") {
       return (chartCategories[view] || []).map((s) => ({ ...s, dRank: s.rank }));
     }
-    if (view === "전체") {
-      return combinedChart().map((s, i) => ({ ...s, dRank: i + 1 }));
-    }
-    // 장르 뷰는 국내(가요)만. 팝·J-POP·일본곡은 각자 탭에만.
+    // 전체·장르 뷰는 국내(가요)만 — 팝·J-POP·일본곡은 각자 탭에만.
     const foreign = new Set();
     for (const c of ["팝", "J-POP"]) for (const s of chartCategories[c] || []) foreign.add(songKey(s.title, s.artist));
     const domestic = (s) => !isForeignSong(s, foreign);
 
+    if (view === "전체") {
+      return combinedChart().filter(domestic).map((s, i) => ({ ...s, dRank: i + 1 }));
+    }
     // 장르별 인기순 TOP100 (벅스 장르차트 + TJ번호)이 있으면 그걸 우선 사용
     if (genreCharts && Array.isArray(genreCharts[view]) && genreCharts[view].length) {
       return genreCharts[view].filter(domestic).map((s, i) => ({ ...s, dRank: i + 1 }));
