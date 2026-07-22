@@ -463,14 +463,14 @@
             artist: String(s.artist),
             tj: s.tj ? String(s.tj) : "",
             ky: s.ky ? String(s.ky) : "",
-            genre: s.genre || "",
+            genre: s.genre || classifyGenre(s.title, s.artist, ""),
             year: s.year || null,
           });
         } else {
           // 중복 곡은 정보를 합침 (특히 TJ·금영 번호)
           if (!cur.tj && s.tj) cur.tj = String(s.tj);
           if (!cur.ky && s.ky) cur.ky = String(s.ky);
-          if (!cur.genre && s.genre) cur.genre = s.genre;
+          if (!cur.genre) cur.genre = s.genre || classifyGenre(s.title, s.artist, "");
           if (!cur.year && s.year) cur.year = s.year;
         }
       }
@@ -1035,7 +1035,7 @@
         title: String(s.title),
         artist: String(s.artist),
         tj: s.tj ? String(s.tj) : "",
-        genre: s.genre || "",
+        genre: s.genre || classifyGenre(s.title, s.artist, ""),
         year: s.year || null,
       }))
       .sort((a, b) => a.rank - b.rank);

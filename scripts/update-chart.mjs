@@ -82,6 +82,16 @@ function loadGenreMap() {
   }
 }
 
+// 아티스트 기반 장르 분류기 (js/genre-map.js 공용)
+function loadClassify() {
+  try {
+    const src = readFileSync(join(ROOT, "js/genre-map.js"), "utf8");
+    return new Function(src + "; return classifyGenre;")();
+  } catch {
+    return (t, a, e) => e || "";
+  }
+}
+
 function parseItems(items, genreMap) {
   const seen = new Set();
   const songs = [];
@@ -95,11 +105,13 @@ function parseItems(items, genreMap) {
     if (seen.has(k)) continue;
     seen.add(k);
     const extra = genreMap.get(k) || {};
-    songs.push({ rank, title, artist, tj, genre: extra.genre || "", year: extra.year || null });
+    songs.push({ rank, title, artist, tj, genre: extra.genre || classify(title, artist, ""), year: extra.year || null });
   }
   songs.sort((a, b) => a.rank - b.rank);
   return songs.slice(0, 100);
 }
+
+const classify = loadClassify();
 
 async function main() {
   const genreMap = loadGenreMap();

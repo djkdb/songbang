@@ -1,10 +1,11 @@
 /* 셋리 — 오프라인 캐시 서비스 워커 */
-const CACHE_NAME = "songbang-v11";
+const CACHE_NAME = "songbang-v12";
 const ASSETS = [
   "./",
   "./index.html",
   "./css/style.css",
   "./js/app.js",
+  "./js/genre-map.js",
   "./js/chart-data.js",
   "./manifest.webmanifest",
   "./icons/icon.svg",
