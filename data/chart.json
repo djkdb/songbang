@@ -1,7 +1,7 @@
 {
   "source": "TJ미디어 노래방 TOP100",
   "sourceUrl": "https://www.tjmedia.com/chart/top100",
-  "updatedAt": "2026-07-22T00:10:31.222Z",
+  "updatedAt": "2026-08-01T18:48:29.307Z",
   "categories": {
     "가요": [
       {
@@ -9,35 +9,11 @@
         "title": "Drowning",
         "artist": "WOODZ(조승연)",
         "tj": "83945",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 2,
-        "title": "까만안경",
-        "artist": "이루(Feat.Daylight)",
-        "tj": "16468",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 3,
-        "title": "0+0",
-        "artist": "한로로",
-        "tj": "50313",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 4,
-        "title": "응급실(쾌걸춘향OST)",
-        "artist": "izi",
-        "tj": "14515",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 5,
         "title": "삭제",
         "artist": "이승기",
         "tj": "13588",
@@ -45,26 +21,50 @@
         "year": null
       },
       {
+        "rank": 3,
+        "title": "응급실(쾌걸춘향OST)",
+        "artist": "izi",
+        "tj": "14515",
+        "genre": "락/밴드",
+        "year": null
+      },
+      {
+        "rank": 4,
+        "title": "0+0",
+        "artist": "한로로",
+        "tj": "50313",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 5,
+        "title": "입춘",
+        "artist": "한로로",
+        "tj": "85215",
+        "genre": "",
+        "year": null
+      },
+      {
         "rank": 6,
-        "title": "내 머리가 나빠서(드라마'꽃보다남자'OST)",
-        "artist": "SS501",
-        "tj": "30639",
+        "title": "까만안경",
+        "artist": "이루(Feat.Daylight)",
+        "tj": "16468",
         "genre": "",
         "year": null
       },
       {
         "rank": 7,
-        "title": "사랑하게 될 거야",
-        "artist": "한로로",
-        "tj": "43883",
+        "title": "바다의 왕자",
+        "artist": "박명수",
+        "tj": "8990",
         "genre": "",
         "year": null
       },
       {
         "rank": 8,
-        "title": "입춘",
-        "artist": "한로로",
-        "tj": "85215",
+        "title": "내 머리가 나빠서(드라마'꽃보다남자'OST)",
+        "artist": "SS501",
+        "tj": "30639",
         "genre": "",
         "year": null
       },
@@ -78,14 +78,22 @@
       },
       {
         "rank": 10,
-        "title": "천상연(웹툰 '선녀외전' X 이창섭(LEE CHANGSUB))",
-        "artist": "이창섭",
-        "tj": "86059",
+        "title": "사랑하게 될 거야",
+        "artist": "한로로",
+        "tj": "43883",
         "genre": "",
         "year": null
       },
       {
         "rank": 11,
+        "title": "천상연(웹툰 '선녀외전' X 이창섭(LEE CHANGSUB))",
+        "artist": "이창섭",
+        "tj": "86059",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 12,
         "title": "좋니",
         "artist": "윤종신",
         "tj": "49818",
@@ -93,7 +101,7 @@
         "year": 2017
       },
       {
-        "rank": 12,
+        "rank": 13,
         "title": "애상",
         "artist": "쿨",
         "tj": "4509",
@@ -101,26 +109,18 @@
         "year": 1998
       },
       {
-        "rank": 13,
+        "rank": 14,
         "title": "어디에도",
         "artist": "MC THE MAX",
         "tj": "46009",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 14,
-        "title": "비행기",
-        "artist": "거북이",
-        "tj": "16223",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 15,
-        "title": "바다의 왕자",
-        "artist": "박명수",
-        "tj": "8990",
+        "title": "비행기",
+        "artist": "거북이",
+        "tj": "16223",
         "genre": "",
         "year": null
       },
@@ -129,19 +129,35 @@
         "title": "남자를 몰라",
         "artist": "버즈",
         "tj": "15978",
-        "genre": "",
+        "genre": "락/밴드",
         "year": null
       },
       {
         "rank": 17,
-        "title": "My Love(And)",
-        "artist": "버즈",
-        "tj": "15922",
+        "title": "REDRED",
+        "artist": "CORTIS(코르티스)",
+        "tj": "52157",
         "genre": "",
         "year": null
       },
       {
         "rank": 18,
+        "title": "말리꽃(비천무OST)",
+        "artist": "이승철",
+        "tj": "8941",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 19,
+        "title": "My Love(And)",
+        "artist": "버즈",
+        "tj": "15922",
+        "genre": "락/밴드",
+        "year": null
+      },
+      {
+        "rank": 20,
         "title": "참 다행이야",
         "artist": "SPAPA",
         "tj": "14352",
@@ -149,7 +165,7 @@
         "year": null
       },
       {
-        "rank": 19,
+        "rank": 21,
         "title": "사랑의 바보",
         "artist": "The Nuts",
         "tj": "13721",
@@ -157,7 +173,15 @@
         "year": null
       },
       {
-        "rank": 20,
+        "rank": 22,
+        "title": "첫눈처럼 너에게 가겠다(도깨비OST)",
+        "artist": "에일리",
+        "tj": "48470",
+        "genre": "OST",
+        "year": null
+      },
+      {
+        "rank": 23,
         "title": "...사랑했잖아...(2024)",
         "artist": "고경표",
         "tj": "44352",
@@ -165,43 +189,19 @@
         "year": null
       },
       {
-        "rank": 21,
-        "title": "첫눈처럼 너에게 가겠다(도깨비OST)",
-        "artist": "에일리",
-        "tj": "48470",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 22,
+        "rank": 24,
         "title": "너의 모든 순간(별에서온그대OST)",
         "artist": "성시경",
         "tj": "38028",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 23,
-        "title": "말리꽃(비천무OST)",
-        "artist": "이승철",
-        "tj": "8941",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 24,
-        "title": "좋은 밤 좋은 꿈",
-        "artist": "너드커넥션(Nerd Connection)",
-        "tj": "76409",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 25,
-        "title": "REDRED",
-        "artist": "CORTIS(코르티스)",
-        "tj": "52157",
-        "genre": "",
+        "title": "좋은 밤 좋은 꿈",
+        "artist": "너드커넥션(Nerd Connection)",
+        "tj": "76409",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -217,7 +217,7 @@
         "title": "모르시나요",
         "artist": "조째즈(Prod.로코베리)",
         "tj": "44491",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -233,27 +233,35 @@
         "title": "오래된 노래",
         "artist": "스탠딩에그",
         "tj": "35819",
-        "genre": "",
+        "genre": "포크/인디",
         "year": null
       },
       {
         "rank": 30,
-        "title": "죽일 놈(Guilty)",
-        "artist": "다이나믹듀오",
-        "tj": "31729",
-        "genre": "",
+        "title": "가시",
+        "artist": "버즈",
+        "tj": "14684",
+        "genre": "락/밴드",
         "year": null
       },
       {
         "rank": 31,
-        "title": "가시",
-        "artist": "버즈",
-        "tj": "14684",
-        "genre": "",
+        "title": "죽일 놈(Guilty)",
+        "artist": "다이나믹듀오",
+        "tj": "31729",
+        "genre": "힙합",
         "year": null
       },
       {
         "rank": 32,
+        "title": "그대만 있다면(여름날우리 X 너드커넥션(Nerd Connection))",
+        "artist": "너드커넥션(Nerd Connection)",
+        "tj": "84392",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 33,
         "title": "가질 수 없는 너",
         "artist": "뱅크",
         "tj": "2730",
@@ -261,23 +269,7 @@
         "year": null
       },
       {
-        "rank": 33,
-        "title": "그대만 있다면(여름날우리 X 너드커넥션(Nerd Connection))",
-        "artist": "너드커넥션(Nerd Connection)",
-        "tj": "84392",
-        "genre": "",
-        "year": null
-      },
-      {
         "rank": 34,
-        "title": "끝사랑",
-        "artist": "김범수",
-        "tj": "34049",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 35,
         "title": "All For You(응답하라1997 OST)",
         "artist": "서인국,정은지",
         "tj": "35774",
@@ -285,34 +277,42 @@
         "year": null
       },
       {
+        "rank": 35,
+        "title": "끝사랑",
+        "artist": "김범수",
+        "tj": "34049",
+        "genre": "발라드",
+        "year": null
+      },
+      {
         "rank": 36,
-        "title": "어제보다 슬픈 오늘",
-        "artist": "우디",
-        "tj": "49057",
-        "genre": "",
+        "title": "소주 한잔",
+        "artist": "임창정",
+        "tj": "11491",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 37,
-        "title": "흰수염고래",
-        "artist": "윤도현밴드",
-        "tj": "34683",
-        "genre": "",
+        "title": "어제보다 슬픈 오늘",
+        "artist": "우디",
+        "tj": "49057",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 38,
-        "title": "소주 한잔",
-        "artist": "임창정",
-        "tj": "11491",
-        "genre": "",
+        "title": "기다리다",
+        "artist": "윤하",
+        "tj": "16677",
+        "genre": "락/밴드",
         "year": null
       },
       {
         "rank": 39,
-        "title": "기다리다",
-        "artist": "윤하",
-        "tj": "16677",
+        "title": "아로하(슬기로운의사생활OST)",
+        "artist": "조정석",
+        "tj": "89245",
         "genre": "",
         "year": null
       },
@@ -321,22 +321,22 @@
         "title": "다시 사랑한다면(니글니글버터플라이)",
         "artist": "김필",
         "tj": "46108",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 41,
-        "title": "아로하(슬기로운의사생활OST)",
-        "artist": "조정석",
-        "tj": "89245",
-        "genre": "",
+        "title": "너였다면(또오해영OST)",
+        "artist": "정승환",
+        "tj": "46490",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 42,
-        "title": "소문의 낙원",
-        "artist": "AKMU(악뮤)",
-        "tj": "52071",
+        "title": "흰수염고래",
+        "artist": "윤도현밴드",
+        "tj": "34683",
         "genre": "",
         "year": null
       },
@@ -350,22 +350,6 @@
       },
       {
         "rank": 44,
-        "title": "너였다면(또오해영OST)",
-        "artist": "정승환",
-        "tj": "46490",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 45,
-        "title": "시작의 아이",
-        "artist": "마크툽(MAKTUB)",
-        "tj": "44381",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 46,
         "title": "심(心)",
         "artist": "DK(디셈버)",
         "tj": "83138",
@@ -373,15 +357,7 @@
         "year": null
       },
       {
-        "rank": 47,
-        "title": "나에게로 떠나는 여행",
-        "artist": "버즈",
-        "tj": "14828",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 48,
+        "rank": 45,
         "title": "사랑합니다",
         "artist": "Tim",
         "tj": "11271",
@@ -389,10 +365,34 @@
         "year": null
       },
       {
+        "rank": 46,
+        "title": "눈사람",
+        "artist": "정승환",
+        "tj": "97309",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 47,
+        "title": "나에게로 떠나는 여행",
+        "artist": "버즈",
+        "tj": "14828",
+        "genre": "락/밴드",
+        "year": null
+      },
+      {
+        "rank": 48,
+        "title": "아크라포빅",
+        "artist": "하모(hamo)",
+        "tj": "70338",
+        "genre": "",
+        "year": null
+      },
+      {
         "rank": 49,
-        "title": "거리에서",
-        "artist": "성시경",
-        "tj": "16503",
+        "title": "시작의 아이",
+        "artist": "마크툽(MAKTUB)",
+        "tj": "44381",
         "genre": "",
         "year": null
       },
@@ -401,75 +401,83 @@
         "title": "One Love",
         "artist": "MC THE MAX",
         "tj": "10594",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 51,
-        "title": "눈사람",
-        "artist": "정승환",
-        "tj": "97309",
-        "genre": "",
+        "title": "Tears",
+        "artist": "소찬휘",
+        "tj": "62438",
+        "genre": "락/밴드",
         "year": null
       },
       {
         "rank": 52,
-        "title": "Tears",
-        "artist": "소찬휘",
-        "tj": "62438",
-        "genre": "",
+        "title": "붉은 노을",
+        "artist": "빅뱅",
+        "tj": "30399",
+        "genre": "댄스",
         "year": null
       },
       {
         "rank": 53,
-        "title": "예뻤어",
-        "artist": "데이식스",
-        "tj": "48585",
-        "genre": "",
+        "title": "나를 사랑했던 사람아",
+        "artist": "허각",
+        "tj": "35198",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 54,
-        "title": "붉은 노을",
-        "artist": "빅뱅",
-        "tj": "30399",
-        "genre": "",
+        "title": "다시 만난 세계",
+        "artist": "소녀시대",
+        "tj": "18470",
+        "genre": "댄스",
         "year": null
       },
       {
         "rank": 55,
-        "title": "Flashback",
-        "artist": "엔플라잉",
-        "tj": "82931",
-        "genre": "",
+        "title": "거리에서",
+        "artist": "성시경",
+        "tj": "16503",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 56,
-        "title": "지나오다",
-        "artist": "닐로",
-        "tj": "97404",
-        "genre": "",
+        "title": "예뻤어",
+        "artist": "데이식스",
+        "tj": "48585",
+        "genre": "락/밴드",
         "year": null
       },
       {
         "rank": 57,
-        "title": "다시 만난 세계",
-        "artist": "소녀시대",
-        "tj": "18470",
-        "genre": "",
+        "title": "소나기(선재업고튀어OST)",
+        "artist": "이클립스",
+        "tj": "86510",
+        "genre": "OST",
         "year": null
       },
       {
         "rank": 58,
-        "title": "나를 사랑했던 사람아",
-        "artist": "허각",
-        "tj": "35198",
-        "genre": "",
+        "title": "잊었니(신들의만찬OST)",
+        "artist": "이승철",
+        "tj": "35017",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 59,
+        "title": "지나오다",
+        "artist": "닐로",
+        "tj": "97404",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 60,
         "title": "I Love You",
         "artist": "포지션",
         "tj": "9308",
@@ -477,39 +485,23 @@
         "year": null
       },
       {
-        "rank": 60,
-        "title": "잊었니(신들의만찬OST)",
-        "artist": "이승철",
-        "tj": "35017",
-        "genre": "",
-        "year": null
-      },
-      {
         "rank": 61,
-        "title": "소나기(선재업고튀어OST)",
-        "artist": "이클립스",
-        "tj": "86510",
-        "genre": "",
+        "title": "It's Me",
+        "artist": "아일릿(ILLIT)",
+        "tj": "52224",
+        "genre": "댄스",
         "year": null
       },
       {
         "rank": 62,
-        "title": "나는 반딧불",
-        "artist": "황가람",
-        "tj": "43770",
+        "title": "봄 내음보다 너를",
+        "artist": "김나영",
+        "tj": "76684",
         "genre": "발라드",
-        "year": 2024
-      },
-      {
-        "rank": 63,
-        "title": "TICK TOCK",
-        "artist": "김하온,Nosun,Raf Sandou,Marv,정준혁(Feat.지코)(Prod.지코,크러쉬)",
-        "tj": "51864",
-        "genre": "",
         "year": null
       },
       {
-        "rank": 64,
+        "rank": 63,
         "title": "체념",
         "artist": "빅마마",
         "tj": "11019",
@@ -517,55 +509,7 @@
         "year": null
       },
       {
-        "rank": 65,
-        "title": "봄 내음보다 너를",
-        "artist": "김나영",
-        "tj": "76684",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 66,
-        "title": "It's Me",
-        "artist": "아일릿(ILLIT)",
-        "tj": "52224",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 67,
-        "title": "이 사랑(태양의후예OST)",
-        "artist": "다비치",
-        "tj": "46136",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 68,
-        "title": "봄이 와도",
-        "artist": "로이킴",
-        "tj": "86150",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 69,
-        "title": "Marry Me",
-        "artist": "마크툽(MAKTUB),구윤회",
-        "tj": "46213",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 70,
-        "title": "벌써 일년",
-        "artist": "브라운아이즈",
-        "tj": "9551",
-        "genre": "R&B",
-        "year": 2001
-      },
-      {
-        "rank": 71,
+        "rank": 64,
         "title": "헤어지자 말해요",
         "artist": "박재정",
         "tj": "83490",
@@ -573,7 +517,31 @@
         "year": 2023
       },
       {
-        "rank": 72,
+        "rank": 65,
+        "title": "소문의 낙원",
+        "artist": "AKMU(악뮤)",
+        "tj": "52071",
+        "genre": "포크/인디",
+        "year": null
+      },
+      {
+        "rank": 66,
+        "title": "이 사랑(태양의후예OST)",
+        "artist": "다비치",
+        "tj": "46136",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 67,
+        "title": "나는 반딧불",
+        "artist": "황가람",
+        "tj": "43770",
+        "genre": "발라드",
+        "year": 2024
+      },
+      {
+        "rank": 68,
         "title": "중독된 사랑",
         "artist": "조장혁",
         "tj": "8937",
@@ -581,7 +549,23 @@
         "year": null
       },
       {
-        "rank": 73,
+        "rank": 69,
+        "title": "LOVE ATTACK",
+        "artist": "RESCENE(리센느)",
+        "tj": "43348",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 70,
+        "title": "눈의 꽃(미안하다사랑한다OST)",
+        "artist": "박효신",
+        "tj": "14238",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 71,
         "title": "숙녀에게",
         "artist": "변진섭",
         "tj": "753",
@@ -589,23 +573,7 @@
         "year": null
       },
       {
-        "rank": 74,
-        "title": "형(兄)",
-        "artist": "노라조",
-        "tj": "31943",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 75,
-        "title": "Tomboy",
-        "artist": "혁오",
-        "tj": "49505",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 76,
+        "rank": 72,
         "title": "버스 안에서",
         "artist": "자자",
         "tj": "3699",
@@ -613,31 +581,7 @@
         "year": null
       },
       {
-        "rank": 77,
-        "title": "눈의 꽃(미안하다사랑한다OST)",
-        "artist": "박효신",
-        "tj": "14238",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 78,
-        "title": "아크라포빅",
-        "artist": "하모(hamo)",
-        "tj": "70338",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 79,
-        "title": "안아줘",
-        "artist": "정준일",
-        "tj": "34687",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 80,
+        "rank": 73,
         "title": "서울의 달",
         "artist": "김건모",
         "tj": "14980",
@@ -645,47 +589,15 @@
         "year": null
       },
       {
-        "rank": 81,
-        "title": "오르막길",
-        "artist": "윤종신",
-        "tj": "81601",
-        "genre": "",
+        "rank": 74,
+        "title": "Tomboy",
+        "artist": "혁오",
+        "tj": "49505",
+        "genre": "락/밴드",
         "year": null
       },
       {
-        "rank": 82,
-        "title": "모든 날, 모든 순간 (Every Day, Every Moment)(키스먼저할까요? OST)",
-        "artist": "폴킴",
-        "tj": "97511",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 83,
-        "title": "눈, 코, 입",
-        "artist": "태양",
-        "tj": "38541",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 84,
-        "title": "신촌을 못가",
-        "artist": "포스트맨",
-        "tj": "36370",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 85,
-        "title": "캐치 캐치",
-        "artist": "YENA(최예나)",
-        "tj": "51888",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 86,
+        "rank": 75,
         "title": "사랑참...",
         "artist": "디셈버",
         "tj": "31818",
@@ -693,15 +605,71 @@
         "year": null
       },
       {
-        "rank": 87,
-        "title": "스물다섯, 스물하나",
-        "artist": "자우림",
-        "tj": "37545",
-        "genre": "락/밴드",
-        "year": 2013
+        "rank": 76,
+        "title": "벌써 일년",
+        "artist": "브라운아이즈",
+        "tj": "9551",
+        "genre": "R&B",
+        "year": 2001
       },
       {
-        "rank": 88,
+        "rank": 77,
+        "title": "Flashback",
+        "artist": "엔플라잉",
+        "tj": "82931",
+        "genre": "락/밴드",
+        "year": null
+      },
+      {
+        "rank": 78,
+        "title": "형(兄)",
+        "artist": "노라조",
+        "tj": "31943",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 79,
+        "title": "오르막길",
+        "artist": "윤종신",
+        "tj": "81601",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 80,
+        "title": "봄이 와도",
+        "artist": "로이킴",
+        "tj": "86150",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 81,
+        "title": "TICK TOCK",
+        "artist": "김하온,Nosun,Raf Sandou,Marv,정준혁(Feat.지코)(Prod.지코,크러쉬)",
+        "tj": "51864",
+        "genre": "힙합",
+        "year": null
+      },
+      {
+        "rank": 82,
+        "title": "Marry Me",
+        "artist": "마크툽(MAKTUB),구윤회",
+        "tj": "46213",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 83,
+        "title": "모든 날, 모든 순간 (Every Day, Every Moment)(키스먼저할까요? OST)",
+        "artist": "폴킴",
+        "tj": "97511",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 84,
         "title": "술 한잔 해요",
         "artist": "지아",
         "tj": "31981",
@@ -709,15 +677,23 @@
         "year": null
       },
       {
-        "rank": 89,
-        "title": "RUDE!",
-        "artist": "Hearts2Hearts(하츠투하츠)",
-        "tj": "51774",
-        "genre": "",
+        "rank": 85,
+        "title": "안아줘",
+        "artist": "정준일",
+        "tj": "34687",
+        "genre": "포크/인디",
         "year": null
       },
       {
-        "rank": 90,
+        "rank": 86,
+        "title": "스토커",
+        "artist": "10CM",
+        "tj": "39361",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 87,
         "title": "그대라는 사치",
         "artist": "한동근",
         "tj": "47835",
@@ -725,23 +701,23 @@
         "year": null
       },
       {
-        "rank": 91,
-        "title": "비밀번호 486",
-        "artist": "윤하",
-        "tj": "17489",
+        "rank": 88,
+        "title": "스물다섯, 스물하나",
+        "artist": "자우림",
+        "tj": "37545",
+        "genre": "락/밴드",
+        "year": 2013
+      },
+      {
+        "rank": 89,
+        "title": "신촌을 못가",
+        "artist": "포스트맨",
+        "tj": "36370",
         "genre": "",
         "year": null
       },
       {
-        "rank": 92,
-        "title": "스토커",
-        "artist": "10CM",
-        "tj": "39361",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 93,
+        "rank": 90,
         "title": "기대",
         "artist": "나윤권",
         "tj": "15357",
@@ -749,31 +725,23 @@
         "year": null
       },
       {
-        "rank": 94,
-        "title": "슬픈 초대장",
-        "artist": "순순희(지환)",
-        "tj": "85796",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 95,
+        "rank": 91,
         "title": "너를 위해",
         "artist": "임재범",
         "tj": "8890",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
-        "rank": 96,
-        "title": "내게 사랑이 뭐냐고 물어본다면",
-        "artist": "로이킴",
-        "tj": "43329",
-        "genre": "",
+        "rank": 92,
+        "title": "8282",
+        "artist": "다비치",
+        "tj": "30868",
+        "genre": "발라드",
         "year": null
       },
       {
-        "rank": 97,
+        "rank": 93,
         "title": "사랑한만큼",
         "artist": "Tim",
         "tj": "18792",
@@ -781,28 +749,60 @@
         "year": null
       },
       {
-        "rank": 98,
-        "title": "8282",
-        "artist": "다비치",
-        "tj": "30868",
+        "rank": 94,
+        "title": "소녀(응답하라1988 OST)",
+        "artist": "오혁",
+        "tj": "45676",
         "genre": "",
+        "year": null
+      },
+      {
+        "rank": 95,
+        "title": "슬픈 초대장",
+        "artist": "순순희(지환)",
+        "tj": "85796",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 96,
+        "title": "눈, 코, 입",
+        "artist": "태양",
+        "tj": "38541",
+        "genre": "댄스",
+        "year": null
+      },
+      {
+        "rank": 97,
+        "title": "그날처럼",
+        "artist": "장덕철",
+        "tj": "97017",
+        "genre": "발라드",
+        "year": 2018
+      },
+      {
+        "rank": 98,
+        "title": "비밀번호 486",
+        "artist": "윤하",
+        "tj": "17489",
+        "genre": "락/밴드",
         "year": null
       },
       {
         "rank": 99,
-        "title": "행복한 나를",
-        "artist": "허각(Feat.존박)",
-        "tj": "33297",
-        "genre": "",
+        "title": "가을 안부",
+        "artist": "먼데이키즈",
+        "tj": "96636",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 100,
-        "title": "낭만고양이",
-        "artist": "체리필터",
-        "tj": "6093",
-        "genre": "락/밴드",
-        "year": 2002
+        "title": "미인",
+        "artist": "이기찬",
+        "tj": "17135",
+        "genre": "",
+        "year": null
       }
     ],
     "팝": [
@@ -843,7 +843,7 @@
         "title": "Love story",
         "artist": "Taylor Swift",
         "tj": "21958",
-        "genre": "",
+        "genre": "팝",
         "year": null
       },
       {
@@ -851,27 +851,11 @@
         "title": "Baby",
         "artist": "Justin Bieber",
         "tj": "22073",
-        "genre": "",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 7,
-        "title": "I'm Not The Only One",
-        "artist": "Sam Smith",
-        "tj": "22692",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 8,
-        "title": "Beauty And A Beat",
-        "artist": "Justin Bieber(Feat.Nicki Minaj)",
-        "tj": "22422",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 9,
         "title": "Love Is An Open Door(Frozen(겨울왕국) OST)",
         "artist": "Kristen Bell,Santino Fontana",
         "tj": "22571",
@@ -879,15 +863,23 @@
         "year": null
       },
       {
-        "rank": 10,
-        "title": "Billie Jean",
-        "artist": "Michael Jackson",
-        "tj": "7013",
+        "rank": 8,
+        "title": "I'm Not The Only One",
+        "artist": "Sam Smith",
+        "tj": "22692",
         "genre": "",
         "year": null
       },
       {
-        "rank": 11,
+        "rank": 9,
+        "title": "Beauty And A Beat",
+        "artist": "Justin Bieber(Feat.Nicki Minaj)",
+        "tj": "22422",
+        "genre": "팝",
+        "year": null
+      },
+      {
+        "rank": 10,
         "title": "Rolling In The Deep",
         "artist": "Adele",
         "tj": "22213",
@@ -895,10 +887,18 @@
         "year": 2010
       },
       {
-        "rank": 12,
+        "rank": 11,
         "title": "2002",
         "artist": "Anne-Marie",
         "tj": "23190",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 12,
+        "title": "Billie Jean",
+        "artist": "Michael Jackson",
+        "tj": "7013",
         "genre": "",
         "year": null
       },
@@ -907,30 +907,30 @@
         "title": "Cruel Summer",
         "artist": "Taylor Swift",
         "tj": "23826",
-        "genre": "",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 14,
-        "title": "Die With A Smile",
-        "artist": "Lady Gaga,Bruno Mars",
-        "tj": "79696",
+        "title": "Rewrite The Stars(The Greatest Showman OST)",
+        "artist": "Zac Efron,Zendaya",
+        "tj": "23165",
         "genre": "",
         "year": null
       },
       {
         "rank": 15,
-        "title": "Lemon tree",
-        "artist": "Fool's Garden",
-        "tj": "7761",
-        "genre": "",
+        "title": "Die With A Smile",
+        "artist": "Lady Gaga,Bruno Mars",
+        "tj": "79696",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 16,
-        "title": "Rewrite The Stars(The Greatest Showman OST)",
-        "artist": "Zac Efron,Zendaya",
-        "tj": "23165",
+        "title": "Lemon tree",
+        "artist": "Fool's Garden",
+        "tj": "7761",
         "genre": "",
         "year": null
       },
@@ -963,7 +963,7 @@
         "title": "Love Yourself",
         "artist": "Justin Bieber",
         "tj": "22852",
-        "genre": "",
+        "genre": "팝",
         "year": null
       },
       {
@@ -976,19 +976,19 @@
       },
       {
         "rank": 22,
-        "title": "Viva La Vida",
-        "artist": "Coldplay",
-        "tj": "21847",
-        "genre": "락/밴드",
-        "year": 2008
-      },
-      {
-        "rank": 23,
         "title": "A Whole New World(Aladdin OST)",
         "artist": "Mena Massoud,Naomi Scott",
         "tj": "23443",
         "genre": "",
         "year": null
+      },
+      {
+        "rank": 23,
+        "title": "Viva La Vida",
+        "artist": "Coldplay",
+        "tj": "21847",
+        "genre": "락/밴드",
+        "year": 2008
       },
       {
         "rank": 24,
@@ -1008,17 +1008,17 @@
       },
       {
         "rank": 26,
-        "title": "Beggin'",
-        "artist": "Maneskin",
-        "tj": "23765",
-        "genre": "",
+        "title": "Stay",
+        "artist": "The Kid LAROI,Justin Bieber",
+        "tj": "23762",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 27,
-        "title": "Stay",
-        "artist": "The Kid LAROI,Justin Bieber",
-        "tj": "23762",
+        "title": "Beggin'",
+        "artist": "Maneskin",
+        "tj": "23765",
         "genre": "",
         "year": null
       },
@@ -1032,19 +1032,19 @@
       },
       {
         "rank": 29,
+        "title": "Dangerously",
+        "artist": "Charlie Puth",
+        "tj": "22993",
+        "genre": "팝",
+        "year": null
+      },
+      {
+        "rank": 30,
         "title": "Shape Of You",
         "artist": "Ed Sheeran",
         "tj": "22966",
         "genre": "댄스",
         "year": 2017
-      },
-      {
-        "rank": 30,
-        "title": "Dangerously",
-        "artist": "Charlie Puth",
-        "tj": "22993",
-        "genre": "",
-        "year": null
       },
       {
         "rank": 31,
@@ -1056,17 +1056,17 @@
       },
       {
         "rank": 32,
-        "title": "Love",
-        "artist": "Keyshia Cole",
-        "tj": "21776",
+        "title": "Call Me Maybe",
+        "artist": "Carly Rae Jepsen",
+        "tj": "22368",
         "genre": "",
         "year": null
       },
       {
         "rank": 33,
-        "title": "Call Me Maybe",
-        "artist": "Carly Rae Jepsen",
-        "tj": "22368",
+        "title": "Love",
+        "artist": "Keyshia Cole",
+        "tj": "21776",
         "genre": "",
         "year": null
       },
@@ -1080,9 +1080,9 @@
       },
       {
         "rank": 35,
-        "title": "Bad",
-        "artist": "Christopher",
-        "tj": "23321",
+        "title": "Painkiller",
+        "artist": "Ruel",
+        "tj": "23455",
         "genre": "",
         "year": null
       },
@@ -1096,6 +1096,14 @@
       },
       {
         "rank": 37,
+        "title": "Bad",
+        "artist": "Christopher",
+        "tj": "23321",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 38,
         "title": "What Makes You Beautiful",
         "artist": "One Direction",
         "tj": "22336",
@@ -1103,71 +1111,7 @@
         "year": null
       },
       {
-        "rank": 38,
-        "title": "Painkiller",
-        "artist": "Ruel",
-        "tj": "23455",
-        "genre": "",
-        "year": null
-      },
-      {
         "rank": 39,
-        "title": "Sugar",
-        "artist": "Maroon 5",
-        "tj": "22720",
-        "genre": "팝",
-        "year": 2015
-      },
-      {
-        "rank": 40,
-        "title": "A Thousand Years(Twilight Saga : Breaking Dawn Part 1 OST)",
-        "artist": "Christina Perri",
-        "tj": "22429",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 41,
-        "title": "Off My Face",
-        "artist": "Justin Bieber",
-        "tj": "23719",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 42,
-        "title": "Payphone",
-        "artist": "Maroon 5(Feat.Wiz Khalifa)",
-        "tj": "22348",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 43,
-        "title": "Fly me to the moon",
-        "artist": "Frank Sinatra",
-        "tj": "21420",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 44,
-        "title": "Chandelier",
-        "artist": "Sia",
-        "tj": "22678",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 45,
-        "title": "I Really Want to Stay at Your House(Cyberpunk OST)",
-        "artist": "Rosa Walton,Hallie Coggins",
-        "tj": "79185",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 46,
         "title": "How Far I'll Go(Moana OST)",
         "artist": "Alessia Cara",
         "tj": "22965",
@@ -1175,23 +1119,63 @@
         "year": null
       },
       {
-        "rank": 47,
-        "title": "One Call Away",
-        "artist": "Charlie Puth",
-        "tj": "22854",
+        "rank": 40,
+        "title": "Off My Face",
+        "artist": "Justin Bieber",
+        "tj": "23719",
+        "genre": "팝",
+        "year": null
+      },
+      {
+        "rank": 41,
+        "title": "A Thousand Years(Twilight Saga : Breaking Dawn Part 1 OST)",
+        "artist": "Christina Perri",
+        "tj": "22429",
         "genre": "",
         "year": null
       },
       {
-        "rank": 48,
-        "title": "Perfect",
-        "artist": "Ed Sheeran",
-        "tj": "23075",
-        "genre": "발라드",
-        "year": 2017
+        "rank": 42,
+        "title": "Sugar",
+        "artist": "Maroon 5",
+        "tj": "22720",
+        "genre": "팝",
+        "year": 2015
       },
       {
-        "rank": 49,
+        "rank": 43,
+        "title": "Payphone",
+        "artist": "Maroon 5(Feat.Wiz Khalifa)",
+        "tj": "22348",
+        "genre": "팝",
+        "year": null
+      },
+      {
+        "rank": 44,
+        "title": "I Really Want to Stay at Your House(Cyberpunk OST)",
+        "artist": "Rosa Walton,Hallie Coggins",
+        "tj": "79185",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 45,
+        "title": "Fly me to the moon",
+        "artist": "Frank Sinatra",
+        "tj": "21420",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 46,
+        "title": "Chandelier",
+        "artist": "Sia",
+        "tj": "22678",
+        "genre": "팝",
+        "year": null
+      },
+      {
+        "rank": 47,
         "title": "Last Night On Earth",
         "artist": "Green Day",
         "tj": "79233",
@@ -1199,11 +1183,27 @@
         "year": null
       },
       {
-        "rank": 50,
-        "title": "Sign Of The Times",
-        "artist": "Harry Styles",
-        "tj": "23044",
+        "rank": 48,
+        "title": "Wonderwall",
+        "artist": "Oasis",
+        "tj": "7963",
         "genre": "",
+        "year": null
+      },
+      {
+        "rank": 49,
+        "title": "Perfect",
+        "artist": "Ed Sheeran",
+        "tj": "23075",
+        "genre": "발라드",
+        "year": 2017
+      },
+      {
+        "rank": 50,
+        "title": "One Call Away",
+        "artist": "Charlie Puth",
+        "tj": "22854",
+        "genre": "팝",
         "year": null
       },
       {
@@ -1216,22 +1216,6 @@
       },
       {
         "rank": 52,
-        "title": "Englishman in New York",
-        "artist": "Sting",
-        "tj": "7386",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 53,
-        "title": "I'm Yours",
-        "artist": "Jason Mraz",
-        "tj": "21945",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 54,
         "title": "My Heart Will Go On",
         "artist": "Celine Dion",
         "tj": "7736",
@@ -1239,15 +1223,7 @@
         "year": 1997
       },
       {
-        "rank": 55,
-        "title": "The Phantom Of The Opera",
-        "artist": "Sarah Brightman",
-        "tj": "20294",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 56,
+        "rank": 53,
         "title": "Into the Unknown(Frozen2(겨울왕국2) OST)",
         "artist": "Idina Menzel,Aurora",
         "tj": "23459",
@@ -1255,26 +1231,50 @@
         "year": null
       },
       {
-        "rank": 57,
-        "title": "Reality",
-        "artist": "Richard Sanderson",
-        "tj": "7548",
+        "rank": 54,
+        "title": "The Phantom Of The Opera",
+        "artist": "Sarah Brightman",
+        "tj": "20294",
         "genre": "",
+        "year": null
+      },
+      {
+        "rank": 55,
+        "title": "Snowman",
+        "artist": "Sia",
+        "tj": "23268",
+        "genre": "팝",
+        "year": null
+      },
+      {
+        "rank": 56,
+        "title": "I'm Yours",
+        "artist": "Jason Mraz",
+        "tj": "21945",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 57,
+        "title": "Englishman in New York",
+        "artist": "Sting",
+        "tj": "7386",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 58,
-        "title": "Wonderwall",
-        "artist": "Oasis",
-        "tj": "7963",
-        "genre": "",
+        "title": "This Love",
+        "artist": "Maroon 5",
+        "tj": "21040",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 59,
-        "title": "Always Remember Us This Way(A Star Is Born OST)",
-        "artist": "Lady Gaga",
-        "tj": "23276",
+        "title": "Reality",
+        "artist": "Richard Sanderson",
+        "tj": "7548",
         "genre": "",
         "year": null
       },
@@ -1288,14 +1288,22 @@
       },
       {
         "rank": 61,
-        "title": "Snowman",
-        "artist": "Sia",
-        "tj": "23268",
-        "genre": "",
+        "title": "Always Remember Us This Way(A Star Is Born OST)",
+        "artist": "Lady Gaga",
+        "tj": "23276",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 62,
+        "title": "Sign Of The Times",
+        "artist": "Harry Styles",
+        "tj": "23044",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 63,
         "title": "If I Ain't Got You",
         "artist": "Alicia Keys",
         "tj": "21045",
@@ -1303,23 +1311,7 @@
         "year": null
       },
       {
-        "rank": 63,
-        "title": "This Love",
-        "artist": "Maroon 5",
-        "tj": "21040",
-        "genre": "",
-        "year": null
-      },
-      {
         "rank": 64,
-        "title": "All Of Me",
-        "artist": "John Legend",
-        "tj": "22512",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 65,
         "title": "This Is Me(The Greatest Showman OST)",
         "artist": "Various Artists",
         "tj": "23113",
@@ -1327,18 +1319,26 @@
         "year": null
       },
       {
+        "rank": 65,
+        "title": "All Of Me",
+        "artist": "John Legend",
+        "tj": "22512",
+        "genre": "",
+        "year": null
+      },
+      {
         "rank": 66,
-        "title": "Circles",
-        "artist": "Post Malone",
-        "tj": "23415",
+        "title": "Despacito",
+        "artist": "Luis Fonsi(Feat.Daddy Yankee)",
+        "tj": "23396",
         "genre": "",
         "year": null
       },
       {
         "rank": 67,
-        "title": "Despacito",
-        "artist": "Luis Fonsi(Feat.Daddy Yankee)",
-        "tj": "23396",
+        "title": "Someone You Loved",
+        "artist": "Lewis Capaldi",
+        "tj": "23434",
         "genre": "",
         "year": null
       },
@@ -1352,9 +1352,9 @@
       },
       {
         "rank": 69,
-        "title": "Someone You Loved",
-        "artist": "Lewis Capaldi",
-        "tj": "23434",
+        "title": "Circles",
+        "artist": "Post Malone",
+        "tj": "23415",
         "genre": "",
         "year": null
       },
@@ -1379,7 +1379,7 @@
         "title": "When We Were Young",
         "artist": "Adele",
         "tj": "22855",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -1387,22 +1387,22 @@
         "title": "Too Good To Say Goodbye",
         "artist": "Bruno Mars",
         "tj": "23035",
-        "genre": "",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 74,
-        "title": "My Love",
-        "artist": "Westlife",
-        "tj": "7686",
+        "title": "Dancing Queen",
+        "artist": "ABBA",
+        "tj": "7166",
         "genre": "",
         "year": null
       },
       {
         "rank": 75,
-        "title": "Dancing Queen",
-        "artist": "ABBA",
-        "tj": "7166",
+        "title": "My Love",
+        "artist": "Westlife",
+        "tj": "7686",
         "genre": "",
         "year": null
       },
@@ -1416,17 +1416,17 @@
       },
       {
         "rank": 77,
-        "title": "Welcome to the black parade",
-        "artist": "My Chemical Romance",
-        "tj": "21533",
-        "genre": "",
+        "title": "Sunday morning",
+        "artist": "Maroon 5",
+        "tj": "21232",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 78,
-        "title": "Beat it",
-        "artist": "Michael Jackson",
-        "tj": "7437",
+        "title": "Welcome to the black parade",
+        "artist": "My Chemical Romance",
+        "tj": "21533",
         "genre": "",
         "year": null
       },
@@ -1440,54 +1440,22 @@
       },
       {
         "rank": 80,
-        "title": "Hero(림버스컴퍼니OST)",
-        "artist": "Mili",
-        "tj": "74010",
-        "genre": "",
+        "title": "Love Story(Taylor's Version)",
+        "artist": "Taylor Swift",
+        "tj": "23679",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 81,
-        "title": "Love Story(Taylor's Version)",
-        "artist": "Taylor Swift",
-        "tj": "23679",
-        "genre": "",
+        "title": "See You Again(폴워커추모엔딩곡)",
+        "artist": "Wiz Khalifa,Charlie Puth",
+        "tj": "22766",
+        "genre": "힙합",
         "year": null
       },
       {
         "rank": 82,
-        "title": "See You Again(폴워커추모엔딩곡)",
-        "artist": "Wiz Khalifa,Charlie Puth",
-        "tj": "22766",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 83,
-        "title": "Sunday morning",
-        "artist": "Maroon 5",
-        "tj": "21232",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 84,
-        "title": "10,000 Hours",
-        "artist": "Dan+Shay,Justin Bieber",
-        "tj": "23444",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 85,
-        "title": "Lay Me Down",
-        "artist": "Sam Smith(Feat.John Legend)",
-        "tj": "22749",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 86,
         "title": "Zombie",
         "artist": "The Cranberries",
         "tj": "7895",
@@ -1495,7 +1463,23 @@
         "year": null
       },
       {
-        "rank": 87,
+        "rank": 83,
+        "title": "10,000 Hours",
+        "artist": "Dan+Shay,Justin Bieber",
+        "tj": "23444",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 84,
+        "title": "Hero(림버스컴퍼니OST)",
+        "artist": "Mili",
+        "tj": "74010",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 85,
         "title": "Legends Never Die(League of Legends)",
         "artist": "Against The Current",
         "tj": "23233",
@@ -1503,23 +1487,7 @@
         "year": null
       },
       {
-        "rank": 88,
-        "title": "Defying Gravity(Wicked OST)",
-        "artist": "Kristin Chenoweth,Idina Menzel",
-        "tj": "23422",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 89,
-        "title": "Piano man",
-        "artist": "Billy Joel",
-        "tj": "20010",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 90,
+        "rank": 86,
         "title": "Bang Bang",
         "artist": "Jessie J,Ariana Grande,Nicki Minaj",
         "tj": "22702",
@@ -1527,10 +1495,42 @@
         "year": null
       },
       {
-        "rank": 91,
+        "rank": 87,
+        "title": "Lay Me Down",
+        "artist": "Sam Smith(Feat.John Legend)",
+        "tj": "22749",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 88,
         "title": "Risk It All",
         "artist": "Bruno Mars",
         "tj": "73991",
+        "genre": "팝",
+        "year": null
+      },
+      {
+        "rank": 89,
+        "title": "Defying Gravity(Wicked OST)",
+        "artist": "Kristin Chenoweth,Idina Menzel",
+        "tj": "23422",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 90,
+        "title": "Beat it",
+        "artist": "Michael Jackson",
+        "tj": "7437",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 91,
+        "title": "I See the Light(Tangled(라푼젤) OST)",
+        "artist": "Mandy Moore,Zachary Levi",
+        "tj": "23891",
         "genre": "",
         "year": null
       },
@@ -1539,43 +1539,35 @@
         "title": "Shallow(A Star Is Born OST)",
         "artist": "Lady Gaga,Bradley Cooper",
         "tj": "23263",
-        "genre": "",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 93,
-        "title": "Marry You",
-        "artist": "Bruno Mars",
-        "tj": "22329",
+        "title": "Piano man",
+        "artist": "Billy Joel",
+        "tj": "20010",
         "genre": "",
         "year": null
       },
       {
         "rank": 94,
-        "title": "I See the Light(Tangled(라푼젤) OST)",
-        "artist": "Mandy Moore,Zachary Levi",
-        "tj": "23891",
-        "genre": "",
+        "title": "Marry You",
+        "artist": "Bruno Mars",
+        "tj": "22329",
+        "genre": "팝",
         "year": null
       },
       {
         "rank": 95,
-        "title": "Can't Take My Eyes Off You",
-        "artist": "Morten Harket",
-        "tj": "7737",
+        "title": "I Love You So",
+        "artist": "The Walters",
+        "tj": "23915",
         "genre": "",
         "year": null
       },
       {
         "rank": 96,
-        "title": "Toxic",
-        "artist": "Britney Spears",
-        "tj": "20947",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 97,
         "title": "Hello",
         "artist": "Adele",
         "tj": "22816",
@@ -1583,26 +1575,34 @@
         "year": 2015
       },
       {
+        "rank": 97,
+        "title": "Can't Take My Eyes Off You",
+        "artist": "Morten Harket",
+        "tj": "7737",
+        "genre": "",
+        "year": null
+      },
+      {
         "rank": 98,
-        "title": "Halo",
-        "artist": "Beyonce",
-        "tj": "20899",
+        "title": "Part of your world(The little mermaid OST)",
+        "artist": "Jodi Benson",
+        "tj": "21128",
         "genre": "",
         "year": null
       },
       {
         "rank": 99,
-        "title": "Don't stop me now",
-        "artist": "Queen",
-        "tj": "20246",
+        "title": "Toxic",
+        "artist": "Britney Spears",
+        "tj": "20947",
         "genre": "",
         "year": null
       },
       {
         "rank": 100,
-        "title": "Part of your world(The little mermaid OST)",
-        "artist": "Jodi Benson",
-        "tj": "21128",
+        "title": "Titanium",
+        "artist": "David Guetta(Feat.Sia)",
+        "tj": "22370",
         "genre": "",
         "year": null
       }
@@ -1621,7 +1621,7 @@
         "title": "晩餐歌",
         "artist": "tuki.",
         "tj": "52788",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -1629,7 +1629,7 @@
         "title": "ベテルギウス(ドラマ'SUPER RICH' OST)",
         "artist": "優里",
         "tj": "68553",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -1653,7 +1653,7 @@
         "title": "Lemon(ドラマ'アンナチュラル' OST)",
         "artist": "米津玄師",
         "tj": "28822",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -1677,7 +1677,7 @@
         "title": "IRIS OUT('劇場版 チェンソーマン レゼ篇' OST)",
         "artist": "米津玄師",
         "tj": "52959",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -1685,7 +1685,7 @@
         "title": "JANE DOE('劇場版 チェンソーマン レゼ篇' OST)",
         "artist": "米津玄師 & 宇多田ヒカル",
         "tj": "52972",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -1717,7 +1717,7 @@
         "title": "ドライフラワー",
         "artist": "優里",
         "tj": "68333",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -1733,7 +1733,7 @@
         "title": "KICK BACK( 'チェンソーマン' OP)",
         "artist": "米津玄師",
         "tj": "68677",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -1746,17 +1746,17 @@
       },
       {
         "rank": 18,
-        "title": "モニタリング",
-        "artist": "DECO*27(Feat.初音ミク)",
-        "tj": "52468",
+        "title": "青と夏(映画'青夏 きみに恋した30日' OST)",
+        "artist": "Mrs. Green Apple",
+        "tj": "68127",
         "genre": "",
         "year": null
       },
       {
         "rank": 19,
-        "title": "青と夏(映画'青夏 きみに恋した30日' OST)",
-        "artist": "Mrs. Green Apple",
-        "tj": "68127",
+        "title": "モニタリング",
+        "artist": "DECO*27(Feat.初音ミク)",
+        "tj": "52468",
         "genre": "",
         "year": null
       },
@@ -1789,22 +1789,22 @@
         "title": "レオ",
         "artist": "優里",
         "tj": "52773",
-        "genre": "",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 24,
-        "title": "酔いどれ知らず",
-        "artist": "Kanaria(Feat.GUMI)",
-        "tj": "52465",
+        "title": "ライラック(アニメ '忘却バッテリー' OST)",
+        "artist": "Mrs. GREEN APPLE",
+        "tj": "68461",
         "genre": "",
         "year": null
       },
       {
         "rank": 25,
-        "title": "ライラック(アニメ '忘却バッテリー' OST)",
-        "artist": "Mrs. GREEN APPLE",
-        "tj": "68461",
+        "title": "酔いどれ知らず",
+        "artist": "Kanaria(Feat.GUMI)",
+        "tj": "52465",
         "genre": "",
         "year": null
       },
@@ -1813,7 +1813,7 @@
         "title": "アイドル(推しの子 OP)",
         "artist": "YOASOBI",
         "tj": "68781",
-        "genre": "",
+        "genre": "댄스",
         "year": null
       },
       {
@@ -1826,46 +1826,14 @@
       },
       {
         "rank": 28,
-        "title": "僕のこと",
-        "artist": "Mrs. Green Apple",
-        "tj": "68248",
-        "genre": "",
+        "title": "夜に駆ける",
+        "artist": "YOASOBI",
+        "tj": "68381",
+        "genre": "댄스",
         "year": null
       },
       {
         "rank": 29,
-        "title": "夜に駆ける",
-        "artist": "YOASOBI",
-        "tj": "68381",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 30,
-        "title": "ヴァンパイア",
-        "artist": "DECO*27(Feat.初音ミク)",
-        "tj": "52515",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 31,
-        "title": "アスノヨゾラ哨戒班",
-        "artist": "Orangestar(Feat.IA)",
-        "tj": "27984",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 32,
-        "title": "マリーゴールド",
-        "artist": "あいみょん",
-        "tj": "28927",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 33,
         "title": "Endless Rain",
         "artist": "X-JAPAN",
         "tj": "6773",
@@ -1873,7 +1841,15 @@
         "year": null
       },
       {
-        "rank": 34,
+        "rank": 30,
+        "title": "僕のこと",
+        "artist": "Mrs. Green Apple",
+        "tj": "68248",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 31,
         "title": "白日(ドラマ'イノセンス 冤罪弁護士' OST)",
         "artist": "King Gnu",
         "tj": "68031",
@@ -1881,7 +1857,23 @@
         "year": null
       },
       {
-        "rank": 35,
+        "rank": 32,
+        "title": "アスノヨゾラ哨戒班",
+        "artist": "Orangestar(Feat.IA)",
+        "tj": "27984",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 33,
+        "title": "マリーゴールド",
+        "artist": "あいみょん",
+        "tj": "28927",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 34,
         "title": "僕が死のうと思ったのは",
         "artist": "amazarashi",
         "tj": "28688",
@@ -1889,10 +1881,18 @@
         "year": null
       },
       {
-        "rank": 36,
+        "rank": 35,
         "title": "丸の内サディスティック",
         "artist": "椎名林檎",
         "tj": "25837",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 36,
+        "title": "ヴァンパイア",
+        "artist": "DECO*27(Feat.初音ミク)",
+        "tj": "52515",
         "genre": "",
         "year": null
       },
@@ -1906,17 +1906,17 @@
       },
       {
         "rank": 38,
-        "title": "AIZO(TVアニメ '呪術廻戦' 第3期 '死滅回游 前編' OP)",
-        "artist": "King Gnu",
-        "tj": "52501",
+        "title": "拝啓, 少年よ('ベネッセ 進研ゼミ 高校講座' CM)",
+        "artist": "Hump Back",
+        "tj": "52756",
         "genre": "",
         "year": null
       },
       {
         "rank": 39,
-        "title": "少女A",
-        "artist": "椎名もた(Feat.鏡音リン)",
-        "tj": "52498",
+        "title": "フォニイ",
+        "artist": "ツミキ(Feat.可不)",
+        "tj": "52537",
         "genre": "",
         "year": null
       },
@@ -1930,25 +1930,25 @@
       },
       {
         "rank": 41,
-        "title": "きゅうくらりん",
-        "artist": "いよわ(Feat.可不)",
-        "tj": "52506",
+        "title": "少女A",
+        "artist": "椎名もた(Feat.鏡音リン)",
+        "tj": "52498",
         "genre": "",
         "year": null
       },
       {
         "rank": 42,
-        "title": "拝啓, 少年よ('ベネッセ 進研ゼミ 高校講座' CM)",
-        "artist": "Hump Back",
-        "tj": "52756",
+        "title": "好きだから。",
+        "artist": "『ユイカ』",
+        "tj": "68523",
         "genre": "",
         "year": null
       },
       {
         "rank": 43,
-        "title": "レイン(鋼の錬金術師 FULLMETAL ALCHEMIST OP)",
-        "artist": "シド",
-        "tj": "27062",
+        "title": "NIGHT DANCER",
+        "artist": "imase",
+        "tj": "68740",
         "genre": "",
         "year": null
       },
@@ -1962,9 +1962,9 @@
       },
       {
         "rank": 45,
-        "title": "好きだから。",
-        "artist": "『ユイカ』",
-        "tj": "68523",
+        "title": "AIZO(TVアニメ '呪術廻戦' 第3期 '死滅回游 前編' OP)",
+        "artist": "King Gnu",
+        "tj": "52501",
         "genre": "",
         "year": null
       },
@@ -1973,23 +1973,23 @@
         "title": "なんでもないや(Movie ver.)(映画'君の名は。' OST)",
         "artist": "RADWIMPS",
         "tj": "27965",
-        "genre": "",
+        "genre": "락/밴드",
         "year": null
       },
       {
         "rank": 47,
-        "title": "ただ君に晴れ",
-        "artist": "ヨルシカ",
-        "tj": "68061",
-        "genre": "",
+        "title": "愛を伝えたいだとか",
+        "artist": "あいみょん",
+        "tj": "28907",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 48,
-        "title": "愛を伝えたいだとか",
-        "artist": "あいみょん",
-        "tj": "28907",
-        "genre": "",
+        "title": "115万キロのフィルム",
+        "artist": "Official髭男dism",
+        "tj": "52994",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -2002,26 +2002,26 @@
       },
       {
         "rank": 50,
-        "title": "115万キロのフィルム",
-        "artist": "Official髭男dism",
-        "tj": "52994",
+        "title": "レイン(鋼の錬金術師 FULLMETAL ALCHEMIST OP)",
+        "artist": "シド",
+        "tj": "27062",
         "genre": "",
         "year": null
       },
       {
         "rank": 51,
-        "title": "LADY(コカコーラ 'ジョージア' CM)",
-        "artist": "米津玄師",
-        "tj": "68495",
+        "title": "ただ君に晴れ",
+        "artist": "ヨルシカ",
+        "tj": "68061",
         "genre": "",
         "year": null
       },
       {
         "rank": 52,
-        "title": "KING",
-        "artist": "Kanaria(Feat.GUMI)",
-        "tj": "52470",
-        "genre": "",
+        "title": "LADY(コカコーラ 'ジョージア' CM)",
+        "artist": "米津玄師",
+        "tj": "68495",
+        "genre": "발라드",
         "year": null
       },
       {
@@ -2034,17 +2034,17 @@
       },
       {
         "rank": 54,
-        "title": "NIGHT DANCER",
-        "artist": "imase",
-        "tj": "68740",
+        "title": "Mela!",
+        "artist": "緑黄色社会",
+        "tj": "68562",
         "genre": "",
         "year": null
       },
       {
         "rank": 55,
-        "title": "Mela!",
-        "artist": "緑黄色社会",
-        "tj": "68562",
+        "title": "きゅうくらりん",
+        "artist": "いよわ(Feat.可不)",
+        "tj": "52506",
         "genre": "",
         "year": null
       },
@@ -2058,30 +2058,22 @@
       },
       {
         "rank": 57,
-        "title": "フォニイ",
-        "artist": "ツミキ(Feat.可不)",
-        "tj": "52537",
+        "title": "KING",
+        "artist": "Kanaria(Feat.GUMI)",
+        "tj": "52470",
         "genre": "",
         "year": null
       },
       {
         "rank": 58,
-        "title": "しわあわせ",
-        "artist": "Vaundy",
-        "tj": "52412",
+        "title": "踊",
+        "artist": "Ado",
+        "tj": "52522",
         "genre": "",
         "year": null
       },
       {
         "rank": 59,
-        "title": "Ray",
-        "artist": "Bump of Chicken(Feat.初音ミク)",
-        "tj": "28109",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 60,
         "title": "貴方の恋人になりたい",
         "artist": "チョーキューメイ",
         "tj": "68815",
@@ -2089,7 +2081,7 @@
         "year": null
       },
       {
-        "rank": 61,
+        "rank": 60,
         "title": "ケセラセラ(ドラマ '日曜の夜ぐらいは…' OST)",
         "artist": "Mrs. GREEN APPLE",
         "tj": "52844",
@@ -2097,7 +2089,7 @@
         "year": null
       },
       {
-        "rank": 62,
+        "rank": 61,
         "title": "God knows...(涼宮ハルヒの憂鬱 OST)",
         "artist": "涼宮ハルヒ(平野綾)",
         "tj": "26235",
@@ -2105,19 +2097,27 @@
         "year": null
       },
       {
+        "rank": 62,
+        "title": "しわあわせ",
+        "artist": "Vaundy",
+        "tj": "52412",
+        "genre": "",
+        "year": null
+      },
+      {
         "rank": 63,
-        "title": "サクラミツツキ(銀魂 OP)",
-        "artist": "SPYAIR",
-        "tj": "27425",
+        "title": "青のすみか(アニメ '呪術廻戦 第2期' OP)",
+        "artist": "キタニタツヤ",
+        "tj": "68863",
         "genre": "",
         "year": null
       },
       {
         "rank": 64,
-        "title": "青のすみか(アニメ '呪術廻戦 第2期' OP)",
-        "artist": "キタニタツヤ",
-        "tj": "68863",
-        "genre": "",
+        "title": "Ray",
+        "artist": "Bump of Chicken(Feat.初音ミク)",
+        "tj": "28109",
+        "genre": "락/밴드",
         "year": null
       },
       {
@@ -2130,14 +2130,6 @@
       },
       {
         "rank": 66,
-        "title": "うっせぇわ",
-        "artist": "Ado",
-        "tj": "68458",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 67,
         "title": "青い珊瑚礁",
         "artist": "松田聖子",
         "tj": "27121",
@@ -2145,39 +2137,31 @@
         "year": null
       },
       {
+        "rank": 67,
+        "title": "サクラミツツキ(銀魂 OP)",
+        "artist": "SPYAIR",
+        "tj": "27425",
+        "genre": "",
+        "year": null
+      },
+      {
         "rank": 68,
-        "title": "前前前世(Movie ver.)(映画'君の名は。' OST)",
-        "artist": "RADWIMPS",
-        "tj": "27944",
+        "title": "うっせぇわ",
+        "artist": "Ado",
+        "tj": "68458",
         "genre": "",
         "year": null
       },
       {
         "rank": 69,
-        "title": "シャルル",
-        "artist": "バルーン(Feat.Flower)",
-        "tj": "28700",
-        "genre": "",
+        "title": "前前前世(Movie ver.)(映画'君の名は。' OST)",
+        "artist": "RADWIMPS",
+        "tj": "27944",
+        "genre": "락/밴드",
         "year": null
       },
       {
         "rank": 70,
-        "title": "恋風邪にのせて('彼とオオカミちゃんには騙されない' OST)",
-        "artist": "Vaundy",
-        "tj": "52428",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 71,
-        "title": "うたたね",
-        "artist": "Leina",
-        "tj": "68961",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 72,
         "title": "恋(ドラマ'逃げるは恥だが役に立つ' OST)",
         "artist": "星野源",
         "tj": "27982",
@@ -2185,7 +2169,15 @@
         "year": null
       },
       {
-        "rank": 73,
+        "rank": 71,
+        "title": "シャルル",
+        "artist": "バルーン(Feat.Flower)",
+        "tj": "28700",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 72,
         "title": "ダンスホール(めざましテレビ OST)",
         "artist": "Mrs. GREEN APPLE",
         "tj": "68620",
@@ -2193,7 +2185,31 @@
         "year": null
       },
       {
+        "rank": 73,
+        "title": "恋風邪にのせて('彼とオオカミちゃんには騙されない' OST)",
+        "artist": "Vaundy",
+        "tj": "52428",
+        "genre": "",
+        "year": null
+      },
+      {
         "rank": 74,
+        "title": "うたたね",
+        "artist": "Leina",
+        "tj": "68961",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 75,
+        "title": "Bling-Bang-Bang-Born(アニメ 'マッシュル-MASHLE- 神覚者候補選抜試験編' OP)",
+        "artist": "Creepy Nuts",
+        "tj": "68950",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 76,
         "title": "天ノ弱",
         "artist": "164(Feat.GUMI)",
         "tj": "28397",
@@ -2201,26 +2217,10 @@
         "year": null
       },
       {
-        "rank": 75,
-        "title": "ピースサイン(僕のヒーローアカデミア OP)",
-        "artist": "米津玄師",
-        "tj": "28720",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 76,
-        "title": "Cry Baby(東京リベンジャーズ OP)",
-        "artist": "Official髭男dism",
-        "tj": "68407",
-        "genre": "",
-        "year": null
-      },
-      {
         "rank": 77,
-        "title": "踊",
-        "artist": "Ado",
-        "tj": "52522",
+        "title": "mosi mosi?",
+        "artist": "楽音",
+        "tj": "52546",
         "genre": "",
         "year": null
       },
@@ -2234,158 +2234,30 @@
       },
       {
         "rank": 79,
-        "title": "セレナーデ(TVアニメ '推しの子' 第3期 ED)",
-        "artist": "なとり",
-        "tj": "52510",
-        "genre": "",
+        "title": "ピースサイン(僕のヒーローアカデミア OP)",
+        "artist": "米津玄師",
+        "tj": "28720",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 80,
-        "title": "ラビットホール",
-        "artist": "DECO*27(Feat.初音ミク)",
-        "tj": "52520",
-        "genre": "",
+        "title": "Cry Baby(東京リベンジャーズ OP)",
+        "artist": "Official髭男dism",
+        "tj": "68407",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 81,
-        "title": "Bling-Bang-Bang-Born(アニメ 'マッシュル-MASHLE- 神覚者候補選抜試験編' OP)",
-        "artist": "Creepy Nuts",
-        "tj": "68950",
-        "genre": "",
+        "title": "カーテンコール(アニメ '僕のヒーローアカデミア' 7期 OP)",
+        "artist": "優里",
+        "tj": "52724",
+        "genre": "발라드",
         "year": null
       },
       {
         "rank": 82,
-        "title": "紅蓮華(鬼滅の刃 OP)",
-        "artist": "LISA",
-        "tj": "68047",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 83,
-        "title": "シュガーソングと ビターステップ(血界戦線 ED)",
-        "artist": "Unison Square Garden",
-        "tj": "27737",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 84,
-        "title": "猫",
-        "artist": "DISH//",
-        "tj": "52454",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 85,
-        "title": "ロキ",
-        "artist": "みきとP(Feat.鏡音リン)",
-        "tj": "28961",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 86,
-        "title": "カーテンコール(アニメ '僕のヒーローアカデミア' 7期 OP)",
-        "artist": "優里",
-        "tj": "52724",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 87,
-        "title": "心做し",
-        "artist": "蝶々P(Feat.GUMI)",
-        "tj": "27906",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 88,
-        "title": "高嶺の花子さん",
-        "artist": "back number",
-        "tj": "27805",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 89,
-        "title": "悪ノ召使",
-        "artist": "鏡音レン",
-        "tj": "26944",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 90,
-        "title": "千鳥",
-        "artist": "ヨルシカ",
-        "tj": "52504",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 91,
-        "title": "死神",
-        "artist": "米津玄師",
-        "tj": "52430",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 92,
-        "title": "オレンジ(映画 '劇場版ハイキュー!! ゴミ捨て場の決戦' OST)",
-        "artist": "SPYAIR",
-        "tj": "68999",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 93,
-        "title": "departure!(アニメ 'HUNTER×HUNTER' OST)",
-        "artist": "小野正利",
-        "tj": "68460",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 94,
-        "title": "夜の踊り子",
-        "artist": "サカナクション",
-        "tj": "52528",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 95,
-        "title": "ブルーバード (Blue Bird)(NARUTO-ナルト-疾風伝 OP)",
-        "artist": "いきものがかり",
-        "tj": "27325",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 96,
-        "title": "恋愛裁判",
-        "artist": "40mP(Feat.初音ミク)",
-        "tj": "28424",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 97,
-        "title": "晴る(アニメ '葬送のフリーレン' OST)",
-        "artist": "ヨルシカ",
-        "tj": "68953",
-        "genre": "",
-        "year": null
-      },
-      {
-        "rank": 98,
         "title": "可愛くてごめん",
         "artist": "HoneyWorks(Feat.かぴ)",
         "tj": "68823",
@@ -2393,18 +2265,146 @@
         "year": null
       },
       {
+        "rank": 83,
+        "title": "ラビットホール",
+        "artist": "DECO*27(Feat.初音ミク)",
+        "tj": "52520",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 84,
+        "title": "紅蓮華(鬼滅の刃 OP)",
+        "artist": "LISA",
+        "tj": "68047",
+        "genre": "락/밴드",
+        "year": null
+      },
+      {
+        "rank": 85,
+        "title": "夜の踊り子",
+        "artist": "サカナクション",
+        "tj": "52528",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 86,
+        "title": "シュガーソングと ビターステップ(血界戦線 ED)",
+        "artist": "Unison Square Garden",
+        "tj": "27737",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 87,
+        "title": "ロキ",
+        "artist": "みきとP(Feat.鏡音リン)",
+        "tj": "28961",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 88,
+        "title": "心做し",
+        "artist": "蝶々P(Feat.GUMI)",
+        "tj": "27906",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 89,
+        "title": "猫",
+        "artist": "DISH//",
+        "tj": "52454",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 90,
+        "title": "死神",
+        "artist": "米津玄師",
+        "tj": "52430",
+        "genre": "발라드",
+        "year": null
+      },
+      {
+        "rank": 91,
+        "title": "千鳥",
+        "artist": "ヨルシカ",
+        "tj": "52504",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 92,
+        "title": "departure!(アニメ 'HUNTER×HUNTER' OST)",
+        "artist": "小野正利",
+        "tj": "68460",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 93,
+        "title": "悪ノ召使",
+        "artist": "鏡音レン",
+        "tj": "26944",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 94,
+        "title": "高嶺の花子さん",
+        "artist": "back number",
+        "tj": "27805",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 95,
+        "title": "オレンジ(映画 '劇場版ハイキュー!! ゴミ捨て場の決戦' OST)",
+        "artist": "SPYAIR",
+        "tj": "68999",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 96,
+        "title": "セレナーデ(TVアニメ '推しの子' 第3期 ED)",
+        "artist": "なとり",
+        "tj": "52510",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 97,
+        "title": "恋愛裁判",
+        "artist": "40mP(Feat.初音ミク)",
+        "tj": "28424",
+        "genre": "",
+        "year": null
+      },
+      {
+        "rank": 98,
+        "title": "晴る(アニメ '葬送のフリーレン' OST)",
+        "artist": "ヨルシカ",
+        "tj": "68953",
+        "genre": "",
+        "year": null
+      },
+      {
         "rank": 99,
-        "title": "革命道中 -On The Way(TVアニメ 'ダンダダン' 第2期 OST)",
-        "artist": "アイナ・ジ・エンド",
-        "tj": "52461",
+        "title": "HELP!!",
+        "artist": "Kobo Kanaeru",
+        "tj": "52526",
         "genre": "",
         "year": null
       },
       {
         "rank": 100,
-        "title": "ヴィラン",
-        "artist": "てにをは(Feat.Flower)",
-        "tj": "52503",
+        "title": "ブルーバード (Blue Bird)(NARUTO-ナルト-疾風伝 OP)",
+        "artist": "いきものがかり",
+        "tj": "27325",
         "genre": "",
         "year": null
       }
